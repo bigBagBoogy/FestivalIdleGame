@@ -70,4 +70,19 @@ contract FestivalIdleGame {
     }
 
     // Additional functions and game logic can be added here
+
+    modifier enoughScullies(uint upgradeCost) {
+  require(currentBalance >= upgradeCost, "Not enough Scullies to cover the upgrade cost.");
+  _;
+}
+
+
+function calculateUpgradCost(uint elementLevel) internal view {
+uint upgradeCost = elementLevel * 1.3;
+
+function calculateUpgradeCost(uint elementLevel) internal view returns (uint) {
+    uint upgradeCost = elementLevel * 13 / 10; // Instead of 1.3, use 13 / 10 to avoid floating-point inaccuracies.
+    return upgradeCost;
+}
+
 }

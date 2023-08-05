@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    background-image: url("images/field-background.png"); /* Replace "background-image.jpg" with your image file */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 250px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* button {
+    padding: 15px 30px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* To make buttons take full width of their cell */
+   */
+  
+  /* Adjust button size for mobile devices */
+  /* @media (max-width: 768px) {
+    .button-container {
+      grid-template-columns: 1fr;
+    }
+  } */
+  img {
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  img:hover {
+    transform: scale(1.1); /* Apply a small scale on hover */
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); Add a subtle shadow effect on hover
+  } */
+
+}

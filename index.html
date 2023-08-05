@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Responsive Buttons</title>
+    <link rel="stylesheet" href="alt-style.css" />
+  </head>
+  <body>
+    <script>
+      async function connect() {
+        if (window.ethereum) {
+          try {
+            await ethereum.request({ method: "eth_requestAccounts" });
+          } catch (e) {
+            console.log(e);
+          }
+          connectButton.innerHTML = "Connected!";
+          const accounts = await ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          console.log(accounts);
+        } else {
+          connectButton.innerHTML = "Install Metamask";
+        }
+      }
+    </script>
+    <div class="button-container">
+      <img src="podium.png" alt="podium" onClick="upgradePodium()" />
+      <img src="drinks.png" alt="drinks" onClick="handleButtonClick()" />
+      <img src="food.png" alt="food" onClick="handleButtonClick()" />
+      <img src="audio.png" alt="audio" onClick="handleButtonClick()" />
+      <img src="tshirts.png" alt="tshirts" onClick="handleButtonClick()" />
+      <img src="camping.png" alt="camping" onClick="handleButtonClick()" />
+    </div>
+    <script src="alt-button-functions.js"></script>
+  </body>
+</html>

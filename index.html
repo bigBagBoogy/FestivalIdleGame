@@ -2,9 +2,10 @@
 <html>
   <head>
     <title>Responsive Buttons</title>
-    <link rel="stylesheet" href="alt-style.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <img src="metamask.svg" alt="connectButton" onClick="connect()" />
     <script>
       async function connect() {
         if (window.ethereum) {
@@ -24,12 +25,20 @@
       }
     </script>
     <div class="button-container">
-      <img src="podium.png" alt="podium" onClick="upgradePodium()" />
-      <img src="drinks.png" alt="drinks" onClick="handleButtonClick()" />
-      <img src="food.png" alt="food" onClick="handleButtonClick()" />
-      <img src="audio.png" alt="audio" onClick="handleButtonClick()" />
-      <img src="tshirts.png" alt="tshirts" onClick="handleButtonClick()" />
-      <img src="camping.png" alt="camping" onClick="handleButtonClick()" />
+      <img src="images/podium.png" alt="podium" onClick="upgradePodium()" />
+      <img src="images/drinks.png" alt="drinks" onClick="handleButtonClick()" />
+      <img src="images/food.png" alt="food" onClick="handleButtonClick()" />
+      <img src="images/audio.png" alt="audio" onClick="handleButtonClick()" />
+      <img
+        src="images/tshirts.png"
+        alt="tshirts"
+        onClick="handleButtonClick()"
+      />
+      <img
+        src="images/camping.png"
+        alt="camping"
+        onClick="handleButtonClick()"
+      />
     </div>
     <script src="alt-button-functions.js"></script>
   </body>

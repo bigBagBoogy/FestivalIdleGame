@@ -15,10 +15,14 @@ contract Fundme {
 
     function withdraw() onlyOwner {}
 
-    function getPrice() {}
-    function getConversionRate() {}
+    /* @dev getting the chainlink pricefeed:*/
+    // we need the pricefeed address for eth/usd sepolia and/or mocks
+    // and the abi, but... in stead of lokking for the ABI, we're going to us an interface.abi
+    // the AggregatorV3Interface
+    function getPrice() public {}
+    function getConversionRate() public {}
 
-    function getMinimalFundAmountUsd() returns (uint256) {
+    function getMinimalFundAmountUsd() public returns (uint256) {
         return minimalFundAmountUsd;
     }
 }

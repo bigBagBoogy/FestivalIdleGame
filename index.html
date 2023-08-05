@@ -5,28 +5,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <img src="metamask.svg" alt="connectButton" onClick="connect()" />
-    <script>
-      async function connect() {
-        if (window.ethereum) {
-          try {
-            await ethereum.request({ method: "eth_requestAccounts" });
-          } catch (e) {
-            console.log(e);
-          }
-          connectButton.innerHTML = "Connected!";
-          const accounts = await ethereum.request({
-            method: "eth_requestAccounts",
-          });
-          console.log(accounts);
-        } else {
-          connectButton.innerHTML = "Install Metamask";
-        }
-      }
-    </script>
+    <style>     
+
+    #connectButton {
+      cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<!-- metaMask code for the button -->
+    <img id="metamaskImg" src="images/metamask.svg" alt="connectButton" onClick="connect()" />
+    
     <div class="button-container">
       <img src="images/podium.png" alt="podium" onClick="upgradePodium()" />
-      <img src="images/drinks.png" alt="drinks" onClick="handleButtonClick()" />
+      <img src="images/drinks2.png" alt="drinks" onClick="handleButtonClick()" />
       <img src="images/food.png" alt="food" onClick="handleButtonClick()" />
       <img src="images/audio.png" alt="audio" onClick="handleButtonClick()" />
       <img
@@ -41,5 +33,7 @@
       />
     </div>
     <script src="alt-button-functions.js"></script>
+    <script src="connectWeb3.js"></script>
+    
   </body>
 </html>

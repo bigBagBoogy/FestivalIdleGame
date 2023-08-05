@@ -15,13 +15,21 @@ body {
   .button-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 250px;
+    gap: 150px;
     max-width: 800px;
     margin: 0 auto;
   }
   
-  /* button {
-    padding: 15px 30px;
+  #metamaskImg {
+    position: absolute;
+    top: 20px; /* Adjust the top position to your liking */
+    right: 20px; /* Adjust the right position to your liking */
+    cursor: pointer;
+    /* Add any other styles you want for the button here */
+  }
+
+  button {
+    padding: 7px 15px;
     background-color: #3498db;
     color: #ffffff;
     border: none;
@@ -29,24 +37,25 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%; /* To make buttons take full width of their cell */
+    width: 10%;} /* To make buttons take % width of their cell
    */
   
   /* Adjust button size for mobile devices */
-  /* @media (max-width: 768px) {
+  @media (max-width: 768px) {
     .button-container {
       grid-template-columns: 1fr;
     }
-  } */
+  }
   img {
-    padding: 15px 30px;
-    border-radius: 5px;
+    max-width: 400px; /* Set a maximum width for the images */
+    padding: 10px 15px;
+    border-radius: 15px;
     font-size: 16px;
     cursor: pointer;
     transition: transform 0.2s;
   }
   
   img:hover {
-    transform: scale(1.1); 
+    transform: scale(1.2); 
 
 }

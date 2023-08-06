@@ -11,6 +11,7 @@ contract FestivalIdleGame {
     uint256 public totalFestivalPoints;
     uint256 public festivalEndTime;
     uint256 public rewardPerPoint;
+    uint256 public currentBalance;
 
     address public owner;
 
@@ -71,18 +72,13 @@ contract FestivalIdleGame {
 
     // Additional functions and game logic can be added here
 
-    modifier enoughScullies(uint upgradeCost) {
-  require(currentBalance >= upgradeCost, "Not enough Scullies to cover the upgrade cost.");
-  _;
-}
+    modifier enoughScullies(uint256 upgradeCost) {
+        require(currentBalance >= upgradeCost, "Not enough Scullies to cover the upgrade cost.");
+        _;
+    }
 
-
-function calculateUpgradCost(uint elementLevel) internal view {
-uint upgradeCost = elementLevel * 1.3;
-
-function calculateUpgradeCost(uint elementLevel) internal view returns (uint) {
-    uint upgradeCost = elementLevel * 13 / 10; // Instead of 1.3, use 13 / 10 to avoid floating-point inaccuracies.
-    return upgradeCost;
-}
-
+    function calculateUpgradeCost(uint256 elementLevel) internal pure returns (uint256) {
+        uint256 upgradeCost = elementLevel * 13 / 10; // Instead of 1.3, use 13 / 10 to avoid floating-point inaccuracies.
+        return upgradeCost;
+    }
 }

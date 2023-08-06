@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {PriceConvertor} from "./PriceConvertor.sol";
+import {PriceConvertor} from "src/PriceConvertor.sol";
 import {console} from "lib/forge-std/src/console.sol";
 import {AggregatorV3Interface} from "lib/forge-std/src/interfaces/AggregatorV3Interface.sol";
 
@@ -11,7 +11,7 @@ contract Fundme {
     error FundMe__NotOwner();
 
     // State variables
-    uint256 public constant MINIMUM_USD = 5 * 10 ** 18;
+    uint256 public constant MINIMUM_USD = 5 * 10 ** 16;
     address private immutable i_owner;
     address[] private s_funders;
     AggregatorV3Interface private s_priceFeed;
@@ -31,9 +31,9 @@ contract Fundme {
     }
 
     function fund() public payable {
-        require(msg.value.getConversionRate() >= 1e16, "Minimal amount is 0.01 ether"); // = 0.01e18 or 0.01 eth
+        require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "Minimal amount is 0.01 ether"); // = 0.01e18 or 0.01 eth
+        s_addressToAmountFunded[msg.sender] += msg.value;
         s_funders.push(msg.sender);
-        s_addressToAmountFunded[msg.sender] = s_addressToAmountFunded[msg.sender] + msg.value;
     }
 
     function withdraw() public onlyOwner {

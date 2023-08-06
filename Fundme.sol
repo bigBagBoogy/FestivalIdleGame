@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {AggregatorV3Interface} from "./AggregatorV3Interface.sol";
-import {console} from "./lib/forge-std/console.sol";
+import {PriceConvertor} from "./PriceConvertor.sol";
+import {console} from "lib/forge-std/src/console.sol";
 
 contract Fundme {
+    using PriceConvertor for uint256;
+
     uint256 public minimumFundAmountUsd = 5e18; // $5
 
     address[] public funders;
@@ -16,7 +18,7 @@ contract Fundme {
     }
 
     function fund() public payable {
-        require(getConversionRate(msg.value) >= 1e16, "Minimal amount is 0.01 ether"); // = 0.01e18 or 0.01 eth
+        require(msg.value.getConversionRate() >= 1e16, "Minimal amount is 0.01 ether"); // = 0.01e18 or 0.01 eth
         funders.push(msg.sender);
         s_addressToAmountFunded[msg.sender] = s_addressToAmountFunded[msg.sender] + msg.value;
     }
@@ -25,9 +27,5 @@ contract Fundme {
 
     function getminimumFundAmountUsd() public returns (uint256) {
         return minimumFundAmountUsd;
-    }
-
-    function getVersion() public view returns (uint256) {
-        return AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306).version();
     }
 }

@@ -2,8 +2,14 @@
 <html>
   <head>
     <title>Idle GMM festival</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
+  <div class="scoreboard-bar">
+    <span class="score">Your Score: <span id="scoreValue">0</span></span>
+    <span class="level">Level: <span id="levelValue">1</span></span>
+    <span class="line-up">Line Up: <span id="lineUpValue">0</span></span>
+    <a href="top-scores.html" class="top-scores-link">Top Scores</a>
+</div>
   <body>
     <style>     
 
@@ -34,6 +40,7 @@
     </div>
     <script src="alt-button-functions.js"></script>
     <script src="connectWeb3.js"></script>
+    <script src="score.js"></script>
     
   </body>
 </html>

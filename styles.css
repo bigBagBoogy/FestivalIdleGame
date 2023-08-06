@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    background-image: url("images/field-background.png"); /* Replace "background-image.jpg" with your image file */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .scoreboard-bar {
+    position: fixed; /* Position the scoreboard bar at the top of the screen */
+    top: 0; /* Stick the scoreboard bar to the top */
+    width: 100%; /* Set the width to 100% */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #caa5a5;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.score {
+  color: #000000;
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 10px; /* Add some left margin for spacing */
+}
+.level {
+  /* Add styles for the level element */
+  font-size: 18px;
+  margin-right: 10px; /* Add some right margin for spacing between .level and .line-up */
+}
+
+.line-up {
+  /* Add styles for the line-up element */
+  font-size: 18px;
+  margin-right: 10px; /* Add some right margin for spacing between .line-up and .top-scores-link */
+}
+.top-scores-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 10px; /* Add some right margin for spacing */
+}
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+  .scoreboard-bar {
+      flex-direction: column; /* Stack elements vertically on smaller screens */
+      align-items: center;
+      padding: 10px 0; /* Adjust top and bottom padding */
+      /* In the CSS shorthand property for padding, the values are specified in the following order: 1. Top padding 2. Right padding 3. Bottom padding 4. Left padding. So, in the case of padding: 10px 0;, it means: 10px of padding for the top and bottom, and 0 padding for the right and left. The 0 value means that there is no padding on the right and left sides. It's equivalent to writing padding: 10px 0 10px 0;, but since the top and bottom values are the same, we can shorten it to padding: 10px 0;. So, the element will have 10 pixels of padding at the top and bottom but no padding on the right and left sides. This is useful for creating spacing between elements vertically while keeping them close together horizontally. */
+  }
+
+  .score, .top-scores-link {
+      margin: 5px 0; /* Add vertical margin between elements */
+  }
+}
+
+.top-scores-link:hover {
+    text-decoration: underline;
+}
+  
+  .button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 150px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  #metamaskImg {
+    position: absolute;
+    top: 20px; /* Adjust the top position to your liking */
+    right: 20px; /* Adjust the right position to your liking */
+    cursor: pointer;
+    /* Add any other styles you want for the button here */
+  }
+
+  button {
+    padding: 7px 15px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 10%;} /* To make buttons take % width of their cell
+   */
+  
+  /* Adjust button size for mobile devices */
+  @media (max-width: 768px) {
+    .button-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  img {
+    max-width: 400px; /* Set a maximum width for the images */
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  img:hover {
+    transform: scale(1.2); 
+
+}

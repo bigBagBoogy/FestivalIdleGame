@@ -74,6 +74,12 @@ function updateDrinksLevel() {
   // Get the level element and update its innerHTML with the current level
   const drinksLevelElement = document.getElementById("drinksLevel");
   drinksLevelElement.innerHTML = drinksLevel;
+
+  if (levelData.Level.drinks > 1 && levelData.Level.drinks < 3) {
+    document.getElementById("drinksLevelImage").src = "images/drinks3.png"; //update img src to src="images/drinks3.png"
+  } else {
+    document.getElementById("drinksLevelImage").src = "images/drinks2.png";
+  }
 }
 function calculateDrinksUpgradeCost() {
   drinksUpgradeCost = drinksUpgradeCost * levelData.Level.podium;
@@ -96,8 +102,6 @@ function upgradeDrinks() {
     console.log("upgrade to next level costs: ", drinksUpgradeCost);
     updateScore(totalScore);
     updateDrinksLevel();
-
-    console.log("new totalScore: ", totalScore);
   }
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
@@ -120,4 +124,7 @@ function openPopup(message) {
 // Close popup
 function closePopup() {
   popupContainer.style.display = "none";
+}
+function cheat() {
+  baseScore = totalScore + 1000;
 }

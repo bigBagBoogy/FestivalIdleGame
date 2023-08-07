@@ -74,12 +74,22 @@ body {
   
   #metamaskImg {
     position: absolute;
-    top: 200px; /* Adjust the top position to your liking */
-    right: 20px; /* Adjust the right position to your liking */
+    top: 40px; /* Adjust the top position to your liking */
+    right: 15px; /* Adjust the right position to your liking */
     width: 90px; /* Adjust the width to your desired size */
     height: 90px; /* Adjust the height to your desired size */
     cursor: pointer;
     /* Add any other styles you want for the button here */
+}
+
+#cheat1000 {
+  position: absolute;
+  top: 150px; /* Adjust the top position to your liking */
+  right: 15px; /* Adjust the right position to your liking */
+  width: 90px; /* Adjust the width to your desired size */
+  height: 90px; /* Adjust the height to your desired size */
+  cursor: pointer;
+  /* Add any other styles you want for the button here */
 }
 
   button {
@@ -126,9 +136,10 @@ body {
 }
 
 .popup-content {
-  background-color: #fff;
+  background-color: #540048;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-align: center;
+  color: white; 
 }

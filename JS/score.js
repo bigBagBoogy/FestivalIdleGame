@@ -1,6 +1,8 @@
 var totalScore;
 var upgradeLevel = 1;
+// var drinksLevel = 1;
 var podiumUpgradeCost = 10;
+var drinksUpgradeCost = 500;
 var baseScore = 0;
 var increment = 1;
 var nextLoop;
@@ -24,27 +26,29 @@ function calculateScore() {
     baseScore = nextLoop;
   }, 250); // Update score every quarter of a second (250 milliseconds)
 }
-
 // Function to update the score in the scoreboard bar
 function updateScore(totalScore) {
   // Get the score element and update its innerHTML with the current score
   const scoreElement = document.getElementById("totalScore");
   scoreElement.innerHTML = Math.floor(totalScore);
 }
-function updateLevel() {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+//         PODIUM              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+function updatePodiumLevel() {
   var podiumLevel = levelData.Level.podium;
   // Get the level element and update its innerHTML with the current level
   const levelElement = document.getElementById("podiumLevel");
   levelElement.innerHTML = podiumLevel;
 }
-function calculateUpgradeCost() {
+function calculatePodiumUpgradeCost() {
   podiumUpgradeCost = podiumUpgradeCost * levelData.Level.podium;
   return podiumUpgradeCost;
 }
-
 function upgradePodium() {
   if (totalScore < podiumUpgradeCost) {
-    openPopup("Not enough Skullies!", totalScore);
+    openPopup(`Not enough Skullies!  need: ${podiumUpgradeCost}`);
     console.log(totalScore);
   } else {
     console.log("upgraded podium!");
@@ -55,14 +59,51 @@ function upgradePodium() {
     console.log("new increment: ", increment);
     levelData.Level.podium++;
     console.log("podium level: ", levelData.Level.podium);
-    podiumUpgradeCost = calculateUpgradeCost();
+    podiumUpgradeCost = calculatePodiumUpgradeCost();
     console.log("upgrade to next level costs: ", podiumUpgradeCost);
     updateScore(totalScore);
-    updateLevel();
+    updatePodiumLevel();
+    console.log("new totalScore: ", totalScore);
+  }
+}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+//         DRINKS              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+function updateDrinksLevel() {
+  var drinksLevel = levelData.Level.drinks;
+  // Get the level element and update its innerHTML with the current level
+  const drinksLevelElement = document.getElementById("drinksLevel");
+  drinksLevelElement.innerHTML = drinksLevel;
+}
+function calculateDrinksUpgradeCost() {
+  drinksUpgradeCost = drinksUpgradeCost * levelData.Level.podium;
+  return drinksUpgradeCost;
+}
+function upgradeDrinks() {
+  if (totalScore < drinksUpgradeCost) {
+    openPopup(`Not enough Skullies!  need: ${drinksUpgradeCost}`);
+    console.log(totalScore);
+  } else {
+    console.log("upgraded drinks!");
+    totalScore -= drinksUpgradeCost;
+    baseScore = totalScore;
+    console.log("new totalScore: ", totalScore);
+    increment = increment * (19 / 10);
+    console.log("new increment: ", increment);
+    levelData.Level.drinks++;
+    console.log("podium level: ", levelData.Level.drinks);
+    drinksUpgradeCost = calculateDrinksUpgradeCost();
+    console.log("upgrade to next level costs: ", drinksUpgradeCost);
+    updateScore(totalScore);
+    updateDrinksLevel();
 
     console.log("new totalScore: ", totalScore);
   }
 }
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+//      HELPER FUNCTIONS       //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
 // Call the calculateScore function to start updating the score
 calculateScore();
 
@@ -76,12 +117,7 @@ function openPopup(message) {
   popupContainer.style.display = "flex";
   setTimeout(closePopup, 2000); // Auto-close after 2 seconds
 }
-
 // Close popup
 function closePopup() {
   popupContainer.style.display = "none";
 }
-
-// openPopupButton.addEventListener('click', () => {
-//   upgradePodium();
-// });

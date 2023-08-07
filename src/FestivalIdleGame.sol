@@ -7,6 +7,14 @@ contract FestivalIdleGame {
         uint256 lastActionTimestamp;
     }
 
+    struct TopFive {
+        address player1;
+        address player2;
+        address player3;
+        address player4;
+        address player5;
+    }
+
     mapping(address => Player) public players;
     uint256 public totalFestivalPoints;
     uint256 public festivalEndTime;
@@ -80,5 +88,9 @@ contract FestivalIdleGame {
     function calculateUpgradeCost(uint256 elementLevel) internal pure returns (uint256) {
         uint256 upgradeCost = elementLevel * 13 / 10; // Instead of 1.3, use 13 / 10 to avoid floating-point inaccuracies.
         return upgradeCost;
+    }
+
+    function getTopFivePlayers() public view returns (TopFive) {
+        return TopFive;
     }
 }

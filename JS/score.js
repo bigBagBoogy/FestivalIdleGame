@@ -1,8 +1,9 @@
 var totalScore;
 var upgradeLevel = 1;
-var upgradeCost = 30;
-var baseScore = 1;
+var podiumUpgradeCost = 10;
+var baseScore = 0;
 var increment = 1;
+var nextLoop;
 const levelData = {
   Level: {
     podium: "1",
@@ -17,36 +18,39 @@ const levelData = {
 function calculateScore() {
   // In this example, we'll use a simple counter to represent time
   setInterval(() => {
-    // Increment the baseScore and update the score
-    totalScore = baseScore + increment; // 1,2,3,4,5  after 1st upgrade increment will be 1.1 so baseScore: 1 + 1.1 = 2.1    then next loop:  2.1 + 1.1 = 3.2   then: 3.2 + 1.1 = 4.3
+    nextLoop = baseScore + increment; // 1,2,3,4,5  after 1st upgrade increment will be 1.1 so baseScore: 1 + 1.1 = 2.1    then next loop:  2.1 + 1.1 = 3.2   then: 3.2 + 1.1 = 4.3
+    totalScore = nextLoop;
     updateScore(totalScore);
-  }, 500); // Update score every half second (500 milliseconds)
+    baseScore = nextLoop;
+  }, 250); // Update score every quarter of a second (250 milliseconds)
 }
 
 // Function to update the score in the scoreboard bar
 function updateScore(totalScore) {
   // Get the score element and update its innerHTML with the current score
   const scoreElement = document.getElementById("totalScore");
-  scoreElement.innerHTML = totalScore;
+  scoreElement.innerHTML = Math.floor(totalScore);
 }
 function calculateUpgradeCost() {
-  upgradeCost = upgradeCost * levelData.Level.podium; // upgradeCost = 100 * 1
-  return upgradeCost; // upgradeCost = 100 * 2
+  podiumUpgradeCost = podiumUpgradeCost * levelData.Level.podium;
+  return podiumUpgradeCost;
 }
 
 function upgradePodium() {
-  podiumUpgradeCost = calculateUpgradeCost();
   if (totalScore < podiumUpgradeCost) {
-    openPopup("Not enough Skullies!");
+    openPopup("Not enough Skullies!", totalScore);
+    console.log(totalScore);
   } else {
     console.log("upgraded podium!");
     totalScore -= podiumUpgradeCost;
+    baseScore = totalScore;
     console.log("new totalScore: ", totalScore);
-    baseScore = baseScore * (11 / 10);
+    increment = increment * (15 / 10);
+    console.log("new increment: ", increment);
     levelData.Level.podium++;
     console.log("podium level: ", levelData.Level.podium);
-    interimCal = calculateUpgradeCost(upgradeCost);
-    console.log("upgrade to next level costs: ", interimCal);
+    podiumUpgradeCost = calculateUpgradeCost();
+    console.log("upgrade to next level costs: ", podiumUpgradeCost);
     updateScore(totalScore);
     console.log("new totalScore: ", totalScore);
   }

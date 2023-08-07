@@ -31,6 +31,12 @@ function updateScore(totalScore) {
   const scoreElement = document.getElementById("totalScore");
   scoreElement.innerHTML = Math.floor(totalScore);
 }
+function updateLevel() {
+  var podiumLevel = levelData.Level.podium;
+  // Get the level element and update its innerHTML with the current level
+  const levelElement = document.getElementById("podiumLevel");
+  levelElement.innerHTML = podiumLevel;
+}
 function calculateUpgradeCost() {
   podiumUpgradeCost = podiumUpgradeCost * levelData.Level.podium;
   return podiumUpgradeCost;
@@ -52,6 +58,8 @@ function upgradePodium() {
     podiumUpgradeCost = calculateUpgradeCost();
     console.log("upgrade to next level costs: ", podiumUpgradeCost);
     updateScore(totalScore);
+    updateLevel();
+
     console.log("new totalScore: ", totalScore);
   }
 }

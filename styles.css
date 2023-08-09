@@ -94,7 +94,7 @@ body {
 
 #cheat1000 {
   position: absolute;
-  top: 150px; /* Adjust the top position to your liking */
+  top: 4050px; /* Adjust the top position to your liking */
   right: 15px; /* Adjust the right position to your liking */
   width: 90px; /* Adjust the width to your desired size */
   height: 90px; /* Adjust the height to your desired size */
@@ -152,4 +152,16 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-align: center;
   color: white; 
+}
+
+.bottom-bar {
+  position: fixed; /* Position the scoreboard bar at the top of the screen */
+  bottom: 0; /* Stick the scoreboard bar to the top */
+  width: 100%; /* Set the width to 100% */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #caa5a5;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

@@ -2,14 +2,25 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
-    background-image: url("images/background2.jpg"); 
+    /* justify-content: center; */
+    /* align-items: center; */
+   /* min-height: 100vh;  */
+    /* background-color: #f0f0f0;
+    background-image: url("images/background2.jpg");  */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+  }
+  .container {
+    position: relative;
+    width: 100%;
+    height: 4358px; /* Height of your background image */
+    overflow-y: scroll; /* Enable vertical scrolling */
+  }
+  
+  .background-image {
+    max-width: 100%;
+    height: auto;
   }
   
   .scoreboard-bar {
@@ -19,32 +30,37 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #caa5a5;
+    background-color: #520052;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .score {
-  color: #000000;
+  color: #ffffff;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 38px;
+  
   margin-left: 10px; /* Add some left margin for spacing */
 }
 .level {
   /* Add styles for the level element */
-  font-size: 18px;
+  color: #ffffff;
+
+  font-size: 38px;
   margin-right: 10px; /* Add some right margin for spacing between .level and .line-up */
 }
 
 .line-up {
   /* Add styles for the line-up element */
-  font-size: 18px;
+  color: #ffffff;
+
+  font-size: 38px;
   margin-right: 10px; /* Add some right margin for spacing between .line-up and .top-scores-link */
 }
 .top-scores-link {
-    color: #007bff;
+    color: #deeeff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 36px;
     margin-right: 10px; /* Add some right margin for spacing */
 }
 /* Responsive adjustments for mobile devices */
@@ -69,17 +85,42 @@ body {
   display: grid;
   grid-template-columns: 1fr; /* Single column */
   grid-template-rows: repeat(3, auto); /* Three rows */
-  row-gap: 250px; /* Adjust the gap between rows */
-  max-width: 1000px;
-  margin: 500px auto 0; /* Adjust the top margin to 800px */
+  row-gap: 290px; /* Adjust the gap between rows */
+  max-width: 40%;
+  margin: -1700px auto 0; /* Adjust the top margin to 800px */
+  left: 18%;
+  position: absolute;
+  /* top: calc(100% - 50px + 600px);   */
+  transform: translate(-50%, -50%);
 }
+
 .button-container2 {
   display: grid;
   grid-template-columns: 1fr; /* Single column */
   grid-template-rows: repeat(3, auto); /* Three rows */
-  row-gap: 250px; /* Adjust the gap between rows */
-  max-width: 1000px;
-  margin: 0px auto 0; /* Adjust the top margin to 800px */
+  row-gap: 380px; /* Adjust the gap between rows */
+  max-width: 600px;
+  /* margin: -2500px auto 0; Adjust the top margin to 800px */
+  left: 78%;
+  position: absolute;
+  top: calc(100% - 1800px);  
+  transform: translate(-50%, -50%);
+}
+.button-container1 img {
+  max-width: 100%; /* Set a maximum width for the images */
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.button-container2 img {
+  max-width: 150%;  /*Set a maximum width for the images */
+  /* padding: 10px 15px; */
+  /* border-radius: 15px; */
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
   
   #metamaskImg {
@@ -94,7 +135,7 @@ body {
 
 #cheat1000 {
   position: absolute;
-  top: 4050px; /* Adjust the top position to your liking */
+  top: 200px; /* Adjust the top position to your liking */
   right: 15px; /* Adjust the right position to your liking */
   width: 90px; /* Adjust the width to your desired size */
   height: 90px; /* Adjust the height to your desired size */
@@ -120,14 +161,8 @@ body {
       grid-template-columns: 1fr;
     }
   }
-  img {
-    max-width: 400px; /* Set a maximum width for the images */
-    padding: 10px 15px;
-    border-radius: 15px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
+
+
   
   img:hover {
     transform: scale(1.2); 

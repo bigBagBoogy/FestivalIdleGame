@@ -4,25 +4,25 @@
     <title>Idle GMM festival</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <!-- Score-board-bar -->
-  <div class="scoreboard-bar">
-    <span class="score">Your Score: <span id="totalScore">0</span></span>
-    <span class="level">Podium Level: <span id="podiumLevel">1</span></span>
-    <span class="level">Drinks Level: <span id="drinksLevel">1</span></span>
-
-    <span class="line-up">Line Up: <span id="lineUpValue">0</span></span>
-    <a href="top-scores.html" class="top-scores-link">Top Scores</a>
-</div>
-
 </head>
-<!-- Custom Popup Container -->
-<div id="popupContainer" class="popup-container">
-  <div class="popup-content">
-      <h2>Upgrade Failed</h2>
-      <p>Your total score is not enough to upgrade the podium.</p>
-  </div>
-</div>
 <body>
+<!-- main container -->
+<div class="container">
+  <img src="images/background2.jpg" alt="Background" class="background-image">
+
+
+
+ <!-- Score-board-bar -->
+ <div class="scoreboard-bar">
+  <span class="score">Skullies: <span id="totalScore">0</span></span>
+  <span class="level">Podium Level: <span id="podiumLevel">1</span></span>
+  <span class="level">Drinks Level: <span id="drinksLevel">1</span></span>
+
+  <span class="line-up">Line Up: <span id="lineUpValue">0</span></span>
+  <a href="top-scores.html" class="top-scores-link">Top Scores</a>
+</div>
+
+
 <!-- metaMask code for the button -->
     <img id="metamaskImg" src="images/metamask.svg" alt="connectButton" onClick="connect()" />
     <img id="cheat1000" src="images/coin.gif" alt="cheat1000" onClick="cheat()" />
@@ -47,14 +47,23 @@
       />
     </div>
     <div class="bottom-bar">
-      <span class="score">Your Score: <span id="totalScore">0</span></span>
-      <span class="level">Podium Level: <span id="podiumLevel">1</span></span>
-      <span class="level">Drinks Level: <span id="drinksLevel">1</span></span>
+      <span class="score">Score: <span id="totalScore">0</span></span>
+      <span class="level">Podium Lvl: <span id="podiumLevel">1</span></span>
+      <span class="level">Drinks Lvl: <span id="drinksLevel">1</span></span>
   
       <span class="line-up">Line Up: <span id="lineUpValue">0</span></span>
       <a href="top-scores.html" class="top-scores-link">Top Scores</a>
   </div>
+
+</div>    <!-- ending main container -->
   
+<!-- Custom Popup Container -->
+<div id="popupContainer" class="popup-container">
+  <div class="popup-content">
+      <h2>Upgrade Failed</h2>
+      <p>Your total score is not enough to upgrade the podium.</p>
+  </div>
+</div>
     <script src="JS/alt-button-functions.js"></script>
     <script src="JS/connectWeb3.js"></script>
     <script src="JS/score.js"></script>

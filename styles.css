@@ -6,11 +6,12 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: #f0f0f0;
-    background-image: url("images/background2.jpg"); /* Replace "background-image.jpg" with your image file */
+    background-image: url("images/background2.jpg"); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
+  
   .scoreboard-bar {
     position: fixed; /* Position the scoreboard bar at the top of the screen */
     top: 0; /* Stick the scoreboard bar to the top */
@@ -64,17 +65,22 @@ body {
     text-decoration: underline;
 }
   
-  .button-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);    
-    row-gap: 1500px; /* Adjust the gap between rows */
-    column-gap: 150px; /* Adjust the gap between columns */
-    /* gap: 150px; */
-    max-width: 1000px;
-    /* max-width: 100%; */
-    
-    margin: 800px auto 0; /* Adjust the top margin to 800px */
-  }
+ .button-container1 {  /*has the podium */
+  display: grid;
+  grid-template-columns: 1fr; /* Single column */
+  grid-template-rows: repeat(3, auto); /* Three rows */
+  row-gap: 250px; /* Adjust the gap between rows */
+  max-width: 1000px;
+  margin: 500px auto 0; /* Adjust the top margin to 800px */
+}
+.button-container2 {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column */
+  grid-template-rows: repeat(3, auto); /* Three rows */
+  row-gap: 250px; /* Adjust the gap between rows */
+  max-width: 1000px;
+  margin: 0px auto 0; /* Adjust the top margin to 800px */
+}
   
   #metamaskImg {
     position: absolute;

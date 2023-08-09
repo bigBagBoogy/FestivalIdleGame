@@ -1,27 +1,23 @@
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
-   /* min-height: 100vh;  */
-    /* background-color: #f0f0f0;
-    background-image: url("images/background2.jpg");  */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .container {
+  margin: 0;
+  padding: 0;
+  background-image: url("images/background3.png");
+  background-size: auto 100vh; /* Set the height to 100vh (viewport height) */
+  background-position: top;
+  background-repeat: no-repeat;
+}
+  /* .container {
     position: relative;
     width: 100%;
-    height: 4358px; /* Height of your background image */
-    overflow-y: scroll; /* Enable vertical scrolling */
-  }
+    height: 4358px; /* Height of your background image 
+    overflow-y: scroll;  Enable vertical scrolling 
+  } */
   
-  .background-image {
+  /* .background-image {
+    position:fixed;
     max-width: 100%;
     height: auto;
-  }
+  } */
   
   .scoreboard-bar {
     position: fixed; /* Position the scoreboard bar at the top of the screen */
@@ -39,7 +35,8 @@ body {
   color: #ffffff;
   font-weight: bold;
   font-size: 38px;
-  
+  margin-top: 20px;
+  margin-bottom: 20px;
   margin-left: 10px; /* Add some left margin for spacing */
 }
 .level {
@@ -80,6 +77,20 @@ body {
 .top-scores-link:hover {
     text-decoration: underline;
 }
+.podium-main {
+  position: fixed;
+    top: 60; /* Adjust the top position to your liking */
+    right: 15px; /* Adjust the right position to your liking */
+    width: 90px; /* Adjust the width to your desired size */
+    height: 90px; /* Adjust the height to your desired size */
+    cursor: pointer;
+    /* Add any other styles you want for the button here */
+  
+  left: 50%;
+  transform: translateX(-50%);
+  /* ... other styles ... */
+}
+
   
  .button-container1 {  /*has the podium */
   display: grid;
@@ -87,9 +98,9 @@ body {
   grid-template-rows: repeat(3, auto); /* Three rows */
   row-gap: 290px; /* Adjust the gap between rows */
   max-width: 40%;
-  margin: -1700px auto 0; /* Adjust the top margin to 800px */
+  margin-top: 1900px; /* Adjust the top margin to 800px */
   left: 18%;
-  position: absolute;
+  position: fixed;
   /* top: calc(100% - 50px + 600px);   */
   transform: translate(-50%, -50%);
 }
@@ -103,7 +114,8 @@ body {
   /* margin: -2500px auto 0; Adjust the top margin to 800px */
   left: 78%;
   position: absolute;
-  top: calc(100% - 1800px);  
+  margin-top: 1500px; /* Adjust the top margin to 800px */
+
   transform: translate(-50%, -50%);
 }
 .button-container1 img {
@@ -124,7 +136,7 @@ body {
 }
   
   #metamaskImg {
-    position: absolute;
+    position: fixed;
     top: 40px; /* Adjust the top position to your liking */
     right: 15px; /* Adjust the right position to your liking */
     width: 90px; /* Adjust the width to your desired size */
@@ -134,8 +146,8 @@ body {
 }
 
 #cheat1000 {
-  position: absolute;
-  top: 200px; /* Adjust the top position to your liking */
+  position: fixed;
+  top: 400px; /* Adjust the top position to your liking */
   right: 15px; /* Adjust the right position to your liking */
   width: 90px; /* Adjust the width to your desired size */
   height: 90px; /* Adjust the height to your desired size */

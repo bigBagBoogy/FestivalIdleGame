@@ -90,7 +90,7 @@ contract FestivalIdleGame {
         return upgradeCost;
     }
 
-    function getTopFivePlayers() public view returns (TopFive) {
-        return TopFive;
-    }
+    // function getTopFivePlayers() public view returns (TopFive memory) {
+    //     return TopFive;
+    // }
 }

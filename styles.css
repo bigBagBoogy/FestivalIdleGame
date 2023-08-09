@@ -6,7 +6,7 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: #f0f0f0;
-    background-image: url("images/field-background.png"); /* Replace "background-image.jpg" with your image file */
+    background-image: url("images/background2.jpg"); /* Replace "background-image.jpg" with your image file */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -66,10 +66,14 @@ body {
   
   .button-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 150px;
+    grid-template-columns: repeat(2, 1fr);    
+    row-gap: 1500px; /* Adjust the gap between rows */
+    column-gap: 150px; /* Adjust the gap between columns */
+    /* gap: 150px; */
     max-width: 1000px;
-    margin: 0 auto;
+    /* max-width: 100%; */
+    
+    margin: 800px auto 0; /* Adjust the top margin to 800px */
   }
   
   #metamaskImg {

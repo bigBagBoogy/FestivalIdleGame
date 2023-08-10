@@ -67,9 +67,28 @@
       <p>Your total score is not enough to upgrade the podium.</p>
   </div>
 </div>
+
+<!-- storyline popup -->
+<button id="showPopup">Show Popup</button>
+    <div id="popup2" class="popup2">
+        <div class="popup-content">
+            <span class="close" id="closePopup">&times;</span>
+            <img id="popupImage" src="" alt="Popup Image">
+            <p id="popupText">Popup Text</p>
+        </div>
+    </div>
+
+    <h2>Save/Load Progress</h2>
+    <button id="saveProgress">Save Progress</button>
+    <button id="loadProgress">Load Progress</button>
+    <div id="progressResult"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.0/web3.min.js"></script>
+    <script src="JS/app.js"></script>
     <script src="JS/alt-button-functions.js"></script>
     <script src="JS/connectWeb3.js"></script>
     <script src="JS/score.js"></script>
+    <script src="JS/story-popup.js"></script>
     
   </body>
 </html>

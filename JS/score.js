@@ -77,7 +77,7 @@ function updateDrinksLevel() {
 
   if (levelData.Level.drinks > 1 && levelData.Level.drinks < 3) {
     document.getElementById("drinksLevelImage").src =
-      "images/beer-bar-3d-yellow.png"; //update img src to src="images/drinks3.png"
+      "images/beer-bar-3d-blue-200pixel.png"; //update img src to src="images/drinks3.png"
   } else {
     document.getElementById("drinksLevelImage").src = "images/beer-bar-3d.png";
   }

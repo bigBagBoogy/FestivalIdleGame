@@ -76,9 +76,10 @@ function updateDrinksLevel() {
   drinksLevelElement.innerHTML = drinksLevel;
 
   if (levelData.Level.drinks > 1 && levelData.Level.drinks < 3) {
-    document.getElementById("drinksLevelImage").src = "images/drinks3.png"; //update img src to src="images/drinks3.png"
+    document.getElementById("drinksLevelImage").src =
+      "images/beer-bar-3d-yellow.png"; //update img src to src="images/drinks3.png"
   } else {
-    document.getElementById("drinksLevelImage").src = "images/drinks2.png";
+    document.getElementById("drinksLevelImage").src = "images/beer-bar-3d.png";
   }
 }
 function calculateDrinksUpgradeCost() {

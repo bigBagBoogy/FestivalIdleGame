@@ -1,58 +1,63 @@
-body {
-  margin: 0;
-  padding: 0;
-  background-image: url("images/background3.png");
-  background-size: auto 100vh; /* Set the height to 100vh (viewport height) */
-  background-position: top;
+ body {  
+  background-image: url("images/background3.png");  
   background-repeat: no-repeat;
-}
+  height: 4358px; /* Height of your background image */
+    overflow-y: scroll;  /*Enable vertical scrolling */
+  /*background-size: cover;*/ /* this works great for desktop! Or, on desktop, press CTRL +*/
+
+} 
   /* .container {
     position: relative;
-    width: 100%;
+    background-image: url("images/background3.png");
+    background-size: auto 100vh;
+    
     height: 4358px; /* Height of your background image 
     overflow-y: scroll;  Enable vertical scrolling 
   } */
   
   /* .background-image {
-    position:fixed;
+    position: top right;
     max-width: 100%;
     height: auto;
   } */
   
-  .scoreboard-bar {
-    position: fixed; /* Position the scoreboard bar at the top of the screen */
-    top: 0; /* Stick the scoreboard bar to the top */
-    width: 100%; /* Set the width to 100% */
-    display: flex;
+   #scoreboard-bar {
+    position: fixed;  /*Position the scoreboard bar at the top of the screen */
+    top: 0; 
+    flex-direction: column;
+    /*margin-left: -10px; */
+    width: max-content;  /*Set the width to 100% */
+     /* Display the scoreboard bar as a flexbox container*/
     justify-content: space-between;
     align-items: center;
     background-color: #520052;
     padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding-bottom: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    z-index: 5;
 }
 
-.score {
+ .score {
   color: #ffffff;
   font-weight: bold;
   font-size: 38px;
   margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 10px; /* Add some left margin for spacing */
-}
+  margin-bottom: 20px;  
+  margin-left: 10px; /*Add some left margin for spacing */
+  margin-right: 20px;
+ }
 .level {
-  /* Add styles for the level element */
+ 
   color: #ffffff;
 
   font-size: 38px;
-  margin-right: 10px; /* Add some right margin for spacing between .level and .line-up */
-}
+  margin-right: 20px;  /*Add some right margin for spacing between .level and .line-up */
+} 
 
-.line-up {
-  /* Add styles for the line-up element */
+.line-up { 
   color: #ffffff;
-
   font-size: 38px;
-  margin-right: 10px; /* Add some right margin for spacing between .line-up and .top-scores-link */
+  margin-right: 20px;  
 }
 .top-scores-link {
     color: #deeeff;
@@ -62,64 +67,102 @@ body {
 }
 /* Responsive adjustments for mobile devices */
 @media (max-width: 768px) {
-  .scoreboard-bar {
-      flex-direction: column; /* Stack elements vertically on smaller screens */
+  #scoreboard-bar {
+      flex-direction: column; /* Stack elements vertically on smaller screens*/ 
       align-items: center;
       padding: 10px 0; /* Adjust top and bottom padding */
       /* In the CSS shorthand property for padding, the values are specified in the following order: 1. Top padding 2. Right padding 3. Bottom padding 4. Left padding. So, in the case of padding: 10px 0;, it means: 10px of padding for the top and bottom, and 0 padding for the right and left. The 0 value means that there is no padding on the right and left sides. It's equivalent to writing padding: 10px 0 10px 0;, but since the top and bottom values are the same, we can shorten it to padding: 10px 0;. So, the element will have 10 pixels of padding at the top and bottom but no padding on the right and left sides. This is useful for creating spacing between elements vertically while keeping them close together horizontally. */
   }
-
   .score, .top-scores-link {
       margin: 5px 0; /* Add vertical margin between elements */
   }
 }
-
 .top-scores-link:hover {
     text-decoration: underline;
 }
-.podium-main {
-  position: fixed;
-    top: 60; /* Adjust the top position to your liking */
-    right: 15px; /* Adjust the right position to your liking */
-    width: 90px; /* Adjust the width to your desired size */
-    height: 90px; /* Adjust the height to your desired size */
+ .responsive {
+  width: 100%;   
+  max-width: 1080px; 
+}/* Adjust the top position to your liking 
+    right: 15px; /* Adjust the right position to your liking 
+    width: 90px; /* Adjust the width to your desired size 
+    height: 90px; /* Adjust the height to your desired size /
     cursor: pointer;
-    /* Add any other styles you want for the button here */
+    /* Add any other styles you want for the button here 
   
   left: 50%;
   transform: translateX(-50%);
-  /* ... other styles ... */
+  /* ... other styles ... 
+}*/
+#podium-main {  
+  position: absolute;
+  top: -50px;
+  right: 0px;
+  z-index: 0.5;
+ }
+ #metamaskImg {
+  position: fixed;
+  top: 70px; 
+  right: 15px; 
+  width: 90px; 
+  height: 90px; 
+  cursor: pointer;
+  z-index: 6;
+ }
+ #cheat1000 {
+  position: fixed;
+  top: 70px; 
+  right: 105px; 
+  width: 100px; 
+  height: 90px; 
+  cursor: pointer;  
+  z-index: 6;
+}
+#podium {
+  position: absolute;
+  top: 1400px; 
+  left: 30px; 
+  width: 500px; 
+  height: 500px; 
+  cursor: pointer; 
+  z-index: 2;
+}
+#drinksLevelImage {
+  position: absolute;
+  top: 2090px; 
+  left: -70px; 
+  width: 700px; 
+  height: 700px; 
+  cursor: pointer; 
 }
 
-  
- .button-container1 {  /*has the podium */
+ 
+ #button-container1 {  
   display: grid;
   grid-template-columns: 1fr; /* Single column */
   grid-template-rows: repeat(3, auto); /* Three rows */
-  row-gap: 290px; /* Adjust the gap between rows */
-  max-width: 40%;
-  margin-top: 1900px; /* Adjust the top margin to 800px */
+ 
+  margin-top:0px; /* Adjust the top margin to 800px */
   left: 18%;
   position: fixed;
-  /* top: calc(100% - 50px + 600px);   */
+  top: calc(100% - 50px + 600px);   
   transform: translate(-50%, -50%);
 }
 
-.button-container2 {
+#button-container2 {
   display: grid;
-  grid-template-columns: 1fr; /* Single column */
-  grid-template-rows: repeat(3, auto); /* Three rows */
-  row-gap: 380px; /* Adjust the gap between rows */
-  max-width: 600px;
+  grid-template-columns: 1fr; 
+  grid-template-rows: repeat(3, auto); 
+  row-gap: 380px; /* Adjust the gap between rows*/ 
+
   /* margin: -2500px auto 0; Adjust the top margin to 800px */
   left: 78%;
   position: absolute;
-  margin-top: 1500px; /* Adjust the top margin to 800px */
-
+  margin-top: 0px; /* Adjust the top margin to 800px */
   transform: translate(-50%, -50%);
 }
 .button-container1 img {
-  max-width: 100%; /* Set a maximum width for the images */
+  
   padding: 10px 15px;
   border-radius: 15px;
   font-size: 16px;
@@ -127,34 +170,18 @@ body {
   transition: transform 0.2s;
 }
 .button-container2 img {
-  max-width: 150%;  /*Set a maximum width for the images */
-  /* padding: 10px 15px; */
-  /* border-radius: 15px; */
+
+   padding: 10px 15px; 
+ border-radius: 15px; 
   font-size: 16px;
   cursor: pointer;
   transition: transform 0.2s;
 }
   
-  #metamaskImg {
-    position: fixed;
-    top: 40px; /* Adjust the top position to your liking */
-    right: 15px; /* Adjust the right position to your liking */
-    width: 90px; /* Adjust the width to your desired size */
-    height: 90px; /* Adjust the height to your desired size */
-    cursor: pointer;
-    /* Add any other styles you want for the button here */
-}
 
-#cheat1000 {
-  position: fixed;
-  top: 400px; /* Adjust the top position to your liking */
-  right: 15px; /* Adjust the right position to your liking */
-  width: 90px; /* Adjust the width to your desired size */
-  height: 90px; /* Adjust the height to your desired size */
-  cursor: pointer;
-  /* Add any other styles you want for the button here */
-}
 
+
+/*
   button {
     padding: 7px 15px;
     background-color: #3498db;
@@ -167,7 +194,7 @@ body {
     width: 10%;} /* To make buttons take % width of their cell
    */
   
-  /* Adjust button size for mobile devices */
+  /* Adjust button size for mobile devices *
   @media (max-width: 768px) {
     .button-container {
       grid-template-columns: 1fr;
@@ -202,9 +229,9 @@ body {
 }
 
 .bottom-bar {
-  position: fixed; /* Position the scoreboard bar at the top of the screen */
-  bottom: 0; /* Stick the scoreboard bar to the top */
-  width: 100%; /* Set the width to 100% */
+  position: fixed; /* Position the scoreboard bar at the top of the screen *
+  bottom: 0; /* Stick the scoreboard bar to the top *
+  width: 100%; /* Set the width to 100% *
   display: flex;
   justify-content: space-between;
   align-items: center;

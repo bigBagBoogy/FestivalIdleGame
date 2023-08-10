@@ -20,3 +20,7 @@ in Javascipts:
 1. score keeping during game
 2. upgrade effects
 3. logout warning ("leave without saving progress to the blockchain?")
+
+
+# The pain that's called CSS:   aka what I learnt:
+position: fixed;  will have an element stay on its position, even when you scroll.

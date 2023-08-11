@@ -67,6 +67,12 @@ function upgradePodium() {
 
 function updateDrinksImage() {
   var drinksLevel = levelData.Level.drinks;
+  const drinksStallElement = document.getElementById("drinksStall");
+  const drinksLevelBox = document.getElementById("drinksLevelBox");
+
+  drinksStallElement.innerHTML = drinksLevel;
+  drinksLevelBox.style.display = "inline-block"; // Show the level box
+
   console.log("updateDrinksLevelAndImage", drinksLevel);
 
   // Determine filter color based on food level
@@ -86,6 +92,13 @@ function updateDrinksImage() {
   // Update the image class and filter
   drinksStall.className = filterColor; // Assign the class to the element
   // console.log(`images/drinks.png#${filterColor}`);
+
+  // Update the image class and filter
+  drinksStallElement.className = filterColor;
+
+  // Update the text of the drinksLevelBox
+  const drinksLevelText = document.getElementById("drinksLevelText");
+  drinksLevelText.textContent = drinksLevel; // Update with the drinks level
   return;
 }
 

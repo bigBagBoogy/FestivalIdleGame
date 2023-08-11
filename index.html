@@ -6,18 +6,13 @@
   </head>
 </head>
 <body class="responsive">
-<!-- main container -->
-<!-- <div id="container">
-  <img id="background-image" src="images/background3.png" alt="Background"> -->
-
-
-
  <!-- Score-board-bar -->
  <div class="responsive" id="scoreboard-bar">
   <span class="score">Skullies: <span id="totalScore">0</span></span>
   <span class="level">Podium Level: <span id="podiumLevel">1</span></span>
-  <span class="level">Drinks Level: <span id="drinksLevel">1</span></span>
   <span class="line-up">Line Up: <span id="lineUpValue">0</span></span>
+  <span class="level">Food Level: <span id="foodLevel">1</span></span>
+
   <a href="top-scores.html" class="top-scores-link">Top Scores</a>
 </div>
 
@@ -27,8 +22,13 @@
     <img id="metamaskImg" src="images/metamask.svg" alt="connectButton" onClick="connect()" />
     <img id="cheat1000" src="images/coin.gif" alt="cheat1000" onClick="cheat()" />
     <img id="podium" src="images/podium2.png" alt="podium" onClick="upgradePodium()" />
-    <img id="drinksLevelImage" src="images/beer-bar-3d.png" alt="drinks" onClick="upgradeDrinks()" />
 
+    <img id="drinksStall" src="images/drinks.png" class="green" alt="drinks" onClick="upgradeDrinks()" />
+    <div id="drinksLevelBox" class="level-box">
+      <span id="drinksLevelText">1</span>
+    </div>
+    
+    <img id="foodStall" src="images/food.png" class="responsive" alt="food" onClick="upgradeFood()" />
 
     
     <!-- <div class="responsive" id="button-container1">
@@ -49,43 +49,34 @@
         onClick="handleButtonClick()"
       />
     </div> -->
-    <div class="bottom-bar">
-      <span class="score">Score: <span id="totalScore">0</span></span>
-      <span class="level">Podium Lvl: <span id="podiumLevel">1</span></span>
-      <span class="level">Drinks Lvl: <span id="drinksLevel">1</span></span>
-  
-      <span class="line-up">Line Up: <span id="lineUpValue">0</span></span>
-      <a href="top-scores.html" class="top-scores-link">Top Scores</a>
-  </div>
 
-</div>    <!-- ending main container -->
+
+
   
 <!-- Custom Popup Container -->
 <div id="popupContainer" class="popup-container">
   <div class="popup-content">
-      <h2>Upgrade Failed</h2>
-      <p>Your total score is not enough to upgrade the podium.</p>
+      <h2>Need nore Scullies!</h2>     
   </div>
 </div>
 
 <!-- storyline popup -->
-<button id="showPopup">Show Popup</button>
+<!-- <button id="showPopup">Show Popup</button>
     <div id="popup2" class="popup2">
         <div class="popup-content">
             <span class="close" id="closePopup">&times;</span>
             <img id="popupImage" src="" alt="Popup Image">
             <p id="popupText">Popup Text</p>
         </div>
-    </div>
+    </div> -->
 
     <h2>Save/Load Progress</h2>
-    <button id="saveProgress">Save Progress</button>
-    <button id="loadProgress">Load Progress</button>
+    <button id="saveProgress" onclick="web3save()">Save Progress</button>
+    <button id="loadProgress"onclick="web3load()">Load Progress</button>
     <div id="progressResult"></div>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.0/web3.min.js"></script>
-    <script src="JS/app.js"></script>
-    <script src="JS/alt-button-functions.js"></script>
+    <script src="JS/web3.min.js"></script>
+    <script src="JS/app.js"></script>    
     <script src="JS/connectWeb3.js"></script>
     <script src="JS/score.js"></script>
     <script src="JS/story-popup.js"></script>

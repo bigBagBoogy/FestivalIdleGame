@@ -3,6 +3,7 @@ var upgradeLevel = 1;
 // var drinksLevel = 1;
 var podiumUpgradeCost = 10;
 var drinksUpgradeCost = 500;
+var foodUpgradeCost = 800;
 var baseScore = 0;
 var increment = 1;
 var nextLoop;
@@ -51,39 +52,45 @@ function upgradePodium() {
     openPopup(`Not enough Skullies!  need: ${podiumUpgradeCost}`);
     console.log(totalScore);
   } else {
-    console.log("upgraded podium!");
     totalScore -= podiumUpgradeCost;
     baseScore = totalScore;
-    console.log("new totalScore: ", totalScore);
     increment = increment * (15 / 10);
-    console.log("new increment: ", increment);
     levelData.Level.podium++;
-    console.log("podium level: ", levelData.Level.podium);
     podiumUpgradeCost = calculatePodiumUpgradeCost();
-    console.log("upgrade to next level costs: ", podiumUpgradeCost);
     updateScore(totalScore);
     updatePodiumLevel();
-    console.log("new totalScore: ", totalScore);
   }
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 //         DRINKS              //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-function updateDrinksLevel() {
-  var drinksLevel = levelData.Level.drinks;
-  // Get the level element and update its innerHTML with the current level
-  const drinksLevelElement = document.getElementById("drinksLevel");
-  drinksLevelElement.innerHTML = drinksLevel;
 
-  if (levelData.Level.drinks > 1 && levelData.Level.drinks < 3) {
-    document.getElementById("drinksLevelImage").src =
-      "images/beer-bar-3d-blue-200pixel.png"; //update img src to src="images/drinks3.png"
-  } else {
-    document.getElementById("drinksLevelImage").src = "images/beer-bar-3d.png";
+function updateDrinksImage() {
+  var drinksLevel = levelData.Level.drinks;
+  console.log("updateDrinksLevelAndImage", drinksLevel);
+
+  // Determine filter color based on food level
+  let filterColor = "green"; // Default color
+
+  if (drinksLevel > 5 && drinksLevel < 7) {
+    filterColor = "purple";
+  } else if (drinksLevel > 4 && drinksLevel < 6) {
+    filterColor = "purple";
+  } else if (drinksLevel > 3 && drinksLevel < 5) {
+    filterColor = "red";
+  } else if (drinksLevel > 2 && drinksLevel < 4) {
+    filterColor = "yellow";
+  } else if (drinksLevel > 1 && drinksLevel < 3) {
+    filterColor = "blue";
   }
+  // Update the image class and filter
+  drinksStall.className = filterColor; // Assign the class to the element
+  // console.log(`images/drinks.png#${filterColor}`);
+  return;
 }
+
 function calculateDrinksUpgradeCost() {
-  drinksUpgradeCost = drinksUpgradeCost * levelData.Level.podium;
+  drinksUpgradeCost = drinksUpgradeCost * levelData.Level.drinks;
   return drinksUpgradeCost;
 }
 function upgradeDrinks() {
@@ -98,11 +105,79 @@ function upgradeDrinks() {
     increment = increment * (19 / 10);
     console.log("new increment: ", increment);
     levelData.Level.drinks++;
-    console.log("podium level: ", levelData.Level.drinks);
+    console.log("drinks level: ", levelData.Level.drinks);
     drinksUpgradeCost = calculateDrinksUpgradeCost();
     console.log("upgrade to next level costs: ", drinksUpgradeCost);
     updateScore(totalScore);
-    updateDrinksLevel();
+    updateDrinksImage();
+  }
+}
+function updateDrinksImage() {
+  var drinksLevel = levelData.Level.drinks;
+  console.log("updateDrinksLevelAndImage", drinksLevel);
+
+  // Determine filter color based on food level
+  let filterColor = "green"; // Default color
+
+  if (drinksLevel > 5 && drinksLevel < 7) {
+    filterColor = "purple";
+  } else if (drinksLevel > 4 && drinksLevel < 6) {
+    filterColor = "purple";
+  } else if (drinksLevel > 3 && drinksLevel < 5) {
+    filterColor = "red";
+  } else if (drinksLevel > 2 && drinksLevel < 4) {
+    filterColor = "yellow";
+  } else if (drinksLevel > 1 && drinksLevel < 3) {
+    filterColor = "blue";
+  }
+  // Update the image class and filter
+  drinksStall.className = filterColor; // Assign the class to the element
+  // console.log(`images/drinks.png#${filterColor}`);
+  return;
+}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+//         foods               //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//  finish altering this///////////////////////////////////////
+function updateFoodLevel() {
+  var foodLevel = levelData.Level.food;
+  // Get the level element and update its innerHTML with the current level
+  const foodLevelElement = document.getElementById("foodLevel");
+  foodLevelElement.innerHTML = foodLevel;
+
+  if (levelData.Level.food > 1 && levelData.Level.food < 3) {
+    document.getElementById("foodStall").src = "images/food-blue.png"; //update img upon leveling"
+  } else if (levelData.Level.food > 2 && levelData.Level.food < 4) {
+    document.getElementById("foodStall").src = "images/food-yellow.png";
+  } else if (levelData.Level.food > 3 && levelData.Level.food < 5) {
+    document.getElementById("foodStall").src = "images/food-red.png";
+  } else if (levelData.Level.food > 4 && levelData.Level.food < 6) {
+    document.getElementById("foodStall").src = "images/food-purple.png";
+  } else {
+  }
+}
+function calculateFoodUpgradeCost() {
+  foodUpgradeCost = foodUpgradeCost * levelData.Level.food;
+  return foodUpgradeCost;
+}
+
+function upgradeFood() {
+  if (totalScore < foodUpgradeCost) {
+    openPopup(`Not enough Skullies!  need: ${foodUpgradeCost}`);
+    console.log(totalScore);
+  } else {
+    console.log("upgraded food!");
+    totalScore -= foodUpgradeCost;
+    baseScore = totalScore;
+    console.log("new totalScore: ", totalScore);
+    increment = increment * (16 / 10);
+    console.log("new increment: ", increment);
+    levelData.Level.food++;
+    console.log("podium level: ", levelData.Level.food);
+    foodUpgradeCost = calculateFoodUpgradeCost();
+    console.log("upgrade to next level costs: ", foodUpgradeCost);
+    updateScore(totalScore);
   }
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
@@ -118,7 +193,7 @@ const closePopupButton = document.getElementById("closePopupButton");
 const popupContainer = document.getElementById("popupContainer");
 
 function openPopup(message) {
-  popupContainer.querySelector(".popup-content p").textContent = message;
+  popupContainer.querySelector(".popup-content").textContent = message;
   popupContainer.style.display = "flex";
   setTimeout(closePopup, 2000); // Auto-close after 2 seconds
 }

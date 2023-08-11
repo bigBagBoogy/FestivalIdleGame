@@ -100,6 +100,37 @@
   right: 0px;
   z-index: 0.5;
  }
+ #saveProgress {
+  position: fixed;
+  top: 75px; 
+  right: 215px; 
+  background-color: #a4da01;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  stroke: black;
+  padding: 20px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 6;
+ }
+ #loadProgress {
+  position: fixed;
+  top: 75px; 
+  right: 405px; 
+  background-color: #0a79ff;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 6;
+
+
+ }
  #metamaskImg {
   position: fixed;
   top: 70px; 
@@ -127,14 +158,75 @@
   cursor: pointer; 
   z-index: 2;
 }
-#drinksLevelImage {
+#drinksStall {
   position: absolute;
-  top: 2090px; 
-  left: -70px; 
-  width: 700px; 
-  height: 700px; 
+  top: 2190px; 
+  left: -40px; 
+  width: 600px; 
+  height: 600px; 
   cursor: pointer; 
 }
+#drinksStall.blue {
+  filter: drop-shadow(0px 0px 30px #1500ff);    
+  /*horizontal offset, vertical offset, blur radius, and color.*/
+}
+
+#drinksStall.yellow {
+  filter: drop-shadow(0px 0px 30px #fff200); 
+}
+
+#drinksStall.red {
+  filter: drop-shadow(0px 0px 30px #ff0000); 
+}
+
+#drinksStall.purple {
+  filter: drop-shadow(0px 0px 30px #c800ff); 
+}
+
+#drinksStall.green {
+  filter: drop-shadow(0px 0px 30px #00ff08); 
+}
+
+#foodStall{
+  position: absolute;
+  top: 2950px; 
+  left: -40px; 
+  width: 600px; 
+  height: 600px; 
+  cursor: pointer; 
+}
+#foodStall {
+  max-width: 100%;
+  height: auto;
+}
+
+/* this is old:   #foodStall.blue {
+  filter: hue-rotate(240deg) brightness(1.2);
+} */
+#foodStall.blue {
+  filter: drop-shadow(0px 0px 30px #1500ff);    
+  /*horizontal offset, vertical offset, blur radius, and color.*/
+}
+#foodStall.yellow {
+  filter: drop-shadow(0px 0px 30px #fff200); 
+}
+
+#foodStall.red {
+  filter: drop-shadow(0px 0px 30px #ff0000); 
+}
+
+#foodStall.purple {
+  filter: drop-shadow(0px 0px 30px #c800ff); 
+}
+
+#foodStall.green {
+  filter: drop-shadow(0px 0px 30px #00ff08); 
+}
+
+/* Add rules for additional colors as needed */
+
+
+
 
  
  #button-container1 {  
@@ -206,7 +298,7 @@
   img:hover {
     transform: scale(1.2); 
 
-}
+}*/
 .popup-container {
   display: none;
   position: fixed;
@@ -222,11 +314,12 @@
 .popup-content {
   background-color: #540048;
   padding: 20px;
+  font-size: 50px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-align: center;
   color: white; 
-}
+}/*
 
 .bottom-bar {
   position: fixed; /* Position the scoreboard bar at the top of the screen *

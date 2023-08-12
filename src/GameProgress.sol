@@ -88,11 +88,11 @@ contract GameProgress {
         return (topPlayers, topScores);
     }
 
-    // Internal function to get the address at a specific index in the s_playerProgress mapping
-    function getAddressAtIndex(uint256 index) internal pure returns (address) {
-        if (index == 0) return address(0); // Replace with actual address
-            // Add logic to get addresses at different indices
-    }
+    // // Internal function to get the address at a specific index in the s_playerProgress mapping
+    // function getAddressAtIndex(uint256 index) internal pure returns (address) {
+    //     if (index == 0) return address(0); // Replace with actual address
+    //         // Add logic to get addresses at different indices
+    // }
 
     // Internal function to check if a player is already in the array
     function isPlayerInArray(address player, address[5] memory array, uint256 size) internal pure returns (bool) {

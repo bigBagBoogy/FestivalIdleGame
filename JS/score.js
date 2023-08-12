@@ -25,13 +25,13 @@ function calculateScore() {
     totalScore = nextLoop;
     updateScore(totalScore);
     baseScore = nextLoop;
-  }, 250); // Update score every quarter of a second (250 milliseconds)
+  }, 500); // Update score every quarter of a second (500 milliseconds)
 }
 // Function to update the score in the scoreboard bar
 function updateScore(totalScore) {
-  // Get the score element and update its innerHTML with the current score
-  const scoreElement = document.getElementById("totalScore");
-  scoreElement.innerHTML = Math.floor(totalScore);
+  const scoreElement = document.getElementById("totalScore"); // Get the score element
+  const formattedScore = formatNumberAbbreviated(totalScore);
+  scoreElement.innerHTML = formattedScore;
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 //         PODIUM              //
@@ -49,8 +49,11 @@ function calculatePodiumUpgradeCost() {
 }
 function upgradePodium() {
   if (totalScore < podiumUpgradeCost) {
-    openPopup(`Not enough Skullies!  need: ${podiumUpgradeCost}`);
-    console.log(totalScore);
+    /// below we turn 1234567 into 1.234m
+    const formattedPodiumUpgradeCost =
+      formatNumberAbbreviated(podiumUpgradeCost);
+    ///                               ///
+    openPopup(`Not enough Skullies!  need: ${formattedPodiumUpgradeCost}`);
   } else {
     totalScore -= podiumUpgradeCost;
     baseScore = totalScore;
@@ -108,7 +111,11 @@ function calculateDrinksUpgradeCost() {
 }
 function upgradeDrinks() {
   if (totalScore < drinksUpgradeCost) {
-    openPopup(`Not enough Skullies!  need: ${drinksUpgradeCost}`);
+    /// below we turn 1234567 into 1.234m
+    const formattedDrinksUpgradeCost =
+      formatNumberAbbreviated(drinksUpgradeCost);
+    ///
+    openPopup(`Not enough Skullies!  need: ${formattedDrinksUpgradeCost}`);
     console.log(totalScore);
   } else {
     console.log("upgraded drinks!");
@@ -177,7 +184,10 @@ function calculateFoodUpgradeCost() {
 
 function upgradeFood() {
   if (totalScore < foodUpgradeCost) {
-    openPopup(`Not enough Skullies!  need: ${foodUpgradeCost}`);
+    /// below we turn 1234567 into 1.234m
+    const formattedFoodUpgradeCost = formatNumberAbbreviated(foodUpgradeCost);
+    ///
+    openPopup(`Not enough Skullies!  need: ${formattedFoodUpgradeCost}`);
     console.log(totalScore);
   } else {
     console.log("upgraded food!");
@@ -214,6 +224,22 @@ function openPopup(message) {
 function closePopup() {
   popupContainer.style.display = "none";
 }
+function formatNumberAbbreviated(number) {
+  const SI_SYMBOL = ["", "k", "M", "G", "T", "P", "E"];
+
+  if (number < 1000) {
+    // Handle numbers below 1000
+    return String(number);
+  } else {
+    const tier = (Math.log10(number) / 3) | 0; // Determine the appropriate scale (e.g., "k", "M", etc.) and value
+    const scaledValue = number / Math.pow(10, tier * 3);
+    const formattedValue = scaledValue.toFixed(
+      3 - Math.max(0, Math.floor(Math.log10(scaledValue)))
+    ); // Format the value
+    return `${formattedValue}${SI_SYMBOL[tier]}`;
+  }
+}
+
 function cheat() {
-  baseScore = totalScore + 1000;
+  baseScore = totalScore * 2;
 }

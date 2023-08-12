@@ -8,13 +8,11 @@ git push -u origin main
 
 # todo:
 
-html line 31 fix img display
-score.js line 78 fix if statement
-
 The keyboard shortcut to toggle word wrap is Alt+Z
 The keyboard shortcut to zoom is Ctrl+ + and/or Ctrl+ - (on the num-pad)
 
 forge test --mt <nameOfTest> -vvv
+forge script script/DeployGameProgress.s.sol
 
 # bigBagBoogie interim note:
 

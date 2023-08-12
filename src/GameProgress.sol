@@ -18,7 +18,7 @@ contract GameProgress {
     // uint128 myUint128   = 39
     // uint256 myUint256   = 77
 
-    struct Progress {
+    struct ProgressStruct {
         uint8 totalScore; //    In frontend, lvl should be capped to max 999
         uint8 podiumLvl;
         uint8 drinksLvl;
@@ -30,7 +30,7 @@ contract GameProgress {
         uint8 canBeAddedFunctionalityLaterLvl; // for possible added functionality
     }
 
-    mapping(address => Progress) private s_playerProgress;
+    mapping(address => ProgressStruct) private s_playerProgress;
 
     // Function to write/save player progress data (to the contract)
     function saveProgress(
@@ -44,7 +44,7 @@ contract GameProgress {
         uint8 _stageStartOverLvl,
         uint8 _canBeAddedFunctionalityLaterLvl
     ) external {
-        s_playerProgress[msg.sender] = Progress({
+        s_playerProgress[msg.sender] = ProgressStruct({
             totalScore: _totalScore,
             podiumLvl: _podiumLvl,
             drinksLvl: _drinksLvl,
@@ -55,17 +55,19 @@ contract GameProgress {
             stageStartOverLvl: _stageStartOverLvl,
             canBeAddedFunctionalityLaterLvl: _canBeAddedFunctionalityLaterLvl
         });
+        // now check if players stageStartOverLvl >= than stageStartOverLvl[topPlayers[4]] && totalScore >= than totalScore[topPlayers[4]] ([4] is fifth place...)
+        // meaning:  check if the player even needs to be added to the top 5.
     }
 
     // Function to read player progress data
-    function getProgress(address _player) external view returns (Progress memory) {
+    function getProgress(address _player) external view returns (ProgressStruct memory) {
         return s_playerProgress[_player];
     }
 
     // Function to get the top five players with the highest scores
     function getTopFivePlayers() external view returns (address[5] memory players, uint256[5] memory scores) {
-        address[5] memory topPlayers;
-        uint256[5] memory topScores;
+        address[5] memory topPlayers; // initialize array of players
+        uint256[5] memory topScores; // initialize array of scores
 
         for (uint256 i = 0; i < 5; i++) {
             address currentPlayer = address(0);

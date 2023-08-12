@@ -70,11 +70,10 @@ function upgradePodium() {
 
 function updateDrinksImage() {
   var drinksLevel = levelData.Level.drinks;
-  const drinksStallElement = document.getElementById("drinksStall");
+  const drinksStallElement = document.getElementById("drinksLevelText"); //What are we going to update?
   const drinksLevelBox = document.getElementById("drinksLevelBox");
-
-  drinksStallElement.innerHTML = drinksLevel;
   drinksLevelBox.style.display = "inline-block"; // Show the level box
+  drinksStallElement.innerHTML = drinksLevel; // update level
 
   console.log("updateDrinksLevelAndImage", drinksLevel);
 
@@ -229,7 +228,7 @@ function formatNumberAbbreviated(number) {
 
   if (number < 1000) {
     // Handle numbers below 1000
-    return String(number);
+    return String(Math.floor(number));
   } else {
     const tier = (Math.log10(number) / 3) | 0; // Determine the appropriate scale (e.g., "k", "M", etc.) and value
     const scaledValue = number / Math.pow(10, tier * 3);

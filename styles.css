@@ -1,25 +1,14 @@
  body {  
   background-image: url("images/background4.png");  
   background-repeat: no-repeat;
-  height: 4358px; /* Height of your background image */
-    overflow-y: scroll;  /*Enable vertical scrolling */
+  height: 4358px;
+  width: 1080; /* Height of your background image */
+    overflow-y: scroll;      /*Enable vertical scrolling */
+    overflow-x: hidden;
   /*background-size: cover;*/ /* this works great for desktop! Or, on desktop, press CTRL +*/
 
 } 
-  /* .container {
-    position: relative;
-    background-image: url("images/background3.png");
-    background-size: auto 100vh;
-    
-    height: 4358px; /* Height of your background image 
-    overflow-y: scroll;  Enable vertical scrolling 
-  } */
-  
-  /* .background-image {
-    position: top right;
-    max-width: 100%;
-    height: auto;
-  } */
+
   
    #scoreboard-bar {
     position: fixed;  /*Position the scoreboard bar at the top of the screen */
@@ -96,10 +85,11 @@
 }*/
 #podium-main {  
   position: absolute;
-  top: 0px;
-  left: 50px;
+  width: 900px;
+  top: 200px;
+  left: 178px;
   z-index: 0.5;
-  transform: translateX(10px); /* Adjust the value as needed */
+  /*transform: translateX(100px);  Adjust the value as needed */
  }
  #saveProgress {
   position: fixed;
@@ -179,10 +169,10 @@
 #drinksStall.green {
   filter: drop-shadow(0px 0px 30px #00ff08); 
 }
-.level-box {
+#drinksLevelBox {
   color: #ffffff;
   font-weight: bold;
-  font-size: 38px;
+  font-size: 40px;
   margin-top: 20px;
   margin-bottom: 20px;  
   margin-left: 10px; /*Add some left margin for spacing */
@@ -190,22 +180,30 @@
   position: absolute;
   top: 2670px; 
   left: 10px; 
-  width: 100px; 
-  height: 100px; 
+  width: 150px; 
+  height: 50px; 
   cursor: pointer; 
   display: inline-block;
-  background-color: blue;
+  background-color: rgb(136, 0, 255);
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
   margin-left: 10px;
 }
+#upgradeArrow {
+  position: absolute; /* Keep the element fixed within the viewport */
+  top: 2620px;     /* Adjust this value as needed */
+  left: 100px; 
+  width: 150px;   
+  z-index: 5;
+  filter: drop-shadow(0px 0px 10px #000000); 
+  animation: moveUpAndDown 1s infinite ease-in-out; /* Apply the animation */ 
+}
 
-
-
-
-
-
+@keyframes moveUpAndDown {
+  0%, 100% { top: 2590px; } /* Start and end position */
+  50% { top: 2605px; } /* Middle position */
+}
 
 
 
@@ -216,8 +214,6 @@
   width: 600px; 
   height: 600px; 
   cursor: pointer; 
-}
-#foodStall {
   max-width: 100%;
   height: auto;
 }

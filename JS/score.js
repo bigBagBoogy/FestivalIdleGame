@@ -32,6 +32,14 @@ function updateScore(totalScore) {
   const scoreElement = document.getElementById("totalScore"); // Get the score element
   const formattedScore = formatNumberAbbreviated(totalScore);
   scoreElement.innerHTML = formattedScore;
+
+  const upgradeArrowImg = document.getElementById("upgradeArrow");
+  if (totalScore >= drinksUpgradeCost) {
+    // console.log("show arrow!");
+    upgradeArrowImg.style.display = "block";
+  } else {
+    upgradeArrowImg.style.display = "none"; // Hide the image
+  }
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 //         PODIUM              //
@@ -69,15 +77,15 @@ function upgradePodium() {
 //         DRINKS              //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-function updateDrinksImage() {
+function updateDrinksLevel() {
   var drinksLevel = levelData.Level.drinks;
-  const drinksStallElement = document.getElementById("drinksLevelText"); //What are we going to update?
-  const drinksLevelBox = document.getElementById("drinksLevelBox");
-  drinksLevelBox.style.display = "inline-block"; // Show the level box
-  drinksStallElement.innerHTML = drinksLevel; // update level
+  // Get the level element and update its innerHTML with the current level
+  const levelElement = document.getElementById("drinksLevelText");
+  levelElement.innerHTML = `lvl: ${drinksLevel}`; // lvlup: ${drinksUpgradeCost}`; this is optional
+}
 
+function updateDrinksImage() {
   console.log("updateDrinksLevelAndImage", drinksLevel);
-
   // Determine filter color based on food level
   let filterColor = "green"; // Default color
 
@@ -95,14 +103,6 @@ function updateDrinksImage() {
   // Update the image class and filter
   drinksStall.className = filterColor; // Assign the class to the element
   // console.log(`images/drinks.png#${filterColor}`);
-
-  // Update the image class and filter
-  drinksStallElement.className = filterColor;
-
-  // Update the text of the drinksLevelBox
-  const drinksLevelText = document.getElementById("drinksLevelText");
-  drinksLevelText.textContent = drinksLevel; // Update with the drinks level
-  return;
 }
 
 function calculateDrinksUpgradeCost() {
@@ -130,11 +130,12 @@ function upgradeDrinks() {
     console.log("upgrade to next level costs: ", drinksUpgradeCost);
     updateScore(totalScore);
     updateDrinksImage();
+    updateDrinksLevel(drinksUpgradeCost);
   }
 }
 function updateDrinksImage() {
   var drinksLevel = levelData.Level.drinks;
-  console.log("updateDrinksLevelAndImage", drinksLevel);
+  console.log("updatedDrinksLevelAndImage", drinksLevel);
 
   // Determine filter color based on food level
   let filterColor = "green"; // Default color
@@ -197,7 +198,7 @@ function upgradeFood() {
     increment = increment * (16 / 10);
     console.log("new increment: ", increment);
     levelData.Level.food++;
-    console.log("podium level: ", levelData.Level.food);
+    console.log("food level: ", levelData.Level.food);
     foodUpgradeCost = calculateFoodUpgradeCost();
     console.log("upgrade to next level costs: ", foodUpgradeCost);
     updateScore(totalScore);
@@ -246,5 +247,5 @@ function calculateCombinedScore(stageStartOverLvl, totalScore) {
 }
 
 function cheat() {
-  baseScore = totalScore * 2;
+  baseScore = totalScore * 5;
 }

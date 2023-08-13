@@ -149,15 +149,7 @@
   cursor: pointer;  
   z-index: 6;
 }
-#podium {
-  position: absolute;
-  top: 1400px; 
-  left: 30px; 
-  width: 500px; 
-  height: 500px; 
-  cursor: pointer; 
-  z-index: 2;
-}
+
 #drinksStall {
   position: absolute;
   top: 2190px; 

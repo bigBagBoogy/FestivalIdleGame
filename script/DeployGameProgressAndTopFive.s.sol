@@ -3,16 +3,16 @@ pragma solidity ^0.8.19;
 
 import {Script} from "forge-std/Script.sol";
 import {HelperConfig} from "./HelperConfig.s.sol";
-import {GameProgress} from "../src/GameProgress.sol";
+import {GameProgressAndTopFive} from "../src/GameProgressAndTopFive.sol";
 
-contract DeployGameProgress is Script {
-    function run() external returns (GameProgress, HelperConfig) {
+contract DeploygameProgressAndTopFive is Script {
+    function run() external returns (GameProgressAndTopFive, HelperConfig) {
         HelperConfig helperConfig = new HelperConfig();
 
         vm.startBroadcast();
-        GameProgress gameProgress = new GameProgress();
+        GameProgressAndTopFive gameProgressAndTopFive = new GameProgressAndTopFive();
         vm.stopBroadcast();
-        return (gameProgress, helperConfig);
+        return (gameProgressAndTopFive, helperConfig);
     }
 }
 

@@ -2,18 +2,18 @@
 pragma solidity ^0.8.19;
 
 // import {DeployGameProgress} from "../../script/DeployGameProgress.s.sol";
-import {GameProgress} from "../../src/GameProgress.sol";
+import {GameProgressAndTopFive} from "../../src/GameProgressAndTopFive.sol";
 
 import {Test, console} from "forge-std/Test.sol";
 import {StdCheats} from "forge-std/StdCheats.sol";
 
-contract GameProgressTest is StdCheats, Test {
+contract GameProgressAndTopFiveTest is StdCheats, Test {
     // Declare your contract instance
-    GameProgress public gameProgress;
+    GameProgressAndTopFive public gameProgressAndTopFive;
 
     // Deploy your contract before each test case
     function setUp() public {
-        gameProgress = new GameProgress();
+        gameProgressAndTopFive = new GameProgressAndTopFive();
     }
 
     function testSaveAndGetProgress() public {
@@ -27,7 +27,7 @@ contract GameProgressTest is StdCheats, Test {
         uint8 expectedStageStartOverLvl = 1;
         uint8 expectedCanBeAddedFunctionalityLaterLvl = 1;
 
-        gameProgress.saveProgress(
+        gameProgressAndTopFive.saveProgress(
             expectedTotalScore,
             expectedPodiumLvl,
             expectedDrinksLvl,
@@ -39,7 +39,8 @@ contract GameProgressTest is StdCheats, Test {
             expectedCanBeAddedFunctionalityLaterLvl
         );
 
-        GameProgress.Progress memory playerProgress = gameProgress.getProgress(address(this));
+        GameProgressAndTopFive.ProgressStruct memory playerProgress =
+            gameProgressAndTopFive.getPlayerProgress(address(this));
 
         assertEq(playerProgress.totalScore, expectedTotalScore, "Total score not saved correctly");
         assertEq(playerProgress.podiumLvl, expectedPodiumLvl, "Podium level not saved correctly");
@@ -59,4 +60,22 @@ contract GameProgressTest is StdCheats, Test {
     }
 
     // Add more test cases as needed
+
+
+    function test_UpdateTopPlayers() public {
+        // Prank initial top 5 players and scores
+        vm.prank(dummyAddress1, initialScore1);
+        vm.prank(dummyAddress2, initialScore2);
+        vm.prank(dummyAddress3, initialScore3);
+        vm.prank(dummyAddress4, initialScore4);
+        vm.prank(dummyAddress5, initialScore5);
+        // Prank "to be added" user
+        vm.prank(newUserAddress, newUserScore);
+        // Perform actions to update top players
+        game.updateTopPlayers();
+        // Assert that the top players have been updated as expected
+        // ...
+    }
+}
+
 }

@@ -8,6 +8,19 @@ git push -u origin main
 
 # todo:
 
+totalScore (skullies) must me capped at 1e50!!!! in JS/score.js
+to cap this, let's add a function that triggers at 1e50 skullies and sets all elements
+to lvl10, which in term will trigger the function: levelUpStage() {
+podiumLvl = 1;
+drinksLvl = 1;
+etc, etc,
+stageStartOverLvl++;
+
+To otherwise call levelUpStage() though, we'll have to add a "checker" that looks for:
+All elementsLvl = 10 to be true
+
+}
+
 The keyboard shortcut to toggle word wrap is Alt+Z
 The keyboard shortcut to zoom is Ctrl+ + and/or Ctrl+ - (on the num-pad)
 

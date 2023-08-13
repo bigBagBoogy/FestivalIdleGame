@@ -99,6 +99,7 @@
   top: 0px;
   left: 50px;
   z-index: 0.5;
+  transform: translateX(10px); /* Adjust the value as needed */
  }
  #saveProgress {
   position: fixed;

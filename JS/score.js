@@ -81,7 +81,7 @@ function updateDrinksLevel() {
   var drinksLevel = levelData.Level.drinks;
   // Get the level element and update its innerHTML with the current level
   const levelElement = document.getElementById("drinksLevelText");
-  levelElement.innerHTML = `lvl: ${drinksLevel}`; // lvlup: ${drinksUpgradeCost}`; this is optional
+  levelElement.innerHTML = `lvl ${drinksLevel}`; // lvlup: ${drinksUpgradeCost}`; this is optional
 }
 
 function updateDrinksImage() {

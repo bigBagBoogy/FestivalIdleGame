@@ -35,6 +35,8 @@ async function web3save() {
   const drinksLvl = parseInt(prompt("Enter drinks level:"));
   const audioLvl = parseInt(prompt("Enter audio level:"));
   const stageStartOverLvl = parseInt(prompt("Enter stage start over level:"));
+  // gather all the lvl values here. Let's try to console.log them first.
+  const combinedScore; // get from JS/score.js  -> calculateCombinedScore(stageStartOverLvl, totalScore)
 
   try {
     await GameProgress.methods

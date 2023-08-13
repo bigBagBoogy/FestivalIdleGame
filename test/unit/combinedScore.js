@@ -1,11 +1,15 @@
 function calculateCombinedScore(stageStartOverLvl, totalScore) {
   const combinedScore = stageStartOverLvl * 1e51 + totalScore;
-  // for this calculation to work, totalScore (skullies) must me capped at 1e50!!!!
+  // for this calculation to work, totalScore (skullies) must me capped at 1e50!!!! see bigBagBoogy.md
   return combinedScore;
 }
+
 /////////////////////////////////////////////////////
 //    Test the calculation with different values   //
 /////////////////////////////////////////////////////
+
+// run tests with cli command:  node test/unit/combinedScore.js
+
 const x = 2;
 const y = 1;
 const a = 1;

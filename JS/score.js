@@ -238,6 +238,11 @@ function formatNumberAbbreviated(number) {
     return `${formattedValue}${SI_SYMBOL[tier]}`;
   }
 }
+function calculateCombinedScore(stageStartOverLvl, totalScore) {
+  const combinedScore = stageStartOverLvl * 1e51 + totalScore;
+  // for this calculation to work, totalScore (skullies) must me capped at 1e50!!!! see bigBagBoogy.md
+  return combinedScore; // This score(number) needs to be sent to src/GameProgressAndTopFive.sol
+}
 
 function cheat() {
   baseScore = totalScore * 2;

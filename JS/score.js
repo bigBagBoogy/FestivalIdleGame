@@ -62,6 +62,7 @@ function upgradePodium() {
     podiumUpgradeCost = calculatePodiumUpgradeCost();
     updateScore(totalScore);
     updatePodiumLevel();
+    console.log(`Upgraded podium to level: ${levelData.Level.podium}`);
   }
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//

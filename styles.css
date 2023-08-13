@@ -96,8 +96,8 @@
 }*/
 #podium-main {  
   position: absolute;
-  top: -50px;
-  right: 0px;
+  top: 0px;
+  left: 50px;
   z-index: 0.5;
  }
  #saveProgress {

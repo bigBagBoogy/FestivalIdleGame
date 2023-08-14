@@ -29,12 +29,7 @@ forge script script/DeployGameProgress.s.sol
 
 # bigBagBoogie interim note:
 
-As of now, when still working on the code, I can see no event being emitted for the
-health factor being broken. See below deliberation with chatGPT3:
-
 # bigBagBoogie:
-
-In the above contract, users should be able to liquidate other users when their health factor is broken. I see no event being emitted of a health factor being broken though. How can users (listen) for this event and find out what users are elligable for liquidation?
 
 # Layout of Contract:
 

@@ -58,24 +58,21 @@ contract GameProgressAndTopFiveTest is StdCheats, Test {
             "Can be added functionality later level not saved correctly"
         );
     }
-
-    // Add more test cases as needed
-
-
-    function test_UpdateTopPlayers() public {
-        // Prank initial top 5 players and scores
-        vm.prank(dummyAddress1, initialScore1);
-        vm.prank(dummyAddress2, initialScore2);
-        vm.prank(dummyAddress3, initialScore3);
-        vm.prank(dummyAddress4, initialScore4);
-        vm.prank(dummyAddress5, initialScore5);
-        // Prank "to be added" user
-        vm.prank(newUserAddress, newUserScore);
-        // Perform actions to update top players
-        game.updateTopPlayers();
-        // Assert that the top players have been updated as expected
-        // ...
-    }
 }
+// Add more test cases as needed
 
-}
+//     function test_UpdateTopPlayers() public {
+//         // Prank initial top 5 players and scores
+//         vm.prank(dummyAddress1, initialScore1);
+//         vm.prank(dummyAddress2, initialScore2);
+//         vm.prank(dummyAddress3, initialScore3);
+//         vm.prank(dummyAddress4, initialScore4);
+//         vm.prank(dummyAddress5, initialScore5);
+//         // Prank "to be added" user
+//         vm.prank(newUserAddress, newUserScore);
+//         // Perform actions to update top players
+//         game.updateTopPlayers();
+//         // Assert that the top players have been updated as expected
+//         // ...
+//     }
+// }

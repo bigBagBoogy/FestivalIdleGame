@@ -18,30 +18,21 @@ contract GameProgressAndTopFive {
     mapping(address => ProgressStruct) private s_playerProgress;
     //     UINT digits    // uint8   myUint8     =  3    // uint16  myUint16    =  5    // uint32  myUint32    = 10    // uint64  myUint64    = 20    // uint128 myUint128   = 39    // uint256 myUint256   = 77
 
+    //  uint8 podiumLvl; //    In frontend, lvl should be capped to max 999
+    //         uint8 drinksLvl; //    In frontend, lvl should be capped to max 999
+    //         uint8 foodLvl; //    In frontend, lvl should be capped to max 999
+    //         uint8 tshirtLvl; //  etc.
+    //         uint8 audioLvl;
+    //         uint8 campingLvl;
+    //         uint8 stageStartOverLvl; // tierLvl
+    //         uint8 canBeAddedFunctionalityLaterLvl; // for possible future added functionality
     struct ProgressStruct {
         uint256 totalScore; //skullies
-        uint8 podiumLvl; //    In frontend, lvl should be capped to max 999
-        uint8 drinksLvl; //    In frontend, lvl should be capped to max 999
-        uint8 foodLvl; //    In frontend, lvl should be capped to max 999
-        uint8 tshirtLvl; //  etc.
-        uint8 audioLvl;
-        uint8 campingLvl;
-        uint8 stageStartOverLvl; // tierLvl
-        uint8 canBeAddedFunctionalityLaterLvl; // for possible future added functionality
+        uint256 concatenatedValue; // all the lvl data in one integer
     }
 
     // Function to write/save player progress data (to the contract)
-    function saveProgress(
-        uint8 _totalScore,
-        uint8 _podiumLvl,
-        uint8 _drinksLvl,
-        uint8 _foodLvl,
-        uint8 _tshirtLvl,
-        uint8 _audioLvl,
-        uint8 _campingLvl,
-        uint8 _stageStartOverLvl,
-        uint8 _canBeAddedFunctionalityLaterLvl
-    ) external {
+    function saveProgress(uint256 _totalScore, uint256 _concatenatedValue) external {
         s_playerProgress[msg.sender] = ProgressStruct({
             totalScore: _totalScore,
             podiumLvl: _podiumLvl,

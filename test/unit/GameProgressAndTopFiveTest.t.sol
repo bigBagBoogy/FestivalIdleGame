@@ -5,6 +5,11 @@ pragma solidity ^0.8.19;
 import {GameProgressAndTopFive} from "../../src/GameProgressAndTopFive.sol";
 
 import {Test, console} from "forge-std/Test.sol";
+//You can call console.log with up to 4 parameters in any order of following types:
+// uint
+// string
+// bool
+// address
 import {StdCheats} from "forge-std/StdCheats.sol";
 
 contract GameProgressAndTopFiveTest is StdCheats, Test {

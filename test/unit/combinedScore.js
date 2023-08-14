@@ -38,6 +38,7 @@ let tshirtLvl = 1;
 let audioLvl = 4;
 let campingLvl = 7;
 let stageStartOverLvl = 6;
+let canBeAddedFunctionalityLaterLvl = 1;
 
 // Function to prepend zeroes to a number until it has a certain length
 function prependZeroes(number, length) {
@@ -53,11 +54,12 @@ const concatenatedValue =
   prependZeroes(tshirtLvl, 3) +
   prependZeroes(audioLvl, 3) +
   prependZeroes(campingLvl, 3) +
-  prependZeroes(stageStartOverLvl, 3);
+  prependZeroes(stageStartOverLvl, 3) +
+  prependZeroes(canBeAddedFunctionalityLaterLvl, 3);
 
-console.log(concatenatedValue); // Output: "003005002001004007006"
+console.log(concatenatedValue); // Output: "003005002001004007006001"
 
-// Deconstruct concatenatedValue = "003005002001004007006"; // Replace with your concatenated value
+// Deconstruct concatenatedValue = "003005002001004007006001"; // Replace with your concatenated value
 
 // Function to remove leading zeroes from a string
 function removeLeadingZeroes(str) {
@@ -79,6 +81,9 @@ function deconstructConcatenatedValue(concatenatedValue) {
     removeLeadingZeroes(concatenatedValue.substr(18, 3)),
     10
   );
+  canBeAddedFunctionalityLaterLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(21, 3))
+  );
 
   console.log(`podiumLvl: ${podiumLvl}`);
   console.log(`drinksLvl: ${drinksLvl}`);
@@ -87,6 +92,9 @@ function deconstructConcatenatedValue(concatenatedValue) {
   console.log(`audioLvl: ${audioLvl}`);
   console.log(`campingLvl: ${campingLvl}`);
   console.log(`stageStartOverLvl: ${stageStartOverLvl}`);
+  console.log(
+    `canBeAddedFunctionalityLaterLvl: ${canBeAddedFunctionalityLaterLvl}`
+  );
 }
 deconstructConcatenatedValue(concatenatedValue);
 

@@ -10,20 +10,23 @@ contract GameProgressAndTopFive {
     // Later it can we read from the blockchain an deconstructed into the struct.
     // This will be a project for a later day
 
+    // this is only top5 stuff:
     address[5] public topPlayers; // initialize array of players
     uint256[5] public topScores; // initialize array of scores
+
+    // this is for all player's progress
     mapping(address => ProgressStruct) private s_playerProgress;
     //     UINT digits    // uint8   myUint8     =  3    // uint16  myUint16    =  5    // uint32  myUint32    = 10    // uint64  myUint64    = 20    // uint128 myUint128   = 39    // uint256 myUint256   = 77
 
     struct ProgressStruct {
-        uint256 totalScore;
+        uint256 totalScore; //skullies
         uint8 podiumLvl; //    In frontend, lvl should be capped to max 999
         uint8 drinksLvl; //    In frontend, lvl should be capped to max 999
         uint8 foodLvl; //    In frontend, lvl should be capped to max 999
         uint8 tshirtLvl; //  etc.
         uint8 audioLvl;
         uint8 campingLvl;
-        uint8 stageStartOverLvl;
+        uint8 stageStartOverLvl; // tierLvl
         uint8 canBeAddedFunctionalityLaterLvl; // for possible future added functionality
     }
 

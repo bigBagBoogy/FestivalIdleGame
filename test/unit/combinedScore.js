@@ -3,6 +3,8 @@ function calculateCombinedScore(stageStartOverLvl, totalScore) {
   // for this calculation to work, totalScore (skullies) must me capped at 1e50!!!! see bigBagBoogy.md
   return combinedScore;
 }
+// We could also put this function in the solidity contract, but if we call it internally,
+// it will still cost gas.
 
 /////////////////////////////////////////////////////
 //    Test the calculation with different values   //

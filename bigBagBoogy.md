@@ -25,7 +25,7 @@ The keyboard shortcut to toggle word wrap is Alt+Z
 The keyboard shortcut to zoom is Ctrl+ + and/or Ctrl+ - (on the num-pad)
 
 forge test --mt <nameOfTest> -vvv
-forge script script/DeployGameProgress.s.sol
+forge script script/DeployGameProgressAndTopFive.s.sol
 
 # bigBagBoogie interim note:
 

@@ -4,6 +4,9 @@ out = "out"
 libs = ["lib"]
 remappings = ["@chainlink/contracts=lib/forge-std/src/interfaces/AggregatorV3Interface.sol","@openzeppelin/contracts=lib/openzeppelin-contracts/contracts"]
 
+[profile.dependencies]
+"solidity-stringutils" = ">=0.2.11"
+
 [invariant]
 runs = 100
 depth = 10

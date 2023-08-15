@@ -31,6 +31,8 @@ forge script script/DeployGameProgress.s.sol
 
 # bigBagBoogie:
 
+//uint8 = 3 uint16 = 5 uint32 = 10 uint64 = 20 uint128 = 39 uint256 = 77
+
 # Layout of Contract:
 
 // version

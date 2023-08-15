@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {DeployGameProgressAndTopFive} from "../../script/DeployGameProgress.s.sol";
+import {DeployGameProgressAndTopFive} from "../../script/DeployGameProgressAndTopFive.s.sol";
 import {GameProgressAndTopFive} from "../../src/GameProgressAndTopFive.sol";
 import {HelperConfig} from "../../script/HelperConfig.s.sol";
 import {Test, console} from "forge-std/Test.sol"; //You can call console.log with up to 4 parameters in any order of following types: uint, string, bool,address
@@ -29,11 +29,13 @@ contract GameProgressAndTopFiveTest is StdCheats, Test {
         uint256 concatenatedValue = 3005002001004007006001;
 
         game.saveProgress(totalScore, concatenatedValue);
+        uint256 stageStartOverLvl = game.getStageStartoverLvl(concatenatedValue);
+        console.log(stageStartOverLvl);
 
         (address[5] memory topPlayers, uint256[5] memory topScores) = game.getTopFivePlayers();
 
         assertEq(topPlayers[0], address(this), "Top player should be this test contract");
-        assertEq(topScores[0], concatenatedValue * 1e51 + totalScore, "Top player's combined score is incorrect");
+        assertEq(topScores[0], stageStartOverLvl * 1e51 + totalScore, "Top player's combined score is incorrect");
     }
 
     function test_saveProgressWithHigherScore() public {

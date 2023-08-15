@@ -5,7 +5,7 @@ import {Script} from "forge-std/Script.sol";
 import {HelperConfig} from "./HelperConfig.s.sol";
 import {GameProgressAndTopFive} from "../src/GameProgressAndTopFive.sol";
 
-contract DeploygameProgressAndTopFive is Script {
+contract DeployGameProgressAndTopFive is Script {
     function run() external returns (GameProgressAndTopFive, HelperConfig) {
         HelperConfig helperConfig = new HelperConfig();
 

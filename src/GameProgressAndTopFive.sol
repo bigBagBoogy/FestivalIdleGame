@@ -30,7 +30,7 @@ contract GameProgressAndTopFive {
     function getStageStartoverLvl(uint256 _concatenatedValue) public pure returns (uint256) {
         string memory concatenatedStr = uint256ToString(_concatenatedValue);
 
-        uint256 start = 18; // Start index of the desired substring
+        uint256 start = 16; // Start index of the desired substring
         uint256 length = 3; // Length of the desired substring
         uint256 stageStartOverLvl = parseSubstring(concatenatedStr, start, length);
 

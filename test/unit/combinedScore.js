@@ -66,6 +66,9 @@ function removeLeadingZeroes(str) {
   return str.replace(/^0+/, "");
 }
 
+// Important! It seems like in solidity, the first prepended zeroe(s) get lost.
+// so 003005002001004007006001  comes back as 3005002001004007006001
+// This may not be a real problem, but it's important to keep in mind
 function deconstructConcatenatedValue(concatenatedValue) {
   // Deconstruct the concatenated value and assign to variables
   podiumLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(0, 3)), 10);

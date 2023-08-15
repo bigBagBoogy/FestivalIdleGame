@@ -1,83 +1,85 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-// import {DeployGameProgress} from "../../script/DeployGameProgress.s.sol";
+import {DeployGameProgressAndTopFive} from "../../script/DeployGameProgress.s.sol";
 import {GameProgressAndTopFive} from "../../src/GameProgressAndTopFive.sol";
-
-import {Test, console} from "forge-std/Test.sol";
-//You can call console.log with up to 4 parameters in any order of following types:
-// uint
-// string
-// bool
-// address
+import {Test, console} from "forge-std/Test.sol";//You can call console.log with up to 4 parameters in any order of following types: uint, string, bool,address
 import {StdCheats} from "forge-std/StdCheats.sol";
 
 contract GameProgressAndTopFiveTest is StdCheats, Test {
     // Declare your contract instance
-    GameProgressAndTopFive public gameProgressAndTopFive;
+    GameProgressAndTopFive public game;
 
     // Deploy your contract before each test case
     function setUp() public {
-        gameProgressAndTopFive = new GameProgressAndTopFive();
+        game = new GameProgressAndTopFive();
     }
 
-    // function testSaveAndGetProgress() public {
-    //     uint8 expectedTotalScore = 100;
-    //     uint8 expectedPodiumLvl = 2;
-    //     uint8 expectedDrinksLvl = 3;
-    //     uint8 expectedFoodLvl = 4;
-    //     uint8 expectedTshirtLvl = 5;
-    //     uint8 expectedAudioLvl = 1;
-    //     uint8 expectedCampingLvl = 1;
-    //     uint8 expectedStageStartOverLvl = 1;
-    //     uint8 expectedCanBeAddedFunctionalityLaterLvl = 1;
 
-    //     gameProgressAndTopFive.saveProgress(
-    //         expectedTotalScore,
-    //         expectedPodiumLvl,
-    //         expectedDrinksLvl,
-    //         expectedFoodLvl,
-    //         expectedTshirtLvl,
-    //         expectedAudioLvl,
-    //         expectedCampingLvl,
-    //         expectedStageStartOverLvl,
-    //         expectedCanBeAddedFunctionalityLaterLvl
-    //     );
+contract GameProgressAndTopFiveTest is Test {
+    GameProgressAndTopFive game;
 
-    //     GameProgressAndTopFive.ProgressStruct memory playerProgress =
-    //         gameProgressAndTopFive.getPlayerProgress(address(this));
+    function beforeEach() public {
+        game = new GameProgressAndTopFive();
+    }
 
-    //     assertEq(playerProgress.totalScore, expectedTotalScore, "Total score not saved correctly");
-    //     assertEq(playerProgress.podiumLvl, expectedPodiumLvl, "Podium level not saved correctly");
-    //     assertEq(playerProgress.drinksLvl, expectedDrinksLvl, "Drinks level not saved correctly");
-    //     assertEq(playerProgress.foodLvl, expectedFoodLvl, "Food level not saved correctly");
-    //     assertEq(playerProgress.tshirtLvl, expectedTshirtLvl, "T-shirt level not saved correctly");
-    //     assertEq(playerProgress.audioLvl, expectedAudioLvl, "Audio level not saved correctly");
-    //     assertEq(playerProgress.campingLvl, expectedCampingLvl, "Camping level not saved correctly");
-    //     assertEq(
-    //         playerProgress.stageStartOverLvl, expectedStageStartOverLvl, "Stage start over level not saved correctly"
-    //     );
-    //     assertEq(
-    //         playerProgress.canBeAddedFunctionalityLaterLvl,
-    //         expectedCanBeAddedFunctionalityLaterLvl,
-    //         "Can be added functionality later level not saved correctly"
-    //     );
-    // }
+    function test_saveProgressAndTopPlayers() public {
+        uint256 totalScore = 100;
+        uint256 concatenatedValue = 123456;
+
+        game.saveProgress(totalScore, concatenatedValue);
+
+        (address[5] memory topPlayers, uint256[5] memory topScores) = game.getTopFivePlayers();
+
+        assertEq(topPlayers[0], address(this), "Top player should be this test contract");
+        assertEq(topScores[0], concatenatedValue * 1e51 + totalScore, "Top player's combined score is incorrect");
+    }
+
+    function test_saveProgressWithHigherScore() public {
+        // Add initial player with a lower score
+        uint256 initialTotalScore = 50;
+        uint256 initialConcatenatedValue = 789012;
+        game.saveProgress(initialTotalScore, initialConcatenatedValue);
+
+        // Add player with higher score
+        uint256 totalScore = 150;
+        uint256 concatenatedValue = 123456;
+        game.saveProgress(totalScore, concatenatedValue);
+
+        (, uint256[5] memory topScores) = game.getTopFivePlayers();
+
+        assertEq(topScores[0], concatenatedValue * 1e51 + totalScore, "Top player's combined score is incorrect");
+        assertEq(topScores[4], initialConcatenatedValue * 1e51 + initialTotalScore, "Last player's score should not change");
+    }
+
+    function test_saveProgressWithEqualScore() public {
+        // Add initial player
+        uint256 initialTotalScore = 100;
+        uint256 initialConcatenatedValue = 123456;
+        game.saveProgress(initialTotalScore, initialConcatenatedValue);
+
+        // Add player with equal score
+        uint256 totalScore = 100;
+        uint256 concatenatedValue = 789012;
+        game.saveProgress(totalScore, concatenatedValue);
+
+        (, uint256[5] memory topScores) = game.getTopFivePlayers();
+
+        assertEq(topScores[0], initialConcatenatedValue * 1e51 + initialTotalScore, "Top player's score should not change");
+        assertEq(topScores[4], 0, "Last player's score should be zero");
+    }
+
+    function test_getPlayerProgress() public {
+        uint256 totalScore = 100;
+        uint256 concatenatedValue = 123456;
+        game.saveProgress(totalScore, concatenatedValue);
+
+        GameProgressAndTopFive.ProgressStruct memory progress = game.getPlayerProgress(address(this));
+
+        assertEq(progress.totalScore, totalScore, "Player's total score is incorrect");
+        assertEq(progress.concatenatedValue, concatenatedValue, "Player's concatenated value is incorrect");
+    }
 }
-// Add more test cases as needed
 
-//     function test_UpdateTopPlayers() public {
-//         // Prank initial top 5 players and scores
-//         vm.prank(dummyAddress1, initialScore1);
-//         vm.prank(dummyAddress2, initialScore2);
-//         vm.prank(dummyAddress3, initialScore3);
-//         vm.prank(dummyAddress4, initialScore4);
-//         vm.prank(dummyAddress5, initialScore5);
-//         // Prank "to be added" user
-//         vm.prank(newUserAddress, newUserScore);
-//         // Perform actions to update top players
-//         game.updateTopPlayers();
-//         // Assert that the top players have been updated as expected
-//         // ...
-//     }
-// }
+}
+    

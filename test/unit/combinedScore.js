@@ -31,6 +31,7 @@ console.log(`Rule satisfied: ${combinedScoreX > combinedScoreOpponent}`);
 //   Pack all lvl data into one string to save gas //
 /////////////////////////////////////////////////////
 
+let canBeAddedFunctionalityLaterLvl = 1;
 let podiumLvl = 3;
 let drinksLvl = 5;
 let foodLvl = 2;
@@ -38,7 +39,6 @@ let tshirtLvl = 1;
 let audioLvl = 4;
 let campingLvl = 7;
 let stageStartOverLvl = 6;
-let canBeAddedFunctionalityLaterLvl = 1;
 
 // Function to prepend zeroes to a number until it has a certain length
 function prependZeroes(number, length) {
@@ -48,46 +48,53 @@ function prependZeroes(number, length) {
 
 // Format the values with leading zeroes and concatenate them
 const concatenatedValue =
+  prependZeroes(canBeAddedFunctionalityLaterLvl, 3) +
   prependZeroes(podiumLvl, 3) +
   prependZeroes(drinksLvl, 3) +
   prependZeroes(foodLvl, 3) +
   prependZeroes(tshirtLvl, 3) +
   prependZeroes(audioLvl, 3) +
   prependZeroes(campingLvl, 3) +
-  prependZeroes(stageStartOverLvl, 3) +
-  prependZeroes(canBeAddedFunctionalityLaterLvl, 3);
+  prependZeroes(stageStartOverLvl, 3);
 
-console.log(concatenatedValue); // Output: "003005002001004007006001"
-
-// Deconstruct concatenatedValue = "003005002001004007006001"; // Replace with your concatenated value
+console.log(concatenatedValue); // Output: "001003005002001004007006"
 
 // Function to remove leading zeroes from a string
 function removeLeadingZeroes(str) {
   return str.replace(/^0+/, "");
 }
 
-// Important! It seems like in solidity, the first prepended zeroe(s) get lost.
+// Important! It seems like in solidity, the first prepended zero(s) get lost.
 // so 003005002001004007006001  comes back as 3005002001004007006001
 // This may not be a real problem, but it's important to keep in mind
+//  EDIT: it IS a real problem. One solution might be to start with an element
+// that has no leading zeroes(never goes beyond one digit(max lvl9))
+// for now we we solve this by leading with our wildcard variable "canBeAddedFunctionalityLaterLvl"
 function deconstructConcatenatedValue(concatenatedValue) {
   // Deconstruct the concatenated value and assign to variables
-  podiumLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(0, 3)), 10);
-  drinksLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(3, 3)), 10);
-  foodLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(6, 3)), 10);
-  tshirtLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(9, 3)), 10);
-  audioLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(12, 3)), 10);
-  campingLvl = parseInt(
-    removeLeadingZeroes(concatenatedValue.substr(15, 3)),
+  canBeAddedFunctionalityLaterLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(0, 3))
+  );
+  podiumLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(3, 3)), 10);
+  drinksLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(6, 3)), 10);
+  foodLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(9, 3)), 10);
+  tshirtLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(12, 3)),
     10
   );
-  stageStartOverLvl = parseInt(
+  audioLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(15, 3)), 10);
+  campingLvl = parseInt(
     removeLeadingZeroes(concatenatedValue.substr(18, 3)),
     10
   );
-  canBeAddedFunctionalityLaterLvl = parseInt(
-    removeLeadingZeroes(concatenatedValue.substr(21, 3))
+  stageStartOverLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(21, 3)),
+    10
   );
 
+  console.log(
+    `canBeAddedFunctionalityLaterLvl: ${canBeAddedFunctionalityLaterLvl}`
+  );
   console.log(`podiumLvl: ${podiumLvl}`);
   console.log(`drinksLvl: ${drinksLvl}`);
   console.log(`foodLvl: ${foodLvl}`);
@@ -95,9 +102,6 @@ function deconstructConcatenatedValue(concatenatedValue) {
   console.log(`audioLvl: ${audioLvl}`);
   console.log(`campingLvl: ${campingLvl}`);
   console.log(`stageStartOverLvl: ${stageStartOverLvl}`);
-  console.log(
-    `canBeAddedFunctionalityLaterLvl: ${canBeAddedFunctionalityLaterLvl}`
-  );
 }
 deconstructConcatenatedValue(concatenatedValue);
 

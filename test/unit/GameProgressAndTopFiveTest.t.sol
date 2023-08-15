@@ -50,12 +50,16 @@ contract GameProgressAndTopFiveTest is StdCheats, Test {
         uint256 totalScore = 5e32;
         uint256 concatenatedValue = 1005002001004007007001;
         game.saveProgress(totalScore, concatenatedValue);
+        uint256 stageStartOverLvl = game.getStageStartoverLvl(concatenatedValue);
+        console.log("stageStartOverLvl of user2: ", stageStartOverLvl);
+        uint256 stageStartOverLvlUser1 = game.getStageStartoverLvl(initialConcatenatedValue);
+        console.log("stageStartOverLvl of user1: ", stageStartOverLvlUser1);
 
         (, uint256[5] memory topScores) = game.getTopFivePlayers();
 
-        assertEq(topScores[0], concatenatedValue * 1e51 + totalScore, "Top player's combined score is incorrect");
+        assertEq(topScores[0], stageStartOverLvl * 1e51 + totalScore, "Top player's combined score is incorrect");
         assertEq(
-            topScores[4], initialConcatenatedValue * 1e51 + initialTotalScore, "Last player's score should not change"
+            topScores[1], stageStartOverLvlUser1 * 1e51 + initialTotalScore, "moved player's score should not change"
         );
     }
 
@@ -65,7 +69,9 @@ contract GameProgressAndTopFiveTest is StdCheats, Test {
         game.saveProgress(totalScore, concatenatedValue);
 
         GameProgressAndTopFive.ProgressStruct memory progress = game.getPlayerProgress(address(this));
-
+        console.log("address: ", address(this));
+        console.log("totalScore: ", totalScore);
+        console.log("to be sent back to frontend: ", concatenatedValue);
         assertEq(progress.totalScore, totalScore, "Player's total score is incorrect");
         assertEq(progress.concatenatedValue, concatenatedValue, "Player's concatenated value is incorrect");
     }

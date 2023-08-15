@@ -2,15 +2,7 @@
 pragma solidity ^0.8.19;
 
 contract GameProgressAndTopFive {
-    // progress can be a struct with all the scores as key/value pairs,
-    // but, to save gas, it can also be a code where the first 3 digits are the podiumLvl, the second 3 digits are the drinksLvl, ect, etc, and the last 2 digits are the audioLvl are the stageStartOverLvl
-    // 00100100100100100101    20-digit number
-    // [001]podium[001]drinks[001]food[001]tshirt[001]audio[001]camping[01]stageStartOver
-    // This code can constucted in the frontend JS and then written to the blockchain
-    // Later it can we read from the blockchain an deconstructed into the struct.
-    // This will be a project for a later day
-
-    // this is only top5 stuff:
+    // these are the top5 state variables:
     address[5] public topPlayers; // initialize array of players
     uint256[5] public topScores; // initialize array of scores
 
@@ -18,36 +10,34 @@ contract GameProgressAndTopFive {
     mapping(address => ProgressStruct) private s_playerProgress;
     //     UINT digits    // uint8   myUint8     =  3    // uint16  myUint16    =  5    // uint32  myUint32    = 10    // uint64  myUint64    = 20    // uint128 myUint128   = 39    // uint256 myUint256   = 77
 
-    //  uint8 podiumLvl; //    In frontend, lvl should be capped to max 999
-    //         uint8 drinksLvl; //    In frontend, lvl should be capped to max 999
-    //         uint8 foodLvl; //    In frontend, lvl should be capped to max 999
-    //         uint8 tshirtLvl; //  etc.
-    //         uint8 audioLvl;
-    //         uint8 campingLvl;
-    //         uint8 stageStartOverLvl; // tierLvl
-    //         uint8 canBeAddedFunctionalityLaterLvl; // for possible future added functionality
     struct ProgressStruct {
         uint256 totalScore; //skullies
         uint256 concatenatedValue; // all the lvl data in one integer
     }
 
-    // Function to write/save player progress data (to the contract)
+    // Function to write/save player progress data (to the contract) and update topPlayers
+    //1. saveProgress to mapping, 2. getStageStartoverLvl, 3. calculateCombinedScore, 4. updateTopPlayers
     function saveProgress(uint256 _totalScore, uint256 _concatenatedValue) external {
-        s_playerProgress[msg.sender] = ProgressStruct({
-            totalScore: _totalScore,
-            podiumLvl: _podiumLvl,
-            drinksLvl: _drinksLvl,
-            foodLvl: _foodLvl,
-            tshirtLvl: _tshirtLvl,
-            audioLvl: _audioLvl,
-            campingLvl: _campingLvl,
-            stageStartOverLvl: _stageStartOverLvl,
-            canBeAddedFunctionalityLaterLvl: _canBeAddedFunctionalityLaterLvl
-        });
-        updateTopPlayers(msg.sender); // run this function inside the saveProgress function
+        s_playerProgress[msg.sender] = ProgressStruct({totalScore: _totalScore, concatenatedValue: _concatenatedValue});
+        uint256 stageStartOverLvl = getStageStartoverLvl(_concatenatedValue);
+        uint 256 combinedScore = calculateCombinedScore(stageStartOverLvl, _totalScore)
+        updateTopPlayers(msg.sender, calculateCombinedScore); 
+        
     }
     // now check if players stageStartOverLvl >= than stageStartOverLvl[topPlayers[4]] && totalScore >= than totalScore[topPlayers[4]] ([4] is fifth place...)
     // meaning:  check if the player even needs to be added to the top 5.
+function getStageStartoverLvl(concatenatedValue) external view returns (uint256) {
+    stageStartOverLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(18, 3)),
+    10
+  );
+
+    function calculateCombinedScore(uint256 stageStartOverLvl, uint256 totalScore) {
+        uint256 combinedScore = stageStartOverLvl * 1e51 + totalScore;
+        // for this calculation to work, totalScore (skullies) must me capped at 1e50!!!! see bigBagBoogy.md
+        console.log(combinedScore);
+        return combinedScore;
+    }
 
     function updateTopPlayers(address currentPlayer) internal {
         for (uint256 i = 0; i < 5; i++) {
@@ -75,3 +65,13 @@ contract GameProgressAndTopFive {
         return s_playerProgress[_player];
     }
 }
+// old:
+
+//  uint8 podiumLvl; //    In frontend, lvl should be capped to max 999
+//         uint8 drinksLvl; //    In frontend, lvl should be capped to max 999
+//         uint8 foodLvl; //    In frontend, lvl should be capped to max 999
+//         uint8 tshirtLvl; //  etc.
+//         uint8 audioLvl;
+//         uint8 campingLvl;
+//         uint8 stageStartOverLvl; // tierLvl
+//         uint8 canBeAddedFunctionalityLaterLvl; // for possible future added functionality

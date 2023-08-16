@@ -127,7 +127,7 @@
 
 
 
- #saveProgress {
+ #saveProgressButton {
   position: fixed;
   top: 75px; 
   right: 215px; 
@@ -142,7 +142,7 @@
   cursor: pointer;
   z-index: 6;
  }
- #loadProgress {
+ #getPlayerProgressButton {
   position: fixed;
   top: 75px; 
   right: 405px; 

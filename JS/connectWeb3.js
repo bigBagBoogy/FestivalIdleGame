@@ -13,7 +13,7 @@ const saveProgressButton = document.getElementById("saveProgressButton");
 const getPlayerProgressButton = document.getElementById(
   "getPlayerProgressButton"
 );
-const getTopPlayersButton = document.getElementById("getTopPlayersButton");
+// const getTopPlayersButton = document.getElementById("getTopPlayersButton");
 
 withdrawButton.onclick = withdraw;
 // cheatButton.onclick = cheatPay;   need to be changed, has other function now
@@ -21,7 +21,7 @@ balanceButton.onclick = getBalance;
 connectButton.onclick = connect;
 saveProgressButton.onclick = saveProgress;
 getPlayerProgressButton.onclick = getPlayerProgress;
-getTopPlayersButton.onclick = getTopFivePlayers;
+// getTopPlayersButton.onclick = getTopFivePlayers;
 
 async function connect() {
   console.log("Button clicked");
@@ -152,15 +152,29 @@ const contract = new ethers.Contract(contractAddress, abi, provider);
 
 async function getTopFivePlayers() {
   try {
-    const topPlayers = await contract.getTopFivePlayers();
-    const topScores = await contract.topScores();
-    console.error(topPlayers, topScores);
+    const [topPlayers, topScores] = await contract.getTopFivePlayers();
+
+    const topPlayersList = document.getElementById("topPlayersList");
+    topPlayersList.innerHTML = ""; // Clear previous list
+
+    for (let i = 0; i < topPlayers.length; i++) {
+      const player = topPlayers[i];
+      const score = topScores[i];
+
+      const listItem = document.createElement("li");
+      listItem.textContent = `${player}: ${score}`;
+      topPlayersList.appendChild(listItem);
+    }
+
+    console.log(topPlayers, topScores);
+
     return { topPlayers, topScores };
   } catch (error) {
     console.error("Error fetching top players:", error);
     throw error;
   }
 }
+getTopFivePlayers();
 
 async function getPlayerProgress(playerAddress) {
   try {
@@ -175,6 +189,7 @@ async function getPlayerProgress(playerAddress) {
 
 async function saveProgress(totalScore, concatenatedValue) {
   try {
+    console.log("saving...");
     const signer = provider.getSigner();
     const contractWithSigner = contract.connect(signer);
     const tx = await contractWithSigner.saveProgress(

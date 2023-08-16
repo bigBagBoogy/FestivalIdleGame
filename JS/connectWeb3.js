@@ -152,6 +152,7 @@ const contract = new ethers.Contract(contractAddress, abi, provider);
 
 async function getTopFivePlayers() {
   try {
+    console.log("fetching top players...");
     const [topPlayers, topScores] = await contract.getTopFivePlayers();
 
     const topPlayersList = document.getElementById("topPlayersList");
@@ -178,6 +179,7 @@ getTopFivePlayers();
 
 async function getPlayerProgress(playerAddress) {
   try {
+    console.log("loading player's progress...");
     const progress = await contract.getPlayerProgress(playerAddress);
     console.error(progress);
     return progress;

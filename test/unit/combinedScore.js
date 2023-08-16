@@ -105,4 +105,4 @@ function deconstructConcatenatedValue(concatenatedValue) {
 }
 deconstructConcatenatedValue(concatenatedValue);
 
-//Write to blockchain in app.js: concatenatedValue
+//Write to blockchain in connectWeb3.js: concatenatedValue

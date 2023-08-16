@@ -279,8 +279,32 @@
 #foodStall.green {
   filter: drop-shadow(0px 0px 30px #00ff08); 
 }
+#foodLevelBox {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;  
+  margin-left: 10px; /*Add some left margin for spacing */
+  margin-right: 20px;
+  position: absolute;
+  top: 3430px; /*480px more than foodStall*/
+  left: 10px; 
+  width: 150px; 
+  height: 50px; 
+  cursor: pointer; 
+  display: inline-block;
+  background-color: rgb(136, 0, 255);
+  padding: 10px;
+  border-radius: 10px;
+  border: 3px solid rgb(0, 0, 0);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
+  margin-left: 10px;
+ /* transform-style: preserve-3d;
+ transform: rotateX('45deg'); */
+}
 
-/* Add rules for additional colors as needed */
+
 
 
 

@@ -161,23 +161,36 @@ function updateDrinksImage() {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 //  finish altering this///////////////////////////////////////
+
 function updateFoodLevel() {
   var foodLevel = levelData.Level.food;
   // Get the level element and update its innerHTML with the current level
-  const foodLevelElement = document.getElementById("foodLevel");
-  foodLevelElement.innerHTML = foodLevel;
-
-  if (levelData.Level.food > 1 && levelData.Level.food < 3) {
-    document.getElementById("foodStall").src = "images/food-blue.png"; //update img upon leveling"
-  } else if (levelData.Level.food > 2 && levelData.Level.food < 4) {
-    document.getElementById("foodStall").src = "images/food-yellow.png";
-  } else if (levelData.Level.food > 3 && levelData.Level.food < 5) {
-    document.getElementById("foodStall").src = "images/food-red.png";
-  } else if (levelData.Level.food > 4 && levelData.Level.food < 6) {
-    document.getElementById("foodStall").src = "images/food-purple.png";
-  } else {
-  }
+  const foodLevelElement = document.getElementById("foodLevelText");
+  foodLevelElement.innerHTML = `lvl ${foodLevel}`; // lvlup: ${foodUpgradeCost}`; this is optional
 }
+
+function updateFoodImage() {
+  var foodLevel = levelData.Level.food;
+  console.log("updateFoodLevelAndImage", foodLevel);
+  // Determine filter color based on food level
+  let filterColor = "green"; // Default color
+  if (foodLevel > 5 && foodLevel < 7) {
+    filterColor = "purple";
+  } else if (foodLevel > 4 && foodLevel < 6) {
+    filterColor = "purple";
+  } else if (foodLevel > 3 && foodLevel < 5) {
+    filterColor = "red";
+  } else if (foodLevel > 2 && foodLevel < 4) {
+    filterColor = "yellow";
+  } else if (foodLevel > 1 && foodLevel < 3) {
+    filterColor = "blue";
+  }
+  // Update the image class and filter
+  foodStall.className = filterColor; // Assign the class to the element
+  console.log(`images/food.png#${filterColor}`);
+  return;
+}
+
 function calculateFoodUpgradeCost() {
   foodUpgradeCost = foodUpgradeCost * levelData.Level.food;
   return foodUpgradeCost;
@@ -202,6 +215,8 @@ function upgradeFood() {
     foodUpgradeCost = calculateFoodUpgradeCost();
     console.log("upgrade to next level costs: ", foodUpgradeCost);
     updateScore(totalScore);
+    updateFoodImage();
+    updateFoodLevel(foodUpgradeCost);
   }
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//

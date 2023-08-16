@@ -36,9 +36,16 @@ function updateScore(totalScore) {
   const upgradeArrowImg = document.getElementById("upgradeArrow");
   if (totalScore >= drinksUpgradeCost) {
     // console.log("show arrow!");
-    upgradeArrowImg.style.display = "block";
+    upgradeArrowImg.style.display = "block"; //show
   } else {
     upgradeArrowImg.style.display = "none"; // Hide the image
+  }
+  const foodUpgradeArrowImg = document.getElementById("foodUpgradeArrow");
+  if (totalScore >= foodUpgradeCost) {
+    console.log("show arrow!");
+    foodUpgradeArrowImg.style.display = "block"; //show
+  } else {
+    foodUpgradeArrowImg.style.display = "none"; // Hide the image
   }
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//

@@ -239,6 +239,17 @@
   animation: moveUpAndDown 1s infinite ease-in-out; /* Apply the animation */ 
 }
 
+
+#foodUpgradeArrow {
+  position: absolute; /* Keep the element fixed within the viewport */
+  top: 3100px;     /* Adjust this value as needed */
+  left: 200px; 
+  width: 150px;   
+  z-index: 5;
+  filter: drop-shadow(0px 0px 10px #000000); 
+  animation: moveUpAndDown 1s infinite ease-in-out; /* Apply the animation */ 
+} 
+
 @keyframes moveUpAndDown {
   0%, 100% { top: 2590px; } /* Start and end position */
   50% { top: 2605px; } /* Middle position */

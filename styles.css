@@ -131,7 +131,7 @@
   cursor: pointer;
   z-index: 6;
  }
- #cheat1000 {
+ #cheatButton {
   position: fixed;
   top: 70px; 
   right: 105px; 
@@ -187,8 +187,11 @@
   background-color: rgb(136, 0, 255);
   padding: 10px;
   border-radius: 10px;
+  border: 3px solid rgb(0, 0, 0);
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
   margin-left: 10px;
+ /* transform-style: preserve-3d;
+ transform: rotateX('45deg'); */
 }
 #upgradeArrow {
   position: absolute; /* Keep the element fixed within the viewport */

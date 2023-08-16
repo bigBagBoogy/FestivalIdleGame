@@ -19,6 +19,8 @@ stageStartOverLvl++;
 To otherwise call levelUpStage() though, we'll have to add a "checker" that looks for:
 All elementsLvl = 10 to be true
 
+Amend the FundMe contract to a cheat contract and handel "pay-to-cheat" logic.
+
 }
 
 The keyboard shortcut to toggle word wrap is Alt+Z

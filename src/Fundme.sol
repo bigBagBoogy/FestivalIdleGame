@@ -30,7 +30,7 @@ contract Fundme {
         i_owner = msg.sender;
     }
 
-    function fund() public payable {
+    function cheat() public payable {
         require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "Minimal amount is 0.01 ether"); // = 0.01e18 or 0.01 eth
         s_addressToAmountFunded[msg.sender] += msg.value;
         s_funders.push(msg.sender);

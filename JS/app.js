@@ -1,5 +1,8 @@
-// Specify your contract address and ABI
-const contractAddress = "CONTRACT_ADDRESS";
+import { ethers } from "JS/ethers-5.1.esm.min.js";
+import { abi, contractAddress } from "./constants.js";
+
+
+
 // const contractABI = [...]; // Replace with your contract's ABI
 
 const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");

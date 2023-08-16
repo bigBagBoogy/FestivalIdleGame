@@ -149,7 +149,9 @@ const provider = new ethers.providers.JsonRpcProvider(
   "https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN"
 ); // Replace with your Ethereum RPC URL
 const contract = new ethers.Contract(contractAddress, abi, provider);
-
+////////////////////
+////   top5      ///
+////////////////////
 async function getTopFivePlayers() {
   try {
     console.log("fetching top players...");
@@ -177,6 +179,10 @@ async function getTopFivePlayers() {
 }
 getTopFivePlayers();
 
+////////////////////
+////   load      ///
+////////////////////
+
 async function getPlayerProgress(playerAddress) {
   try {
     console.log("loading player's progress...");
@@ -188,7 +194,9 @@ async function getPlayerProgress(playerAddress) {
     throw error;
   }
 }
-
+////////////////////
+////   save      ///
+////////////////////
 async function saveProgress(totalScore, concatenatedValue) {
   try {
     console.log("saving...");

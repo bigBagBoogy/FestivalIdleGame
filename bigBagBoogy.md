@@ -8,6 +8,8 @@ git push -u origin main
 
 # todo:
 
+integrate the combinedScore.js functions into the save and load functions
+
 # install npm install --save-dev dotenv-webpack
 
 totalScore (skullies) must me capped at 1e50!!!! in JS/score.js
@@ -25,7 +27,7 @@ All elementsLvl = 10 to be true
 
 Amend the FundMe contract to a cheat contract and handel "pay-to-cheat" logic.
 
-}
+# end of todo..........................................
 
 The keyboard shortcut to toggle word wrap is Alt+Z
 The keyboard shortcut to zoom is Ctrl+ + and/or Ctrl+ - (on the num-pad)

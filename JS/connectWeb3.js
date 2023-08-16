@@ -127,3 +127,52 @@ function testImport() {
   console.log("connection with connectWeb3.js made!");
 }
 testImport();
+
+////////////////////////////////
+///    game  functionality    //
+////////////////////////////////
+
+const rpcUrl = process.env.SEPOLIA_RPC_URL;
+const provider = new ethers.providers.JsonRpcProvider(rpcUrl); // Replace with your Ethereum RPC URL
+const contract = new ethers.Contract(contractAddress, abi, provider);
+
+async function getTopFivePlayers() {
+  try {
+    const topPlayers = await contract.getTopFivePlayers();
+    const topScores = await contract.topScores();
+    console.error(topPlayers, topScores);
+    return { topPlayers, topScores };
+  } catch (error) {
+    console.error("Error fetching top players:", error);
+    throw error;
+  }
+}
+
+async function getPlayerProgress(playerAddress) {
+  try {
+    const progress = await contract.getPlayerProgress(playerAddress);
+    console.error(progress);
+    return progress;
+  } catch (error) {
+    console.error("Error fetching player progress:", error);
+    throw error;
+  }
+}
+
+async function saveProgress(totalScore, concatenatedValue) {
+  try {
+    const signer = provider.getSigner();
+    const contractWithSigner = contract.connect(signer);
+    const tx = await contractWithSigner.saveProgress(
+      totalScore,
+      concatenatedValue
+    );
+    await tx.wait();
+    console.log("Progress saved successfully");
+  } catch (error) {
+    console.error("Error saving progress:", error);
+    throw error;
+  }
+}
+
+export { getTopFivePlayers, getPlayerProgress, saveProgress };

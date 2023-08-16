@@ -1,15 +1,27 @@
 import { ethers } from "./ethers-5.6.esm.min.js";
 import { abi, contractAddress } from "./constants.js";
+// import { config } from "dotenv";
+// config();
+
 // import "./score.js";
 
 const withdrawButton = document.getElementById("withdrawButton");
 // const cheatButton = document.getElementById("cheatButton"); need to be changed, has other function now
 const balanceButton = document.getElementById("balanceButton");
 const connectButton = document.getElementById("connectButton");
-connectButton.onclick = connect;
+const saveProgressButton = document.getElementById("saveProgressButton");
+const getPlayerProgressButton = document.getElementById(
+  "getPlayerProgressButton"
+);
+const getTopPlayersButton = document.getElementById("getTopPlayersButton");
+
 withdrawButton.onclick = withdraw;
 // cheatButton.onclick = cheatPay;   need to be changed, has other function now
 balanceButton.onclick = getBalance;
+connectButton.onclick = connect;
+saveProgressButton.onclick = saveProgress;
+getPlayerProgressButton.onclick = getPlayerProgress;
+getTopPlayersButton.onclick = getTopFivePlayers;
 
 async function connect() {
   console.log("Button clicked");
@@ -132,8 +144,10 @@ testImport();
 ///    game  functionality    //
 ////////////////////////////////
 
-const rpcUrl = process.env.SEPOLIA_RPC_URL;
-const provider = new ethers.providers.JsonRpcProvider(rpcUrl); // Replace with your Ethereum RPC URL
+// const rpcUrl = process.env.SEPOLIA_RPC_URL;  this does not work yet.  Might need npm install --save-dev dotenv-webpack
+const provider = new ethers.providers.JsonRpcProvider(
+  "https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN"
+); // Replace with your Ethereum RPC URL
 const contract = new ethers.Contract(contractAddress, abi, provider);
 
 async function getTopFivePlayers() {

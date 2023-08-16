@@ -8,6 +8,8 @@ git push -u origin main
 
 # todo:
 
+# install npm install --save-dev dotenv-webpack
+
 totalScore (skullies) must me capped at 1e50!!!! in JS/score.js
 to cap this, let's add a function that triggers at 1e50 skullies and sets all elements
 to lvl10, which in term will trigger the function: levelUpStage() {

@@ -248,4 +248,5 @@ function calculateCombinedScore(stageStartOverLvl, totalScore) {
 
 function cheat() {
   baseScore = totalScore * 5;
+  console.log("cheater!");
 }

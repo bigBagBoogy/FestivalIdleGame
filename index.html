@@ -55,25 +55,6 @@
       onClick="upgradeFood()"
     />
 
-    <!-- <div class="responsive" id="button-container1">
-      <img src="images/podium2.png" alt="podium" onClick="upgradePodium()" />
-      <img src="images/drinks2.png" img id="drinksLevelImage" alt="drinks" onClick="upgradeDrinks()" />
-      <img src="images/food.png" alt="food" onClick="handleButtonClick()" /></div> -->
-
-    <!-- <div class="responsive" id="button-container2" >  
-      <img src="images/audio.png" alt="audio" onClick="handleButtonClick()" />
-      <img
-        src="images/tshirts.png"
-        alt="tshirts"
-        onClick="handleButtonClick()"
-      />
-      <img
-        src="images/camping.png"
-        alt="camping"
-        onClick="handleButtonClick()"
-      />
-    </div> -->
-
     <!-- Custom Popup Container -->
     <div id="popupContainer" class="popup-container">
       <div class="popup-content">
@@ -93,8 +74,12 @@
 
     <button id="balanceButton" onclick="getBalance()">balance</button>
     <button id="withdrawButton" onclick="withdraw()">withdraw</button>
-    <button id="saveProgress" onclick="web3save()">Save Progress</button>
-    <button id="loadProgress" onclick="web3load()">Load Progress</button>
+    <button id="saveProgressButton" onclick="saveProgress()">
+      Save Progress
+    </button>
+    <button id="getPlayerProgressButton" onclick="getPlayerProgress()">
+      Load Progress
+    </button>
     <div id="progressResult"></div>
 
     <script src="JS/score.js"></script>

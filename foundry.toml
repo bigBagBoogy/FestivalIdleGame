@@ -6,6 +6,12 @@ remappings = ["@chainlink/contracts=lib/forge-std/src/interfaces/AggregatorV3Int
 
 [profile.dependencies]
 "solidity-stringutils" = ">=0.2.11"
+"dotenv" = "^16.3.1"
+
+
+
+    
+  
 
 [invariant]
 runs = 100

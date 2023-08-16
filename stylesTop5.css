@@ -14,6 +14,22 @@ body {
     color: #121212;
     background-color: #caa5a5;
 }
+#getTopPlayersButton {
+  position: fixed;
+  top: 75px; 
+  right: 215px; 
+  background-color: #a4da01;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  stroke: black;
+  padding: 20px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 6;
+
+}
 
 /* Custom styles for scoreboard bar */
 .scoreboard-bar {

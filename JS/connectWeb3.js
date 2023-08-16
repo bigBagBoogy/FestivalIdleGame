@@ -1,30 +1,55 @@
+import { ethers } from "./ethers-5.6.esm.min.js";
+import { abi, contractAddress } from "./constants.js";
+// import "./score.js";
+
 const withdrawButton = document.getElementById("withdrawButton");
-const cheatButton = document.getElementById("cheatButton");
+// const cheatButton = document.getElementById("cheatButton"); need to be changed, has other function now
 const balanceButton = document.getElementById("balanceButton");
+const connectButton = document.getElementById("connectButton");
 connectButton.onclick = connect;
 withdrawButton.onclick = withdraw;
-cheatButton.onclick = cheat;
+// cheatButton.onclick = cheatPay;   need to be changed, has other function now
 balanceButton.onclick = getBalance;
 
 async function connect() {
-  if (window.ethereum) {
+  console.log("Button clicked");
+  if (typeof window.ethereum !== "undefined") {
     try {
       await ethereum.request({ method: "eth_requestAccounts" });
-      // Metamask is connected, update the image source
-      document.getElementById("metamaskImg").src =
+      //Metamask is connected, update the image source
+      document.getElementById("connectButton").src =
         "images/metamaskConnected.svg";
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
     }
-    // connectButton.innerHTML = "Connected!";
-    const accounts = await ethereum.request({
-      method: "eth_requestAccounts",
-    });
+    connectButton.innerHTML = "Connected";
+    const accounts = await ethereum.request({ method: "eth_accounts" });
     console.log(accounts);
   } else {
-    connectButton.innerHTML = "Install Metamask";
+    connectButton.innerHTML = "Please install MetaMask";
   }
 }
+
+// async function connect() {
+//   console.log("Button clicked");
+//   if (window.ethereum) {
+//     try {
+//       await ethereum.request({ method: "eth_requestAccounts" });
+//       // Metamask is connected, update the image source
+//       document.getElementById("connectButton").src =
+//         "images/metamaskConnected.svg";
+//     } catch (e) {
+//       console.log(e);
+//     }
+//     // connectButton.innerHTML = "Connected!";
+//     const accounts = await ethereum.request({
+//       method: "eth_requestAccounts",
+//     });
+//     console.log(accounts);
+//   } else {
+//     connectButton.innerHTML = "Install Metamask";
+//   }
+// }
 
 async function withdraw() {
   console.log(`Withdrawing...`);
@@ -44,25 +69,25 @@ async function withdraw() {
     withdrawButton.innerHTML = "Please install MetaMask";
   }
 }
-async function cheat() {
-  const ethAmount = document.getElementById("ethAmount").value;
-  console.log(`Funding with ${ethAmount}...`);
-  if (typeof window.ethereum !== "undefined") {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, abi, signer);
-    try {
-      const transactionResponse = await contract.fund({
-        value: ethers.utils.parseEther(ethAmount),
-      });
-      await listenForTransactionMine(transactionResponse, provider);
-    } catch (error) {
-      console.log(error);
-    }
-  } else {
-    fundButton.innerHTML = "Please install MetaMask";
-  }
-}
+// async function cheatPay() {
+//   const ethAmount = document.getElementById("ethAmount").value;
+//   console.log(`cheating with ${ethAmount}...`);
+//   if (typeof window.ethereum !== "undefined") {
+//     const provider = new ethers.providers.Web3Provider(window.ethereum);
+//     const signer = provider.getSigner();
+//     const contract = new ethers.Contract(contractAddress, abi, signer);
+//     try {
+//       const transactionResponse = await contract.cheat({
+//         value: ethers.utils.parseEther(ethAmount),
+//       });
+//       await listenForTransactionMine(transactionResponse, provider);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   } else {
+//     cheatButton.innerHTML = "Please install MetaMask";
+//   }
+// }
 
 async function getBalance() {
   if (typeof window.ethereum !== "undefined") {
@@ -93,3 +118,12 @@ function listenForTransactionMine(transactionResponse, provider) {
     }
   });
 }
+
+// end of functions that rely on ethers library
+// start of GameProgressAndTopFive functions
+
+//test to see if this file knows about score.js:
+function testImport() {
+  console.log("connection with connectWeb3.js made!");
+}
+testImport();

@@ -19,6 +19,8 @@ stageStartOverLvl++;
 To otherwise call levelUpStage() though, we'll have to add a "checker" that looks for:
 All elementsLvl = 10 to be true
 
+# change ABI and contract in constants.js. Now they are dummys!
+
 Amend the FundMe contract to a cheat contract and handel "pay-to-cheat" logic.
 
 }

@@ -1,13 +1,13 @@
-import { ethers } from "JS/ethers-5.1.esm.min.js";
+import { ethers } from "/JS/ethers-5.1.esm.min.js";
 import { abi, contractAddress } from "./constants.js";
-
+import "./JS/score.js";
 
 
 // const contractABI = [...]; // Replace with your contract's ABI
 
 const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
-// import { getTotalScore } from "./JS/score.js";
+
 // const totalScore = getTotalScore();
 // console.log(totalScore);
 

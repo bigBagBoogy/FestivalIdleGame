@@ -3,6 +3,10 @@
   <head>
     <title>Idle GMM festival</title>
     <link rel="stylesheet" href="styles.css" />
+    <!-- <script src="JS/app.js"></script> -->
+    <script src="JS/connectWeb3.js" type="module"></script>
+
+    <!-- without type="module" you get: Uncaught SyntaxError: Cannot use import statement outside a module (at connectWeb3.js:1:1) -->
   </head>
 
   <body class="responsive">
@@ -25,12 +29,8 @@
     />
 
     <!-- metaMask code for the button -->
-    <img
-      id="metamaskImg"
-      src="images/metamask.svg"
-      alt="connectButton"
-      onClick="connect()"
-    />
+    <img id="connectButton" src="images/metamask.svg" alt="connectButton" />
+
     <img id="cheatButton" src="images/coin.gif" alt="cheat" onClick="cheat()" />
     <!-- drinks -->
     <img
@@ -80,24 +80,25 @@
         <h2>Need nore Scullies!</h2>
       </div>
     </div>
+
     <!-- storyline popup -->
-    <!-- <button id="showPopup">Show Popup</button>
+    <!-- <button id="storylinePopup">Show Popup</button>
     <div id="popup2" class="popup2">
-        <div class="popup-content">
-            <span class="close" id="closePopup">&times;</span>
-            <img id="popupImage" src="" alt="Popup Image">
-            <p id="popupText">Popup Text</p>
-        </div>
+      <div class="storylinePopupDiv">
+        <span class="close" id="closeStorylinePopup">&times;</span>
+        <img id="storylinePopupImage" src="" alt="Popup Image" />
+        <p id="storylinePopupText">storyline Popup Text</p>
+      </div>
     </div> -->
 
+    <button id="balanceButton" onclick="getBalance()">balance</button>
+    <button id="withdrawButton" onclick="withdraw()">withdraw</button>
     <button id="saveProgress" onclick="web3save()">Save Progress</button>
     <button id="loadProgress" onclick="web3load()">Load Progress</button>
     <div id="progressResult"></div>
 
-    <script src="JS/web3.min.js"></script>
-    <script src="JS/app.js"></script>
-    <script src="JS/connectWeb3.js"></script>
     <script src="JS/score.js"></script>
-    <script src="JS/story-popup.js"></script>
+    <!--this needs to be at the bottom!-->
+    <!-- <script src="JS/story-popup.js"></script> -->
   </body>
 </html>

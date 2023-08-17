@@ -176,6 +176,15 @@
   cursor: pointer;  
   z-index: 6;
 }
+#freeCheatButton {
+  position: fixed;
+  top: 170px; 
+  right: 105px; 
+  width: 100px; 
+  height: 90px; 
+  cursor: pointer;  
+  z-index: 6;
+}
 
 #drinksStall {
   position: absolute;

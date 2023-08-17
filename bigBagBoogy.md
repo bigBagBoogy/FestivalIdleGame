@@ -8,13 +8,17 @@ git push -u origin main
 
 # todo:⭐️
 
-integrate the combinedScore.js functions into the save and load functions
+Disable double tap = zoom screen -> how to?
 
-# install npm install --save-dev dotenv-webpack
+fix fund/cheatPay function
+line 84 connectWeb3.JS:
+const ethAmount = document.getElementById("ethAmount").value; //string value here
+
+# if needed install npm install --save-dev dotenv-webpack
 
 totalScore (skullies) must me capped at 1e50!!!! in JS/score.js
 to cap this, let's add a function that triggers at 1e50 skullies and sets all elements
-to lvl10, which in term will trigger the function: levelUpStage() {
+to lvl10, which in term will trigger the function: levelUpStage()
 podiumLvl = 1;
 drinksLvl = 1;
 etc, etc,
@@ -71,3 +75,6 @@ connectWeb3.js needs to be typecasted: type="module" in it's html element and
 score.js MUST not! otherwise all functions will break `undefinded`.
 You can not and don't need to (if you use VAR for variables you need in both files),
 do: "// import "./score.js";" in connectWeb3.js. If you do, It will call the inteval function double, with wrong arguments.
+
+If You see this error in the browser console: `ethers-5.6.esm.min.js:16475     POST https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN net::ERR_NAME_NOT_RESOLVED`
+It means you're not connected to the internet!

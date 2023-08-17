@@ -5,7 +5,7 @@ import { abi, contractAddress } from "./constants.js";
 // config();
 
 const withdrawButton = document.getElementById("withdrawButton");
-// const cheatButton = document.getElementById("cheatButton"); need to be changed, has other function now
+const cheatButton = document.getElementById("cheatButton"); //need to be changed, has other function now
 const balanceButton = document.getElementById("balanceButton");
 const connectButton = document.getElementById("connectButton");
 const saveProgressButton = document.getElementById("saveProgressButton");
@@ -15,7 +15,7 @@ const getPlayerProgressButton = document.getElementById(
 // const getTopPlayersButton = document.getElementById("getTopPlayersButton");
 
 withdrawButton.onclick = withdraw;
-// cheatButton.onclick = cheatPay;   need to be changed, has other function now
+cheatButton.onclick = cheatPay; //need to be changed, has other function now
 balanceButton.onclick = getBalance;
 connectButton.onclick = connect;
 saveProgressButton.onclick = saveProgress;
@@ -80,25 +80,29 @@ async function withdraw() {
     withdrawButton.innerHTML = "Please install MetaMask";
   }
 }
-// async function cheatPay() {
-//   const ethAmount = document.getElementById("ethAmount").value;
-//   console.log(`cheating with ${ethAmount}...`);
-//   if (typeof window.ethereum !== "undefined") {
-//     const provider = new ethers.providers.Web3Provider(window.ethereum);
-//     const signer = provider.getSigner();
-//     const contract = new ethers.Contract(contractAddress, abi, signer);
-//     try {
-//       const transactionResponse = await contract.cheat({
-//         value: ethers.utils.parseEther(ethAmount),
-//       });
-//       await listenForTransactionMine(transactionResponse, provider);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   } else {
-//     cheatButton.innerHTML = "Please install MetaMask";
-//   }
-// }
+async function cheatPay() {
+  const ethAmount = document.getElementById("ethAmount").value; //string value here
+  console.log(`cheating with ${ethAmount}...`);
+  if (typeof window.ethereum !== "undefined") {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    try {
+      const transactionResponse = await contract.cheat({
+        value: ethers.utils.parseEther(ethAmount),
+      });
+      await listenForTransactionMine(transactionResponse, provider);
+      ////   cheat functionality start
+      baseScore = totalScore * 5;
+      console.log("cheater!");
+      ////   cheat functionality end
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    cheatButton.innerHTML = "Please install MetaMask";
+  }
+}
 
 async function getBalance() {
   if (typeof window.ethereum !== "undefined") {
@@ -199,13 +203,14 @@ async function getPlayerProgress(playerAddress) {
 ////////////////////
 async function saveProgress() {
   try {
+    const roundedTotalScore = Math.round(totalScore);
     console.log(
-      `saving concatenatedValue: ${concatenatedValue} and totalScore: ${totalScore}`
+      `saving concatenatedValue: ${concatenatedValue} and totalScore: ${roundedTotalScore}`
     );
     const signer = provider.getSigner();
     const contractWithSigner = contract.connect(signer);
     const tx = await contractWithSigner.saveProgress(
-      totalScore,
+      roundedTotalScore,
       concatenatedValue
     );
     await tx.wait();

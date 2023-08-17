@@ -30,17 +30,17 @@ function calculateScore() {
       isUpdatingScore = true; // Set the flag to indicate an update is in progress
       nextLoop = baseScore + increment; // 1,2,3,4,5  after 1st upgrade increment will be 1.1 so baseScore: 1 + 1.1 = 2.1    then next loop:  2.1 + 1.1 = 3.2   then: 3.2 + 1.1 = 4.3
       totalScore = nextLoop;
-      console.log("Calling updateScore from calculateScore", totalScore);
+      // console.log("Calling updateScore from calculateScore", totalScore);
       updateScore(totalScore);
       getConcatenatedValue();
       baseScore = nextLoop;
       isUpdatingScore = false; // Reset the flag after the update is complete
     }
-  }, 4000); // Update score every quarter of a second (500 milliseconds)
+  }, 1000); // Update score every quarter of a second (500 milliseconds)
 }
 // Function to update the score in the scoreboard bar
 function updateScore(totalScore) {
-  console.log("updateScore called with totalScore:", totalScore);
+  // console.log("updateScore called with totalScore:", totalScore);
   const scoreElement = document.getElementById("totalScore"); // Get the score element
   const formattedScore = formatNumberAbbreviated(totalScore);
   scoreElement.innerHTML = formattedScore;
@@ -54,7 +54,7 @@ function updateScore(totalScore) {
   }
   const foodUpgradeArrowImg = document.getElementById("foodUpgradeArrow");
   if (totalScore >= foodUpgradeCost) {
-    console.log("show arrow!");
+    // console.log("show arrow!");
     foodUpgradeArrowImg.style.display = "block"; //show
   } else {
     foodUpgradeArrowImg.style.display = "none"; // Hide the image
@@ -239,7 +239,7 @@ function closePopup() {
   popupContainer.style.display = "none";
 }
 function formatNumberAbbreviated(number) {
-  const SI_SYMBOL = ["", "k", "M", "G", "T", "P", "E"];
+  const SI_SYMBOL = ["", "k", "M", "B", "T", "P", "E", "AA", "AB", "AC", "AE"];
 
   if (number < 1000) {
     // Handle numbers below 1000
@@ -254,7 +254,7 @@ function formatNumberAbbreviated(number) {
   }
 }
 
-function cheat() {
+function freeCheat() {
   baseScore = totalScore * 5;
   console.log("cheater!");
 }

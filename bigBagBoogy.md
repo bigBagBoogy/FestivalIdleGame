@@ -6,7 +6,7 @@ git add .
 git commit -m "test added"
 git push -u origin main
 
-# todo:
+# todo:⭐️
 
 integrate the combinedScore.js functions into the save and load functions
 
@@ -23,7 +23,7 @@ stageStartOverLvl++;
 To otherwise call levelUpStage() though, we'll have to add a "checker" that looks for:
 All elementsLvl = 10 to be true
 
-look into creating ECMAScript modules.
+look into creating ECMAScript modules. 🧩
 
 # change ABI and contract in constants.js. Now they are dummys!
 
@@ -64,3 +64,10 @@ forge script script/DeployGameProgressAndTopFive.s.sol
 // internal
 // private
 // view & pure functions
+
+# bug along the way to learn from:
+
+connectWeb3.js needs to be typecasted: type="module" in it's html element and
+score.js MUST not! otherwise all functions will break `undefinded`.
+You can not and don't need to (if you use VAR for variables you need in both files),
+do: "// import "./score.js";" in connectWeb3.js. If you do, It will call the inteval function double, with wrong arguments.

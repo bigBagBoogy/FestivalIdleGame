@@ -4,8 +4,6 @@ import { abi, contractAddress } from "./constants.js";
 // import { config } from "dotenv";
 // config();
 
-// import "./score.js";
-
 const withdrawButton = document.getElementById("withdrawButton");
 // const cheatButton = document.getElementById("cheatButton"); need to be changed, has other function now
 const balanceButton = document.getElementById("balanceButton");
@@ -189,7 +187,7 @@ async function getPlayerProgress(playerAddress) {
   try {
     console.log("loading player's progress...");
     const progress = await contract.getPlayerProgress(playerAddress);
-    console.error(progress);
+    console.log(progress);
     return progress;
   } catch (error) {
     console.error("Error fetching player progress:", error);
@@ -199,13 +197,11 @@ async function getPlayerProgress(playerAddress) {
 ////////////////////
 ////   save      ///
 ////////////////////
-async function saveProgress(totalScore, stageStartOverLvl) {
+async function saveProgress() {
   try {
-    const concatenatedValue = calculateCombinedScore(
-      stageStartOverLvl,
-      totalScore
+    console.log(
+      `saving concatenatedValue: ${concatenatedValue} and totalScore: ${totalScore}`
     );
-    console.log(`saving... ${concatenatedValue}`);
     const signer = provider.getSigner();
     const contractWithSigner = contract.connect(signer);
     const tx = await contractWithSigner.saveProgress(

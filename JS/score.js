@@ -7,35 +7,40 @@ var foodUpgradeCost = 800;
 var baseScore = 0;
 var increment = 1;
 var nextLoop;
-
-let tshirtLvl = 1;
-let audioLvl = 4;
-let campingLvl = 7;
-const stageStartOverLvl = 6;
-let canBeAddedFunctionalityLaterLvl = 1;
+var concatenatedValue;
 
 const levelData = {
   Level: {
+    canBeAddedFunctionalityLater: "1",
     podium: "1",
     drinks: "1",
     food: "1",
+    tshirt: "1",
     audio: "1",
-    tshirts: "1",
     camping: "1",
+    stageStartOver: "1",
   },
 };
+let isUpdatingScore = false; // Flag to track if a score update is in progress
 // Function to calculate the score based on time passed
 function calculateScore() {
   // In this example, we'll use a simple counter to represent time
   setInterval(() => {
-    nextLoop = baseScore + increment; // 1,2,3,4,5  after 1st upgrade increment will be 1.1 so baseScore: 1 + 1.1 = 2.1    then next loop:  2.1 + 1.1 = 3.2   then: 3.2 + 1.1 = 4.3
-    totalScore = nextLoop;
-    updateScore(totalScore);
-    baseScore = nextLoop;
-  }, 500); // Update score every quarter of a second (500 milliseconds)
+    if (!isUpdatingScore) {
+      isUpdatingScore = true; // Set the flag to indicate an update is in progress
+      nextLoop = baseScore + increment; // 1,2,3,4,5  after 1st upgrade increment will be 1.1 so baseScore: 1 + 1.1 = 2.1    then next loop:  2.1 + 1.1 = 3.2   then: 3.2 + 1.1 = 4.3
+      totalScore = nextLoop;
+      console.log("Calling updateScore from calculateScore", totalScore);
+      updateScore(totalScore);
+      getConcatenatedValue();
+      baseScore = nextLoop;
+      isUpdatingScore = false; // Reset the flag after the update is complete
+    }
+  }, 4000); // Update score every quarter of a second (500 milliseconds)
 }
 // Function to update the score in the scoreboard bar
 function updateScore(totalScore) {
+  console.log("updateScore called with totalScore:", totalScore);
   const scoreElement = document.getElementById("totalScore"); // Get the score element
   const formattedScore = formatNumberAbbreviated(totalScore);
   scoreElement.innerHTML = formattedScore;
@@ -257,11 +262,89 @@ function cheat() {
 /////////        helpers for web3  traffic        //////////
 /////////////////////////////////////////////////////////////
 
-//for this calculation to work, totalScore (skullies) must me capped at 1e50!!!! see bigBagBoogy.md
-function calculateCombinedScore() {
-  const combinedScore = stageStartOverLvl * 1e51 + totalScore;
-  console.log(
-    `stageStartOverLvl ${stageStartOverLvl} * 1e51 + totalScore ${totalScore} = combinedScore ${combinedScore}`
-  );
-  return combinedScore;
+/////////////////////////////////////////////////////
+//   Pack all lvl data into one string to save gas //
+/////////////////////////////////////////////////////
+
+// Function to prepend zeroes to a number until it has a certain length
+function prependZeroes(number, length) {
+  const stringValue = number.toString();
+  return stringValue.padStart(length, "0");
 }
+
+function getConcatenatedValue() {
+  const canBeAddedFunctionalityLaterLvl =
+    levelData.Level.canBeAddedFunctionalityLater;
+  const podiumLvl = levelData.Level.podium;
+  const drinksLvl = levelData.Level.drinks;
+  const foodLvl = levelData.Level.food;
+  const tshirtLvl = levelData.Level.tshirt;
+  const audioLvl = levelData.Level.audio;
+  const campingLvl = levelData.Level.camping;
+  const stageStartOverLvl = levelData.Level.stageStartOver;
+  // Format the values with leading zeroes and concatenate them
+  concatenatedValue =
+    prependZeroes(canBeAddedFunctionalityLaterLvl, 3) +
+    prependZeroes(podiumLvl, 3) +
+    prependZeroes(drinksLvl, 3) +
+    prependZeroes(foodLvl, 3) +
+    prependZeroes(tshirtLvl, 3) +
+    prependZeroes(audioLvl, 3) +
+    prependZeroes(campingLvl, 3) +
+    prependZeroes(stageStartOverLvl, 3);
+
+  //console.log(concatenatedValue); // Output: "001003005002001004007006" (example)
+}
+
+////////////////////////
+///    load           //
+////////////////////////
+
+// Important! It seems like in solidity, the first prepended zero(s) get lost.
+// so 003005002001004007006001  comes back as 3005002001004007006001
+// This may not be a real problem, but it's important to keep in mind
+//  EDIT: it IS a real problem. One solution might be to start with an element
+// that has no leading zeroes(never goes beyond one digit(max lvl9))
+// for now we we solve this by leading with our wildcard variable "canBeAddedFunctionalityLaterLvl"
+// Function to remove leading zeroes from a string
+function removeLeadingZeroes(str) {
+  return str.replace(/^0+/, "");
+}
+
+// Deconstruct the concatenated value and assign to variables
+// this function needs to be inside the "getPlayerProgress" function in connectWeb3.js
+function deconstructConcatenatedValue(concatenatedValue) {
+  canBeAddedFunctionalityLaterLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(0, 3))
+  );
+  podiumLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(3, 3)), 10);
+  drinksLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(6, 3)), 10);
+  foodLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(9, 3)), 10);
+  tshirtLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(12, 3)),
+    10
+  );
+  audioLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(15, 3)), 10);
+  campingLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(18, 3)),
+    10
+  );
+  stageStartOverLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(21, 3)),
+    10
+  );
+
+  console.log(
+    `canBeAddedFunctionalityLaterLvl: ${canBeAddedFunctionalityLaterLvl}`
+  );
+  console.log(`podiumLvl: ${podiumLvl}`);
+  console.log(`drinksLvl: ${drinksLvl}`);
+  console.log(`foodLvl: ${foodLvl}`);
+  console.log(`tshirtLvl: ${tshirtLvl}`);
+  console.log(`audioLvl: ${audioLvl}`);
+  console.log(`campingLvl: ${campingLvl}`);
+  console.log(`stageStartOverLvl: ${stageStartOverLvl}`);
+}
+// deconstructConcatenatedValue(concatenatedValue);
+
+//Write to blockchain in connectWeb3.js: concatenatedValue

@@ -1,5 +1,11 @@
 import { ethers } from "./ethers-5.6.esm.min.js";
 import { abi, contractAddress } from "./constants.js";
+import {
+  totalScore,
+  stageStartOverLvl,
+  calculateCombinedScore,
+} from "./score.js";
+
 // import { config } from "dotenv";
 // config();
 
@@ -177,7 +183,8 @@ async function getTopFivePlayers() {
     throw error;
   }
 }
-getTopFivePlayers();
+// uncomment below function call to auto-load top5. Or add an "onLoad" function to top-score.js
+// getTopFivePlayers();
 
 ////////////////////
 ////   load      ///
@@ -197,9 +204,13 @@ async function getPlayerProgress(playerAddress) {
 ////////////////////
 ////   save      ///
 ////////////////////
-async function saveProgress(totalScore, concatenatedValue) {
+async function saveProgress(totalScore, stageStartOverLvl) {
   try {
-    console.log("saving...");
+    const concatenatedValue = calculateCombinedScore(
+      stageStartOverLvl,
+      totalScore
+    );
+    console.log(`saving... ${concatenatedValue}`);
     const signer = provider.getSigner();
     const contractWithSigner = contract.connect(signer);
     const tx = await contractWithSigner.saveProgress(
@@ -213,5 +224,5 @@ async function saveProgress(totalScore, concatenatedValue) {
     throw error;
   }
 }
-
+// console.log(stageStartOverLvl, totalScore, calculateCombinedScore);
 export { getTopFivePlayers, getPlayerProgress, saveProgress };

@@ -7,6 +7,13 @@ var foodUpgradeCost = 800;
 var baseScore = 0;
 var increment = 1;
 var nextLoop;
+
+let tshirtLvl = 1;
+let audioLvl = 4;
+let campingLvl = 7;
+const stageStartOverLvl = 6;
+let canBeAddedFunctionalityLaterLvl = 1;
+
 const levelData = {
   Level: {
     podium: "1",
@@ -89,27 +96,6 @@ function updateDrinksLevel() {
   // Get the level element and update its innerHTML with the current level
   const levelElement = document.getElementById("drinksLevelText");
   levelElement.innerHTML = `lvl ${drinksLevel}`; // lvlup: ${drinksUpgradeCost}`; this is optional
-}
-
-function updateDrinksImage() {
-  console.log("updateDrinksLevelAndImage", drinksLevel);
-  // Determine filter color based on food level
-  let filterColor = "green"; // Default color
-
-  if (drinksLevel > 5 && drinksLevel < 7) {
-    filterColor = "purple";
-  } else if (drinksLevel > 4 && drinksLevel < 6) {
-    filterColor = "purple";
-  } else if (drinksLevel > 3 && drinksLevel < 5) {
-    filterColor = "red";
-  } else if (drinksLevel > 2 && drinksLevel < 4) {
-    filterColor = "yellow";
-  } else if (drinksLevel > 1 && drinksLevel < 3) {
-    filterColor = "blue";
-  }
-  // Update the image class and filter
-  drinksStall.className = filterColor; // Assign the class to the element
-  // console.log(`images/drinks.png#${filterColor}`);
 }
 
 function calculateDrinksUpgradeCost() {
@@ -262,13 +248,21 @@ function formatNumberAbbreviated(number) {
     return `${formattedValue}${SI_SYMBOL[tier]}`;
   }
 }
-function calculateCombinedScore(stageStartOverLvl, totalScore) {
-  const combinedScore = stageStartOverLvl * 1e51 + totalScore;
-  // for this calculation to work, totalScore (skullies) must me capped at 1e50!!!! see bigBagBoogy.md
-  return combinedScore; // This score(number) needs to be sent to src/GameProgressAndTopFive.sol
-}
 
 function cheat() {
   baseScore = totalScore * 5;
   console.log("cheater!");
 }
+/////////////////////////////////////////////////////////////
+/////////        helpers for web3  traffic        //////////
+/////////////////////////////////////////////////////////////
+
+//for this calculation to work, totalScore (skullies) must me capped at 1e50!!!! see bigBagBoogy.md
+function calculateCombinedScore(stageStartOverLvl, totalScore) {
+  const combinedScore = stageStartOverLvl * 1e51 + totalScore;
+  console.log(
+    `stageStartOverLvl ${stageStartOverLvl} * 1e51 + totalScore ${totalScore} = combinedScore ${combinedScore}`
+  );
+  return combinedScore;
+}
+export { totalScore, stageStartOverLvl, calculateCombinedScore };

@@ -258,11 +258,10 @@ function cheat() {
 /////////////////////////////////////////////////////////////
 
 //for this calculation to work, totalScore (skullies) must me capped at 1e50!!!! see bigBagBoogy.md
-function calculateCombinedScore(stageStartOverLvl, totalScore) {
+function calculateCombinedScore() {
   const combinedScore = stageStartOverLvl * 1e51 + totalScore;
   console.log(
     `stageStartOverLvl ${stageStartOverLvl} * 1e51 + totalScore ${totalScore} = combinedScore ${combinedScore}`
   );
   return combinedScore;
 }
-export { totalScore, stageStartOverLvl, calculateCombinedScore };

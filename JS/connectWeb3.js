@@ -1,10 +1,5 @@
 import { ethers } from "./ethers-5.6.esm.min.js";
 import { abi, contractAddress } from "./constants.js";
-import {
-  totalScore,
-  stageStartOverLvl,
-  calculateCombinedScore,
-} from "./score.js";
 
 // import { config } from "dotenv";
 // config();

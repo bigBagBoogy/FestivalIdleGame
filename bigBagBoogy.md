@@ -8,8 +8,6 @@ git push -u origin main
 
 # todo:
 
-at line 253 in css @keyframe foodUpgradeArrow need tobe unique to each arrow
-
 integrate the combinedScore.js functions into the save and load functions
 
 # install npm install --save-dev dotenv-webpack
@@ -24,6 +22,8 @@ stageStartOverLvl++;
 
 To otherwise call levelUpStage() though, we'll have to add a "checker" that looks for:
 All elementsLvl = 10 to be true
+
+look into creating ECMAScript modules.
 
 # change ABI and contract in constants.js. Now they are dummys!
 

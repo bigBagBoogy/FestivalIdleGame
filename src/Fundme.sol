@@ -5,10 +5,10 @@ import {PriceConvertor} from "src/PriceConvertor.sol";
 import {console} from "lib/forge-std/src/console.sol";
 import {AggregatorV3Interface} from "lib/forge-std/src/interfaces/AggregatorV3Interface.sol";
 
-contract Fundme {
+contract Cheatpay {
     using PriceConvertor for uint256;
 
-    error FundMe__NotOwner();
+    error Cheatpay__NotOwner();
 
     // State variables
     uint256 public constant MINIMUM_USD = 5 * 10 ** 16;
@@ -21,7 +21,7 @@ contract Fundme {
     // modifiers
     modifier onlyOwner() {
         // require(msg.sender == i_owner);
-        if (msg.sender != i_owner) revert FundMe__NotOwner();
+        if (msg.sender != i_owner) revert Cheatpay__NotOwner();
         _;
     }
 

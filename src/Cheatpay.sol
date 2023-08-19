@@ -13,7 +13,7 @@ contract Cheatpay {
     // State variables
     uint256 public constant MINIMUM_USD = 5 * 10 ** 16;
     address private immutable i_owner;
-    address[] private s_funders;
+    address[] private s_cheaters;
     AggregatorV3Interface private s_priceFeed;
 
     mapping(address funder => uint256 amountFunded) public s_addressToAmountFunded;
@@ -30,29 +30,29 @@ contract Cheatpay {
         i_owner = msg.sender;
     }
 
-    function cheatPay() public payable {
+    function payForScullies() public payable {
         require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "Minimal amount is 0.01 ether"); // = 0.01e18 or 0.01 eth
         s_addressToAmountFunded[msg.sender] += msg.value;
-        s_funders.push(msg.sender);
+        s_cheaters.push(msg.sender);
     }
 
     function withdraw() public onlyOwner {
-        for (uint256 fundersIndex = 0; fundersIndex < s_funders.length; fundersIndex++) {
-            address funder = s_funders[fundersIndex];
+        for (uint256 fundersIndex = 0; fundersIndex < s_cheaters.length; fundersIndex++) {
+            address funder = s_cheaters[fundersIndex];
             s_addressToAmountFunded[funder] = 0;
         }
-        s_funders = new address[](0);
+        s_cheaters = new address[](0);
         (bool succes,) = i_owner.call{value: address(this).balance}("");
         require(succes, "Failed to withdraw funds");
     }
 
     function cheaperWithdraw() public onlyOwner {
-        address[] memory funders = s_funders; // in stead of looping and then reading from storage each loop, we read from storage once, take the array inside the function an the loop over it thus saving gas.
+        address[] memory funders = s_cheaters; // in stead of looping and then reading from storage each loop, we read from storage once, take the array inside the function an the loop over it thus saving gas.
         for (uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++) {
             address funder = funders[funderIndex];
             s_addressToAmountFunded[funder] = 0;
         }
-        s_funders = new address[](0);
+        s_cheaters = new address[](0);
         (bool success,) = i_owner.call{value: address(this).balance}("");
         require(success, "Failed to withdraw funds");
     }
@@ -79,7 +79,7 @@ contract Cheatpay {
     }
 
     function getFunder(uint256 index) public view returns (address) {
-        return s_funders[index];
+        return s_cheaters[index];
     }
 
     function getOwner() public view returns (address) {

@@ -35,14 +35,14 @@ contract CheatpayTest is StdCheats, Test {
         assertEq(retreivedPriceFeed, expectedPriceFeed);
     }
 
-    function testFundFailsWithoutEnoughETH() public {
+    function testPayForSculliesFailsWithoutEnoughETH() public {
         vm.expectRevert();
-        cheatpay.fund();
+        cheatpay.payForScullies();
     }
 
-    function testFundUpdatesFundedDataStructure() public {
+    function testPayForSculliesUpdatesFundedDataStructure() public {
         vm.startPrank(USER);
-        cheatpay.fund{value: SEND_VALUE}();
+        cheatpay.payForScullies{value: SEND_VALUE}();
         vm.stopPrank();
 
         uint256 amountFunded = cheatpay.getAddressToAmountFunded(USER);
@@ -51,7 +51,7 @@ contract CheatpayTest is StdCheats, Test {
 
     function testAddsFunderToArrayOfFunders() public {
         vm.startPrank(USER);
-        cheatpay.fund{value: SEND_VALUE}();
+        cheatpay.payForScullies{value: SEND_VALUE}();
         vm.stopPrank();
 
         address funder = cheatpay.getFunder(0);
@@ -62,7 +62,7 @@ contract CheatpayTest is StdCheats, Test {
 
     modifier funded() {
         vm.prank(USER);
-        cheatpay.fund{value: SEND_VALUE}();
+        cheatpay.payForScullies{value: SEND_VALUE}();
         assert(address(cheatpay).balance > 0);
         _;
     }
@@ -105,7 +105,7 @@ contract CheatpayTest is StdCheats, Test {
             // we get hoax from stdcheats
             // prank + deal
             hoax(address(i), STARTING_USER_BALANCE);
-            cheatpay.fund{value: SEND_VALUE}();
+            cheatpay.payForScullies{value: SEND_VALUE}();
         }
 
         uint256 startingFundMeBalance = address(cheatpay).balance;

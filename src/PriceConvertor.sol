@@ -17,12 +17,14 @@ import {console} from "lib/forge-std/src/console.sol";
 // and the abi, but... in stead of looking for the ABI, we're going to us an interface.abi
 // the AggregatorV3Interface
 library PriceConvertor {
+    // from ETH to USD
     function getPrice(AggregatorV3Interface priceFeed) internal view returns (uint256) {
         (, int256 answer,,,) = priceFeed.latestRoundData();
         // ETH/USD rate in 18 digit
         return uint256(answer * 10000000000);
     }
 
+    // from USD to ETH
     function getConversionRate(uint256 ethAmount, AggregatorV3Interface priceFeed) internal view returns (uint256) {
         uint256 ethPrice = getPrice(priceFeed);
         uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;

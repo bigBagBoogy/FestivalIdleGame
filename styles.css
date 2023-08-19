@@ -185,6 +185,34 @@
   cursor: pointer;  
   z-index: 6;
 }
+#storylinePopupButton {
+  position: fixed;
+  top: 170px; 
+  right: 205px; 
+  width: 100px; 
+  height: 90px; 
+  cursor: pointer;  
+  z-index: 10;
+}
+
+  #closeStorylinePopup {
+    position: absolute;
+    top: 100px;
+    right: 220px;
+    width: 60px; /* Adjust the width as needed */
+    height: 60px; /* Adjust the height as needed */
+    background-color: red; /* Set the background color to red */
+    color: white; /* Set the text color to white */
+    font-size: 80px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 30%; /* Make it a circular button */
+    z-index: 10;
+  }
+  
 
 #drinksStall {
   position: absolute;
@@ -439,20 +467,45 @@
   background-color: #caa5a5;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}*/
+.storylinePopupDiv2 {
+  position: fixed;
+  top: 500;
+  right: -800px; /* Initially positioned off the screen */
+  width: 800px; /* Adjust the width as needed */
+  height: 300px; /* Set a minimum height to cover at least the viewport height */
+  background-color: transparent;
+  
+  transition: right 0.4s ease-in-out; /* Add smooth transition animation */
+  z-index: 1000; /* Ensure the popup is above other content */
 }
-.popup2 {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 300px;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    overflow-x: hidden;
-    transition: 0.5s;
+.storylinePopupDiv {
+  top: 500;
+  padding: 20px;
+  position: relative;
+}
+/* Close button style */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 100px;
+  cursor: pointer;
+}
+/* Show the popup by adjusting its right position */
+.popup2.active {
+  right: 0;
+}
+#storylinePopupText {
+  position: absolute;
+ top: 60px;
+ max-width: 400px;
+ right: 300px;
+  font-size: 60px;
+  font-weight: bold;
 }
 
-.popup-content2 {
+/* .popup-content2 {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
@@ -468,12 +521,13 @@
     font-size: 20px;
     cursor: pointer;
 }
-
-#popupImage {
-    max-width: 100%;
+*/
+#storylinePopupImage {
+    /* max-width: 100%; */
     height: auto;
+    width: 800px;
 }
 
 #popupText {
     margin-top: 10px;
-}
+} 

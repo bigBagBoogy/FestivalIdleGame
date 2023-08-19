@@ -40,39 +40,39 @@ contract CheatpayTest is StdCheats, Test {
         cheatpay.payForScullies();
     }
 
-    function testPayForSculliesUpdatesFundedDataStructure() public {
+    function testPayForSculliesUpdatesCheatersDataStructure() public {
         vm.startPrank(USER);
         cheatpay.payForScullies{value: SEND_VALUE}();
         vm.stopPrank();
 
-        uint256 amountFunded = cheatpay.getAddressToAmountFunded(USER);
-        assertEq(amountFunded, SEND_VALUE);
+        uint256 amountpayed = cheatpay.getAddressToAmountCheateded(USER);
+        assertEq(amountpayed, SEND_VALUE);
     }
 
-    function testAddsFunderToArrayOfFunders() public {
+    function testAddsCheaterToArrayOfCheaters() public {
         vm.startPrank(USER);
         cheatpay.payForScullies{value: SEND_VALUE}();
         vm.stopPrank();
 
-        address funder = cheatpay.getFunder(0);
-        assertEq(funder, USER);
+        address cheater = cheatpay.getCheater(0);
+        assertEq(cheater, USER);
     }
 
     // https://twitter.com/PaulRBerg/status/1624763320539525121
 
-    modifier funded() {
+    modifier Payed() {
         vm.prank(USER);
         cheatpay.payForScullies{value: SEND_VALUE}();
         assert(address(cheatpay).balance > 0);
         _;
     }
 
-    function testOnlyOwnerCanWithdraw() public funded {
+    function testOnlyOwnerCanWithdraw() public PayedForScullies {
         vm.expectRevert();
         cheatpay.withdraw();
     }
 
-    function testWithdrawFromASingleFunder() public funded {
+    function testWithdrawFromASingleCheater() public PayedForScullies {
         // Arrange
         uint256 startingCheatpayBalance = address(cheatpay).balance;
         uint256 startingOwnerBalance = cheatpay.getOwner().balance;
@@ -98,17 +98,17 @@ contract CheatpayTest is StdCheats, Test {
     }
 
     // Can we do our withdraw function a cheaper way?
-    function testWithDrawFromMultipleFunders() public funded {
-        uint160 numberOfFunders = 10;
-        uint160 startingFunderIndex = 2;
-        for (uint160 i = startingFunderIndex; i < numberOfFunders + startingFunderIndex; i++) {
+    function testWithDrawFromMultipleCheaters() public PayedForScullies {
+        uint160 numberOfCheaters = 10;
+        uint160 startingCheatererIndex = 2;
+        for (uint160 i = startingCheatererIndex; i < numberOfCheaters + startingCheatererIndex; i++) {
             // we get hoax from stdcheats
             // prank + deal
             hoax(address(i), STARTING_USER_BALANCE);
             cheatpay.payForScullies{value: SEND_VALUE}();
         }
 
-        uint256 startingFundMeBalance = address(cheatpay).balance;
+        uint256 startingCheatpayBalance = address(cheatpay).balance;
         uint256 startingOwnerBalance = cheatpay.getOwner().balance;
 
         vm.startPrank(cheatpay.getOwner());
@@ -117,7 +117,7 @@ contract CheatpayTest is StdCheats, Test {
 
         assert(address(cheatpay).balance == 0);
         assert(startingCheatpayBalance + startingOwnerBalance == cheatpay.getOwner().balance);
-        assert((numberOfFunders + 1) * SEND_VALUE == cheatpay.getOwner().balance - startingOwnerBalance);
+        assert((numberOfCheaters + 1) * SEND_VALUE == cheatpay.getOwner().balance - startingOwnerBalance);
         console.log("hi");
     }
 }

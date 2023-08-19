@@ -16,7 +16,7 @@ contract Cheatpay {
     address[] private s_cheaters;
     AggregatorV3Interface private s_priceFeed;
 
-    mapping(address funder => uint256 amountFunded) public s_addressToAmountFunded;
+    mapping(address cheater => uint256 amountPayed) public s_addressToAmountPayed;
 
     // modifiers
     modifier onlyOwner() {
@@ -32,25 +32,25 @@ contract Cheatpay {
 
     function payForScullies() public payable {
         require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "Minimal amount is 0.01 ether"); // = 0.01e18 or 0.01 eth
-        s_addressToAmountFunded[msg.sender] += msg.value;
+        s_addressToAmountPayed[msg.sender] += msg.value;
         s_cheaters.push(msg.sender);
     }
 
     function withdraw() public onlyOwner {
-        for (uint256 fundersIndex = 0; fundersIndex < s_cheaters.length; fundersIndex++) {
-            address funder = s_cheaters[fundersIndex];
-            s_addressToAmountFunded[funder] = 0;
+        for (uint256 cheatersIndex = 0; cheatersIndex < s_cheaters.length; cheatersIndex++) {
+            address cheater = s_cheaters[cheatersIndex];
+            s_addressToAmountPayed[cheater] = 0;
         }
         s_cheaters = new address[](0);
-        (bool succes,) = i_owner.call{value: address(this).balance}("");
-        require(succes, "Failed to withdraw funds");
+        (bool success,) = i_owner.call{value: address(this).balance}("");
+        require(success, "Failed to withdraw funds");
     }
 
     function cheaperWithdraw() public onlyOwner {
-        address[] memory funders = s_cheaters; // in stead of looping and then reading from storage each loop, we read from storage once, take the array inside the function an the loop over it thus saving gas.
-        for (uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++) {
-            address funder = funders[funderIndex];
-            s_addressToAmountFunded[funder] = 0;
+        address[] memory cheaters = s_cheaters; // in stead of looping and then reading from storage each loop, we read from storage once, take the array inside the function an the loop over it thus saving gas.
+        for (uint256 cheatersIndex = 0; cheatersIndex < cheaters.length; cheatersIndex++) {
+            address cheater = cheaters[cheatersIndex];
+            s_addressToAmountPayed[cheater] = 0;
         }
         s_cheaters = new address[](0);
         (bool success,) = i_owner.call{value: address(this).balance}("");
@@ -62,12 +62,12 @@ contract Cheatpay {
      */
 
     /**
-     * @notice Gets the amount that an address has funded
-     *  @param fundingAddress the address of the funder
-     *  @return the amount funded
+     * @notice Gets the amount that an address has payed
+     *  @param payingAddress the address of the payed
+     *  @return the amount payed
      */
-    function getAddressToAmountFunded(address fundingAddress) public view returns (uint256) {
-        return s_addressToAmountFunded[fundingAddress];
+    function getAddressToAmountPayed(address payingAddress) public view returns (uint256) {
+        return s_addressToAmountPayed[payingAddress];
     }
 
     function getMINIMUM_USD() public pure returns (uint256) {
@@ -78,7 +78,7 @@ contract Cheatpay {
         return s_priceFeed.version();
     }
 
-    function getFunder(uint256 index) public view returns (address) {
+    function getCheater(uint256 index) public view returns (address) {
         return s_cheaters[index];
     }
 

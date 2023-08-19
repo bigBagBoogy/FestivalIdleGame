@@ -45,7 +45,7 @@ contract CheatpayTest is StdCheats, Test {
         cheatpay.payForScullies{value: SEND_VALUE}();
         vm.stopPrank();
 
-        uint256 amountpayed = cheatpay.getAddressToAmountCheateded(USER);
+        uint256 amountpayed = cheatpay.getAddressToAmountPayed(USER);
         assertEq(amountpayed, SEND_VALUE);
     }
 
@@ -60,7 +60,7 @@ contract CheatpayTest is StdCheats, Test {
 
     // https://twitter.com/PaulRBerg/status/1624763320539525121
 
-    modifier Payed() {
+    modifier PayedForScullies() {
         vm.prank(USER);
         cheatpay.payForScullies{value: SEND_VALUE}();
         assert(address(cheatpay).balance > 0);

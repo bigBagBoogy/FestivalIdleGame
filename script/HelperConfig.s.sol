@@ -38,7 +38,7 @@ contract HelperConfig is Script {
         vm.startBroadcast();
         MockV3Aggregator mockPriceFeed = new MockV3Aggregator(
             DECIMALS,
-            INITIAL_PRICE
+            INITIAL_PRICE // again, in the mock we're here passing the ETH/USD price of $2000
         );
         vm.stopBroadcast();
         emit HelperConfig__CreatedMockPriceFeed(address(mockPriceFeed));

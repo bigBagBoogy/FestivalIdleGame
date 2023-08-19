@@ -32,6 +32,7 @@ contract CheatpayTest is StdCheats, Test {
         address retreivedPriceFeed = address(cheatpay.getPriceFeed());
         // (address expectedPriceFeed) = helperConfig.activeNetworkConfig();
         address expectedPriceFeed = helperConfig.activeNetworkConfig();
+        console.log(retreivedPriceFeed, expectedPriceFeed);
         assertEq(retreivedPriceFeed, expectedPriceFeed);
     }
 
@@ -57,8 +58,6 @@ contract CheatpayTest is StdCheats, Test {
         address cheater = cheatpay.getCheater(0);
         assertEq(cheater, USER);
     }
-
-    // https://twitter.com/PaulRBerg/status/1624763320539525121
 
     modifier PayedForScullies() {
         vm.prank(USER);

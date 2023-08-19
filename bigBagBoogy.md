@@ -14,6 +14,16 @@ fix fund/cheatPay function
 line 84 connectWeb3.JS:
 const ethAmount = document.getElementById("ethAmount").value; //string value here
 
+# let's:
+
+Offer 2 tiers of cheating: CheatSilver and CheatGold. Let's make these $5 and $10
+These fiat amounts need to be measured against the current price of ETH/USD?
+We'll write the code for this, but comment it out, since keeping track of chainlink pricefeed
+funding might not be wanted.
+html: button -> popup with CheatSilver and CheatGold buttons. onclick=CheatSilver()
+For now we'll work off a price for ETH of $2000,
+so CheatSilver = 0.0025 ETH and CheatGold = 0.005 ETH (2500000000000000 WEI and 5000000000000000)
+
 # if needed install npm install --save-dev dotenv-webpack
 
 totalScore (skullies) must me capped at 1e50!!!! in JS/score.js

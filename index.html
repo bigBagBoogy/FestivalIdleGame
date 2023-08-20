@@ -31,12 +31,6 @@
     <img id="connectButton" src="images/metamask.svg" alt="connectButton" />
 
     <img
-      id="cheatButton"
-      src="images/coin.gif"
-      alt="cheat"
-      onClick="cheatPay()"
-    />
-    <img
       id="freeCheatButton"
       src="images/freeCheat.gif"
       alt="freeCheat"
@@ -87,6 +81,26 @@
         <span class="close" id="closeStorylinePopup">&times;</span>
         <img id="storylinePopupImage" src="" alt="Popup Image" />
         <p id="storylinePopupText">storyline Popup Text</p>
+      </div>
+    </div>
+
+    <!-- payForScullies popup -->
+    <img id="cheatButton" src="images/coin.gif" alt="cheat" />
+    <div id="cheatPayPopupDiv2" class="cheatPayPopupDiv2">
+      <div class="cheatPayPopupDiv">
+        <button
+          id="cheatSilver"
+          class="cheat-button"
+          onclick="cheatPay(0.0025)"
+        >
+          Cheat Silver
+        </button>
+        <button id="cheatGold" class="cheat-button" onclick="cheatPay(0.005)">
+          Cheat Gold
+        </button>
+        <span class="close" id="closeCheatPayPopup">&times;</span>
+        <img id="cheatPayPopupImage" src="" alt="Popup Image" />
+        <p id="cheatPayPopupText">storyline Popup Text</p>
       </div>
     </div>
 

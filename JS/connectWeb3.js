@@ -5,7 +5,6 @@ import { abi, contractAddress } from "./constants.js";
 // config();
 
 const withdrawButton = document.getElementById("withdrawButton");
-const cheatButton = document.getElementById("cheatButton"); //need to be changed, has other function now
 const balanceButton = document.getElementById("balanceButton");
 const connectButton = document.getElementById("connectButton");
 const saveProgressButton = document.getElementById("saveProgressButton");
@@ -15,7 +14,6 @@ const getPlayerProgressButton = document.getElementById(
 // const getTopPlayersButton = document.getElementById("getTopPlayersButton");
 
 withdrawButton.onclick = withdraw;
-cheatButton.onclick = cheatPay; //need to be changed, has other function now
 balanceButton.onclick = getBalance;
 connectButton.onclick = connect;
 saveProgressButton.onclick = saveProgress;
@@ -88,7 +86,7 @@ async function cheatPay() {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(contractAddress, abi, signer);
     try {
-      const transactionResponse = await contract.cheat({
+      const transactionResponse = await contract.payForScullies({
         value: ethers.utils.parseEther(ethAmount),
       });
       await listenForTransactionMine(transactionResponse, provider);

@@ -13,6 +13,8 @@ Disable double tap = zoom screen -> how to?
 fix fund/cheatPay function
 line 84 connectWeb3.JS:
 const ethAmount = document.getElementById("ethAmount").value; //string value here
+connect the cheatpay button to a popup img that has 2 buttons and a close button
+1 for CheatSilver and 1 for CheatGold.
 
 # let's:
 

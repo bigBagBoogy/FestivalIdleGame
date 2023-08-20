@@ -1,8 +1,8 @@
 import { ethers } from "./ethers-5.6.esm.min.js";
-import { abi, contractAddress } from "./constants.js";
+import { abi } from "./constants.js";
+import { contractAddress } from "./constantsCheatpay.js";
 
-// import { config } from "dotenv";
-// config();
+//import { abi, contractAddress } from "./constantsCheatpay.js";
 
 const withdrawButton = document.getElementById("withdrawButton");
 const balanceButton = document.getElementById("balanceButton");

@@ -12,7 +12,6 @@
     <!-- Score-board-bar -->
     <div class="responsive" id="scoreboard-bar">
       <span class="score">Skullies: <span id="totalScore">0</span></span>
-      <span class="level">Podium Level: <span id="podiumLevel">1</span></span>
       <span class="line-up">Line Up: <span id="lineUpValue">0</span></span>
       <span class="level">Food Level: <span id="foodLevel">1</span></span>
 
@@ -26,6 +25,9 @@
       alt="main"
       onClick="upgradePodium()"
     />
+    <div id="podiumLevelBox" class="level-box">
+      <span id="podiumLevel">lvl 1</span>
+    </div>
 
     <!-- metaMask code for the button -->
     <img id="connectButton" src="images/metamask.svg" alt="connectButton" />
@@ -53,6 +55,11 @@
       id="foodUpgradeArrow"
       src="images/upgradeArrow.png"
       alt="foodUpgradeArrow"
+    />
+    <img
+      id="podiumUpgradeArrow"
+      src="images/upgradeArrow.png"
+      alt="podiumUpgradeArrow"
     />
     <!-- end of drinks -->
 

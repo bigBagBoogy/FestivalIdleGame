@@ -59,6 +59,13 @@ function updateScore(totalScore) {
   } else {
     foodUpgradeArrowImg.style.display = "none"; // Hide the image
   }
+  const podiumUpgradeArrowImg = document.getElementById("podiumUpgradeArrow");
+  if (totalScore >= podiumUpgradeCost) {
+    // console.log("show arrow!");
+    podiumUpgradeArrowImg.style.display = "block"; //show
+  } else {
+    podiumUpgradeArrowImg.style.display = "none"; // Hide the image
+  }
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 //         PODIUM              //
@@ -68,8 +75,9 @@ function updatePodiumLevel() {
   var podiumLevel = levelData.Level.podium;
   // Get the level element and update its innerHTML with the current level
   const levelElement = document.getElementById("podiumLevel");
-  levelElement.innerHTML = podiumLevel;
+  levelElement.innerHTML = `lvl ${podiumLevel}`; // lvlup: ${podiumUpgradeCost}`; this is optional
 }
+
 function calculatePodiumUpgradeCost() {
   podiumUpgradeCost = podiumUpgradeCost * levelData.Level.podium;
   return podiumUpgradeCost;

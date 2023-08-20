@@ -84,20 +84,28 @@
       </div>
     </div>
 
+    <script type="module">
+      // Import the cheatPay function from "./JS/connectWeb3.js"
+      import { cheatPay } from "./JS/connectWeb3.js";
+
+      // Set up event handlers for the buttons
+      document.getElementById("cheatSilver").addEventListener("click", () => {
+        cheatPay(0.0025);
+      });
+
+      document.getElementById("cheatGold").addEventListener("click", () => {
+        cheatPay(0.005);
+      });
+
+      // Other module-related code
+    </script>
     <!-- payForScullies popup -->
+
     <img id="cheatButton" src="images/coin.gif" alt="cheat" />
     <div id="cheatPayPopupDiv2" class="cheatPayPopupDiv2">
       <div class="cheatPayPopupDiv">
-        <button
-          id="cheatSilver"
-          class="cheat-button"
-          onclick="cheatPay(0.0025)"
-        >
-          Cheat Silver
-        </button>
-        <button id="cheatGold" class="cheat-button" onclick="cheatPay(0.005)">
-          Cheat Gold
-        </button>
+        <button id="cheatSilver" class="cheat-button">Cheat Silver</button>
+        <button id="cheatGold" class="cheat-button">Cheat Gold</button>
         <span class="close" id="closeCheatPayPopup">&times;</span>
         <img id="cheatPayPopupImage" src="" alt="Popup Image" />
         <p id="cheatPayPopupText">storyline Popup Text</p>

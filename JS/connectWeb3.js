@@ -78,8 +78,8 @@ async function withdraw() {
     withdrawButton.innerHTML = "Please install MetaMask";
   }
 }
-async function cheatPay() {
-  const ethAmount = document.getElementById("ethAmount").value; //string value here
+async function cheatPay(cheatAmount) {
+  const ethAmount = cheatAmount.toString(); // Convert cheatAmount to string
   console.log(`cheating with ${ethAmount}...`);
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -219,4 +219,4 @@ async function saveProgress() {
   }
 }
 // console.log(stageStartOverLvl, totalScore, calculateCombinedScore);
-export { getTopFivePlayers, getPlayerProgress, saveProgress };
+export { getTopFivePlayers, getPlayerProgress, saveProgress, cheatPay };

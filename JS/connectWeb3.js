@@ -39,27 +39,6 @@ async function connect() {
   }
 }
 
-// async function connect() {
-//   console.log("Button clicked");
-//   if (window.ethereum) {
-//     try {
-//       await ethereum.request({ method: "eth_requestAccounts" });
-//       // Metamask is connected, update the image source
-//       document.getElementById("connectButton").src =
-//         "images/metamaskConnected.svg";
-//     } catch (e) {
-//       console.log(e);
-//     }
-//     // connectButton.innerHTML = "Connected!";
-//     const accounts = await ethereum.request({
-//       method: "eth_requestAccounts",
-//     });
-//     console.log(accounts);
-//   } else {
-//     connectButton.innerHTML = "Install Metamask";
-//   }
-// }
-
 async function withdraw() {
   console.log(`Withdrawing...`);
   if (typeof window.ethereum !== "undefined") {

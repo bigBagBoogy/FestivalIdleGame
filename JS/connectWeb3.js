@@ -1,6 +1,9 @@
 import { ethers } from "./ethers-5.6.esm.min.js";
-import { abi } from "./constants.js";
-import { contractAddress } from "./constantsCheatpay.js";
+import { abiCheatpay } from "./constantsCheatpay.js"; // fund, withdraw, balance
+import { contractAddressCheatpay } from "./constantsCheatpay.js";
+
+import { abiGameProgressAndTopFive } from "./constants.js"; //  save progress, top5
+import { contractAddressGameProgressAndTopFive } from "./constants.js";
 
 //import { abi, contractAddress } from "./constantsCheatpay.js";
 
@@ -45,9 +48,13 @@ async function withdraw() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, abi, signer);
+    const contractPay = new ethers.Contract(
+      contractAddressCheatpay,
+      abiCheatpay,
+      signer
+    );
     try {
-      const transactionResponse = await contract.withdraw();
+      const transactionResponse = await contractPay.withdraw();
       await listenForTransactionMine(transactionResponse, provider);
       // await transactionResponse.wait(1)
     } catch (error) {
@@ -63,9 +70,13 @@ async function cheatPay(cheatAmount) {
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, abi, signer);
+    const contractPay = new ethers.Contract(
+      contractAddressCheatpay,
+      abiCheatpay,
+      signer
+    );
     try {
-      const transactionResponse = await contract.payForScullies({
+      const transactionResponse = await contractPay.payForScullies({
         value: ethers.utils.parseEther(ethAmount),
       });
       await listenForTransactionMine(transactionResponse, provider);
@@ -85,7 +96,7 @@ async function getBalance() {
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     try {
-      const balance = await provider.getBalance(contractAddress);
+      const balance = await provider.getBalance(contractAddressCheatpay);
       console.log(ethers.utils.formatEther(balance));
     } catch (error) {
       console.log(error);
@@ -128,14 +139,18 @@ testImport();
 const provider = new ethers.providers.JsonRpcProvider(
   "https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN"
 ); // Replace with your Ethereum RPC URL
-const contract = new ethers.Contract(contractAddress, abi, provider);
+const contractCheat = new ethers.Contract(
+  contractAddressGameProgressAndTopFive,
+  abiGameProgressAndTopFive,
+  provider
+);
 ////////////////////
 ////   top5      ///
 ////////////////////
 async function getTopFivePlayers() {
   try {
     console.log("fetching top players...");
-    const [topPlayers, topScores] = await contract.getTopFivePlayers();
+    const [topPlayers, topScores] = await contractCheat.getTopFivePlayers();
 
     const topPlayersList = document.getElementById("topPlayersList");
     topPlayersList.innerHTML = ""; // Clear previous list
@@ -167,7 +182,7 @@ async function getTopFivePlayers() {
 async function getPlayerProgress(playerAddress) {
   try {
     console.log("loading player's progress...");
-    const progress = await contract.getPlayerProgress(playerAddress);
+    const progress = await contractCheat.getPlayerProgress(playerAddress);
     console.log(progress);
     return progress;
   } catch (error) {
@@ -185,7 +200,7 @@ async function saveProgress() {
       `saving concatenatedValue: ${concatenatedValue} and totalScore: ${roundedTotalScore}`
     );
     const signer = provider.getSigner();
-    const contractWithSigner = contract.connect(signer);
+    const contractWithSigner = contractCheat.connect(signer);
     const tx = await contractWithSigner.saveProgress(
       roundedTotalScore,
       concatenatedValue

@@ -60,10 +60,10 @@ open metamask
 click import account
 in cli: `make anvil`
 take a private key and paste it in metamask to import account
-click import tokens
+click ADD NETWORK
 copy - paste account from cli (anvil)
 symbol: eth
-rpc-url: http://127
+rpc-url: http://127.0.0.1:8545
 chainid: 31337
 
 This will deploy all contracts to the "fake" hardhat localhost blockchain (chainId 31337)
@@ -80,6 +80,9 @@ Additionally, add your localhost with chainid 31337 to your metamask.
 2. open the frontend and
    Click the “Go Live” button at the bottom-right-hand corner of VSCode to start a server on port 5500. This will also often prompt your browser to open a new window/tab that loads your index.html file.
    If the browser doen't open then go to [a link]http://127.0.0.1:5500/
+   !!! You might not be connected to your website (local frontend) with the right account
+   --check this in the browser console. You need to be connected to the Anvil account with
+   funds in it.
 
 3. You can play around with the website functionality including funding, and withdrawing. The balance is logged into the console, so to see that, press cmd/ctrl + shift + i
    and then press the balance button.
@@ -123,11 +126,19 @@ have fun!
 
 # bug along the way to learn from:
 
-connectWeb3.js needs to be typecasted: type="module" in it's html element and
+1. connectWeb3.js needs to be typecasted: type="module" in it's html element and
 score.js MUST not! otherwise all functions will break `undefinded`.
 You can not and don't need to (if you use VAR for variables you need in both files),
 do: "// import "./score.js";" in connectWeb3.js. If you do, It will call the inteval function double, with wrong arguments.
 
-If You see this error in the browser console: `ethers-5.6.esm.min.js:16475     POST https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN net::ERR_NAME_NOT_RESOLVED`
+2. If You see this error in the browser console: `ethers-5.6.esm.min.js:16475     POST https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN net::ERR_NAME_NOT_RESOLVED`
 It means you're not connected to the internet!
+
+3. When running Anvil, you can only test 1 deployed contract at a time.
+When you run an other deploy script, the first one gets overwritten.
+
+forge script script/DeployGameProgressAndTopFive.s.sol
+forge script script/DeployCheatpay.s.sol  <---- this one is now "live"
 ````
+
+4. browser console: BlockOutOfRangeError: `inpage.js:1 MetaMask - RPC Error: [ethjs-query] while formatting outputs from RPC '{"value":{"code":-32603,"data":{"code":-32602,"message":"BlockOutOfRangeError: block height is 657 but requested was 1946"}}}'`

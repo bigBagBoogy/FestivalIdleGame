@@ -7,21 +7,21 @@ import { contractAddressGameProgressAndTopFive } from "./constants.js";
 
 //import { abi, contractAddress } from "./constantsCheatpay.js";
 
-const withdrawButton = document.getElementById("withdrawButton");
-const balanceButton = document.getElementById("balanceButton");
-const connectButton = document.getElementById("connectButton");
-const saveProgressButton = document.getElementById("saveProgressButton");
-const getPlayerProgressButton = document.getElementById(
-  "getPlayerProgressButton"
-);
-const getTopPlayersButton = document.getElementById("getTopPlayersButton");
+// const withdrawButton = document.getElementById("withdrawButton");
+// const balanceButton = document.getElementById("balanceButton");
+// const connectButton = document.getElementById("connectButton");
+// const saveProgressButton = document.getElementById("saveProgressButton");
+// const getPlayerProgressButton = document.getElementById(
+//   "getPlayerProgressButton"
+// );
+// const getTopPlayersButton = document.getElementById("getTopPlayersButton");
 
-withdrawButton.onclick = withdraw;
-balanceButton.onclick = getBalance;
-connectButton.onclick = connect;
-saveProgressButton.onclick = saveProgress;
-getPlayerProgressButton.onclick = getPlayerProgress;
-getTopPlayersButton.onclick = getTopFivePlayers;
+// withdrawButton.onclick = withdraw;
+// balanceButton.onclick = getBalance;
+// connectButton.onclick = connect;
+// // saveProgressButton.onclick = saveProgress;
+// getPlayerProgressButton.onclick = getPlayerProgress;
+// getTopPlayersButton.onclick = getTopFivePlayers;
 
 async function connect() {
   console.log("Button clicked");

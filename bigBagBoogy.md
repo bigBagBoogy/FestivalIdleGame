@@ -8,7 +8,10 @@ git push -u origin main
 
 # todo:⭐️
 
-Withdraw does not work in anvil. onlyOwner? Who is msg.sender?
+The onclick="saveProgress" in html does not work because <script src="JS/connectWeb3.js" type="module"></script> is at the top, where it needs to stay.
+However, the `const saveProgressButton = document.getElementById("saveProgressButton");`
+`saveProgressButton.onclick = saveProgress;` pairs in connectWeb3.js give conflicts in the
+browser. This needs to be solved!
 
 Disable double tap = zoom screen -> how to?
 

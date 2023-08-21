@@ -14,14 +14,14 @@ const saveProgressButton = document.getElementById("saveProgressButton");
 const getPlayerProgressButton = document.getElementById(
   "getPlayerProgressButton"
 );
-// const getTopPlayersButton = document.getElementById("getTopPlayersButton");
+const getTopPlayersButton = document.getElementById("getTopPlayersButton");
 
 withdrawButton.onclick = withdraw;
 balanceButton.onclick = getBalance;
 connectButton.onclick = connect;
 saveProgressButton.onclick = saveProgress;
 getPlayerProgressButton.onclick = getPlayerProgress;
-// getTopPlayersButton.onclick = getTopFivePlayers;
+getTopPlayersButton.onclick = getTopFivePlayers;
 
 async function connect() {
   console.log("Button clicked");
@@ -180,6 +180,17 @@ async function getTopFivePlayers() {
 ////////////////////
 
 async function getPlayerProgress(playerAddress) {
+  // const provider = new ethers.providers.JsonRpcProvider(
+  //   "https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN"
+  // );
+  const provider = new ethers.providers.JsonRpcProvider(
+    "http://localhost:8545"
+  );
+  const contractCheat = new ethers.Contract(
+    contractAddressGameProgressAndTopFive,
+    abiGameProgressAndTopFive,
+    provider
+  );
   try {
     console.log("loading player's progress...");
     const progress = await contractCheat.getPlayerProgress(playerAddress);
@@ -194,6 +205,17 @@ async function getPlayerProgress(playerAddress) {
 ////   save      ///
 ////////////////////
 async function saveProgress() {
+  // const provider = new ethers.providers.JsonRpcProvider(
+  //   "https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN"
+  // );
+  const provider = new ethers.providers.JsonRpcProvider(
+    "http://localhost:8545"
+  );
+  const contractCheat = new ethers.Contract(
+    contractAddressGameProgressAndTopFive,
+    abiGameProgressAndTopFive,
+    provider
+  );
   try {
     const roundedTotalScore = Math.round(totalScore);
     console.log(

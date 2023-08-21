@@ -8,6 +8,8 @@ git push -u origin main
 
 # todo:⭐️
 
+Withdraw does not work in anvil. onlyOwner? Who is msg.sender?
+
 Disable double tap = zoom screen -> how to?
 
 fix fund/cheatPay function
@@ -142,3 +144,53 @@ forge script script/DeployCheatpay.s.sol  <---- this one is now "live"
 ````
 
 4. browser console: BlockOutOfRangeError: `inpage.js:1 MetaMask - RPC Error: [ethjs-query] while formatting outputs from RPC '{"value":{"code":-32603,"data":{"code":-32602,"message":"BlockOutOfRangeError: block height is 657 but requested was 1946"}}}'`
+
+# solution:
+
+If you quit this and on a later occasion you want to do this again you will need to first open your metamask,
+go to settings, --- advanced, --- and choose RESET WALLET
+otherwise you will get this BlockOutOfRangeError error in the console and the functions wont work anymore.
+
+5. Error saving progress: ReferenceError: Cannot access 'provider' before initialization
+   at HTMLButtonElement.saveProgress (connectWeb3.js:202:20)
+   --> when calling saveProgress
+
+   solution: This was a scope issue. I had these lines outside the saveProgress() :
+
+   ````const provider = new ethers.providers.JsonRpcProvider(
+   "https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN"
+   );
+   const contractCheat = new ethers.Contract(
+   contractAddressGameProgressAndTopFive,
+   abiGameProgressAndTopFive,
+   provider
+   );```
+
+   ````
+
+   # note:
+
+   I'm having a hunch that the "provider" I'm using can be 1 of (at least) 2:
+
+   1. window.ethereum (metamask) can be a provider. I'm using that for the fundMe stuff.
+   2. JsonRpcProvider from Alchemy, for use with sepolia eth. I use for gameProgress.
+
+   - I may need to deploy to sepolia to test these functions.
+     ChatGPT says I need to use: `const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545");` for testing within Anvil
+     --> indeed I got `Progress saved successfully` when using http://localhost:8545!
+
+6. connectWeb3.js:211 Error saving progress: Error: unknown account #0 (operation="getAddress", code=UNSUPPORTED_OPERATION, version=providers/5.1.2)
+   at Logger.makeError (ethers-5.6.esm.min.js:2919:19)
+   at Logger.throwError (ethers-5.6.esm.min.js:2928:16)
+   at ethers-5.6.esm.min.js:19070:18
+   at async Promise.all (:5500/index 0)
+
+   # chatGpt: Yes, the error message you're encountering seems to indicate that the operation "getAddress" is trying to retrieve the address of the msg.sender. In Ethereum smart contracts, msg.sender refers to the address of the sender of the current transaction.
+
+In your JavaScript code, you are using provider.getSigner() to get the signer object. The error message suggests that the operation "getAddress" is not supported or available in the current context. This operation is likely being used to fetch the address of the Ethereum account associated with the signer.
+
+# to do before testing with Sepolia:
+
+For testing with Anvil I changed the JsonRpcProvider from Alchemy's to Anvil's localhost:
+http://localhost:8545
+This needs to be reset to Alchemy's Sepolia RPC-URL for saveProgress, LoadProgress and top5

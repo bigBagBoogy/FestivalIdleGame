@@ -190,3 +190,5 @@ In your JavaScript code, you are using provider.getSigner() to get the signer ob
 For testing with Anvil I changed the JsonRpcProvider from Alchemy's to Anvil's localhost:
 http://localhost:8545
 This needs to be reset to Alchemy's Sepolia RPC-URL for saveProgress, LoadProgress and top5
+
+7. inpage.js:1 MetaMask - RPC Error: Internal JSON-RPC error.

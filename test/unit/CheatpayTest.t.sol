@@ -48,6 +48,7 @@ contract CheatpayTest is StdCheats, Test {
 
         uint256 amountpayed = cheatpay.getAddressToAmountPayed(USER);
         assertEq(amountpayed, SEND_VALUE);
+        console.log(amountpayed);
     }
 
     function testAddsCheaterToArrayOfCheaters() public {

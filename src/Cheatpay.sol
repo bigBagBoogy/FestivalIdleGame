@@ -11,7 +11,7 @@ contract Cheatpay {
     error Cheatpay__NotOwner();
 
     // State variables
-    uint256 public constant MINIMUM_CHEAT = 0.0025 ether
+    uint256 public constant MINIMUM_CHEAT = 0.0025 ether;
     address private immutable i_owner;
     address[] private s_cheaters;
     AggregatorV3Interface private s_priceFeed;
@@ -31,9 +31,9 @@ contract Cheatpay {
     }
 
     function payForScullies() public payable {
-        require(msg.value =< MINIMUM_CHEAT, "Amount is wrong"); 
-        s_addressToAmountPayed[msg.sender] += msg.value;
-        s_cheaters.push(msg.sender);
+        require(msg.value >= MINIMUM_CHEAT, "Amount is wrong");
+        // s_addressToAmountPayed[msg.sender] += msg.value;
+        // s_cheaters.push(msg.sender);
     }
 
     function withdraw() public onlyOwner {
@@ -47,15 +47,15 @@ contract Cheatpay {
     }
 
     function cheaperWithdraw() public onlyOwner {
-        address[] memory cheaters = s_cheaters; // in stead of looping and then reading from storage each loop, we read from storage once, take the array inside the function an the loop over it thus saving gas.
-        for (uint256 cheatersIndex = 0; cheatersIndex < cheaters.length; cheatersIndex++) {
-            address cheater = cheaters[cheatersIndex];
-            s_addressToAmountPayed[cheater] = 0;
-        }
-        s_cheaters = new address[](0);
         (bool success,) = i_owner.call{value: address(this).balance}("");
         require(success, "Failed to withdraw funds");
     }
+    // address[] memory cheaters = s_cheaters; // in stead of looping and then reading from storage each loop, we read from storage once, take the array inside the function an the loop over it thus saving gas.
+    // for (uint256 cheatersIndex = 0; cheatersIndex < cheaters.length; cheatersIndex++) {
+    //     address cheater = cheaters[cheatersIndex];
+    //     s_addressToAmountPayed[cheater] = 0;
+    // }
+    // s_cheaters = new address[](0);
 
     /**
      * Getter Functions

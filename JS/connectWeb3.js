@@ -44,7 +44,6 @@ async function connect() {
 
 async function withdraw() {
   console.log(`Withdrawing...`);
-  // Add these console logs to the beginning of the `withdraw` function
   console.log(`Contract address: ${contractAddressCheatpay}`);
   if (typeof window.ethereum !== "undefined") {
     try {
@@ -62,9 +61,15 @@ async function withdraw() {
           abiCheatpay,
           signer
         );
-        const transactionResponse = await contractPay.cheaperWithdraw();
+        const contractBalance = await provider.getBalance(
+          contractAddressCheatpay
+        );
+        console.log(`contractBalance: ${contractBalance}`);
+        // Call the contract's withdraw function without the value parameter
+        const transactionResponse = await contractPay
+          .connect(signer)
+          .cheaperWithdraw();
         await listenForTransactionMine(transactionResponse, provider);
-
         // await transactionResponse.wait(1)
       }
     } catch (error) {
@@ -74,6 +79,7 @@ async function withdraw() {
     withdrawButton.innerHTML = "Please install MetaMask";
   }
 }
+
 async function cheatPay(cheatAmount) {
   const ethAmount = cheatAmount.toString(); // Convert cheatAmount to string
   console.log(`cheating with ${ethAmount}...`);

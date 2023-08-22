@@ -44,19 +44,29 @@ async function connect() {
 
 async function withdraw() {
   console.log(`Withdrawing...`);
+  // Add these console logs to the beginning of the `withdraw` function
+  console.log(`Contract address: ${contractAddressCheatpay}`);
   if (typeof window.ethereum !== "undefined") {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
-    const contractPay = new ethers.Contract(
-      contractAddressCheatpay,
-      abiCheatpay,
-      signer
-    );
     try {
-      const transactionResponse = await contractPay.withdraw();
-      await listenForTransactionMine(transactionResponse, provider);
-      // await transactionResponse.wait(1)
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const requestAccountsResult = await provider.send(
+        "eth_requestAccounts",
+        []
+      );
+      if (requestAccountsResult.length > 0) {
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        console.log(`Owner address: ${address}`);
+        const contractPay = new ethers.Contract(
+          contractAddressCheatpay,
+          abiCheatpay,
+          signer
+        );
+        const transactionResponse = await contractPay.cheaperWithdraw();
+        await listenForTransactionMine(transactionResponse, provider);
+
+        // await transactionResponse.wait(1)
+      }
     } catch (error) {
       console.log(error);
     }

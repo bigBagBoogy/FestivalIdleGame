@@ -59,21 +59,19 @@ forge script script/DeployCheatpay.s.sol
 open metamask
 click import account
 in cli: `make anvil`
-take a private key and paste it in metamask to import account
+take a private key and paste it into metamask to import account
 click ADD NETWORK
 copy - paste account from cli (anvil)
 symbol: eth
 rpc-url: http://127.0.0.1:8545
 chainid: 31337
 
-This will deploy all contracts to the "fake" hardhat localhost blockchain (chainId 31337)
-Update your constants.js (in b-donate-front) with the new contract address.
-In your constants.js file, update the variable contractAddress with the address of the deployed "FundMe" contract. You'll see it near the top of the hardhat output.
+This will deploy all contracts to the "fake" Anvil localhost blockchain (chainId 31337)
+Update your constants.js and constantsCheatpay.js with the new contract address.
+You'll see it near the top of the hardhat output.
 
 Connect your metamask to your local hardhat blockchain.
-`PLEASE USE A METAMASK ACCOUNT THAT ISNT ASSOCIATED WITH ANY REAL MONEY.` I usually use a few different browser profiles to separate my metamasks easily.
-
-In the output of the above command, take one of the private key accounts and import it into your metamask.
+`PLEASE USE A METAMASK ACCOUNT THAT ISNT ASSOCIATED WITH ANY REAL MONEY.`
 
 Additionally, add your localhost with chainid 31337 to your metamask.
 

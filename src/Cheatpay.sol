@@ -11,7 +11,7 @@ contract Cheatpay {
     error Cheatpay__NotOwner();
 
     // State variables
-    uint256 public constant MINIMUM_USD = 5 * 10 ** 16;
+    uint256 public constant MINIMUM_CHEAT = 0.0025 ether
     address private immutable i_owner;
     address[] private s_cheaters;
     AggregatorV3Interface private s_priceFeed;
@@ -31,7 +31,7 @@ contract Cheatpay {
     }
 
     function payForScullies() public payable {
-        require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "Minimal amount is 0.01 ether"); // = 0.01e18 or 0.01 eth
+        require(msg.value =< MINIMUM_CHEAT, "Amount is wrong"); 
         s_addressToAmountPayed[msg.sender] += msg.value;
         s_cheaters.push(msg.sender);
     }
@@ -63,15 +63,15 @@ contract Cheatpay {
 
     /**
      * @notice Gets the amount that an address has payed
-     *  @param payingAddress the address of the payed
+     *  @param payingAddress the address of the payer
      *  @return the amount payed
      */
     function getAddressToAmountPayed(address payingAddress) public view returns (uint256) {
         return s_addressToAmountPayed[payingAddress];
     }
 
-    function getMINIMUM_USD() public pure returns (uint256) {
-        return MINIMUM_USD;
+    function getMINIMUM_CHEAT() public pure returns (uint256) {
+        return MINIMUM_CHEAT;
     }
 
     function getVersion() public view returns (uint256) {

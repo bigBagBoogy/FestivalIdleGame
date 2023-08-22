@@ -1,0 +1,18 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.jacket-container {
+    width: 100vw;
+    height: 100vh;
+    background: url('images/denim-jacket.png') center/contain no-repeat;
+    background-color: #3c00ff; /* Set the background color */
+    position: relative;
+}
+.patch {
+    width: 400px;
+    height: 400px;
+    background: url('images/patch-graspop.png') center/contain no-repeat;
+    position: absolute;
+}

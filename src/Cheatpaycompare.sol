@@ -1,20 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {PriceConvertor} from "src/PriceConvertor.sol";
-import {console} from "lib/forge-std/src/console.sol";
-import {AggregatorV3Interface} from "lib/forge-std/src/interfaces/AggregatorV3Interface.sol";
-
 contract Cheatpay {
-    using PriceConvertor for uint256;
-
     error Cheatpay__NotOwner();
 
     // State variables
     uint256 public constant MINIMUM_CHEAT = 0.0025 ether;
     address payable private immutable i_owner;
     address[] private s_cheaters;
-    AggregatorV3Interface private s_priceFeed;
 
     mapping(address cheater => uint256 amountPayed) public s_addressToAmountPayed;
 
@@ -34,8 +27,7 @@ contract Cheatpay {
         _;
     }
 
-    constructor(address priceFeed) {
-        s_priceFeed = AggregatorV3Interface(priceFeed);
+    constructor() {
         i_owner = payable(msg.sender);
     }
 
@@ -88,10 +80,6 @@ contract Cheatpay {
         return MINIMUM_CHEAT;
     }
 
-    function getVersion() public view returns (uint256) {
-        return s_priceFeed.version();
-    }
-
     function getCheater(uint256 index) public view returns (address) {
         return s_cheaters[index];
     }
@@ -100,7 +88,7 @@ contract Cheatpay {
         return i_owner;
     }
 
-    function getPriceFeed() public view returns (AggregatorV3Interface) {
-        return s_priceFeed;
+    function getOwnerBalance() public view returns (uint256) {
+        return i_owner.balance;
     }
 }

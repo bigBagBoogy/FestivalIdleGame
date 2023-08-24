@@ -73,7 +73,7 @@ async function withdraw() {
         // await transactionResponse.wait(1)
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message); // Log the error message
     }
   } else {
     withdrawButton.innerHTML = "Please install MetaMask";
@@ -196,59 +196,93 @@ async function getTopFivePlayers() {
 ////////////////////
 
 async function getPlayerProgress(playerAddress) {
-  // const provider = new ethers.providers.JsonRpcProvider(
-  //   "https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN"
-  // );
-  const provider = new ethers.providers.JsonRpcProvider(
-    "http://localhost:8545"
-  );
-  const contractCheat = new ethers.Contract(
-    contractAddressGameProgressAndTopFive,
-    abiGameProgressAndTopFive,
-    provider
-  );
-  try {
-    console.log("loading player's progress...");
-    const progress = await contractCheat.getPlayerProgress(playerAddress);
-    console.log(progress);
-    return progress;
-  } catch (error) {
-    console.error("Error fetching player progress:", error);
-    throw error;
+  if (typeof window.ethereum !== "undefined") {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const contractCheat = new ethers.Contract(
+      contractAddressGameProgressAndTopFive,
+      abiGameProgressAndTopFive,
+      provider
+    );
+
+    try {
+      console.log("loading player's progress...");
+      const progress = await contractCheat.getPlayerProgress(playerAddress);
+      console.log(progress);
+      return progress;
+    } catch (error) {
+      console.error("Error fetching player progress:", error);
+      throw error;
+    }
+  } else {
+    console.error("Web3 provider not found (e.g., MetaMask)");
   }
 }
+
 ////////////////////
 ////   save      ///
 ////////////////////
+// async function saveProgress() {
+//   const provider = new ethers.providers.JsonRpcProvider(
+//     "https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN"
+//   );
+//   // const provider = new ethers.providers.JsonRpcProvider(
+//   //   "http://localhost:8545"
+//   // );
+//   const contractCheat = new ethers.Contract(
+//     contractAddressGameProgressAndTopFive,
+//     abiGameProgressAndTopFive,
+//     provider
+//   );
+//   try {
+//     const roundedTotalScore = Math.round(totalScore);
+//     console.log(
+//       `saving concatenatedValue: ${concatenatedValue} and totalScore: ${roundedTotalScore}`
+//     );
+//     const signer = provider.getSigner();
+//     const contractWithSigner = contractCheat.connect(signer);
+//     const tx = await contractWithSigner.saveProgress(
+//       roundedTotalScore,
+//       concatenatedValue
+//     );
+//     await tx.wait();
+//     console.log("Progress saved successfully");
+//   } catch (error) {
+//     console.error("Error saving progress:", error);
+//     throw error;
+//   }
+// }
+
 async function saveProgress() {
-  // const provider = new ethers.providers.JsonRpcProvider(
-  //   "https://eth-sepolia.g.alchemy.com/v2/69txysSR3src6m4REhIftFAI2BYyEgcN"
-  // );
-  const provider = new ethers.providers.JsonRpcProvider(
-    "http://localhost:8545"
-  );
-  const contractCheat = new ethers.Contract(
-    contractAddressGameProgressAndTopFive,
-    abiGameProgressAndTopFive,
-    provider
-  );
-  try {
-    const roundedTotalScore = Math.round(totalScore);
-    console.log(
-      `saving concatenatedValue: ${concatenatedValue} and totalScore: ${roundedTotalScore}`
+  if (typeof window.ethereum !== "undefined") {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const contractCheat = new ethers.Contract(
+      contractAddressGameProgressAndTopFive,
+      abiGameProgressAndTopFive,
+      provider
     );
-    const signer = provider.getSigner();
-    const contractWithSigner = contractCheat.connect(signer);
-    const tx = await contractWithSigner.saveProgress(
-      roundedTotalScore,
-      concatenatedValue
-    );
-    await tx.wait();
-    console.log("Progress saved successfully");
-  } catch (error) {
-    console.error("Error saving progress:", error);
-    throw error;
+
+    try {
+      const roundedTotalScore = Math.round(totalScore);
+      console.log(
+        `saving concatenatedValue: ${concatenatedValue} and totalScore: ${roundedTotalScore}`
+      );
+
+      const signer = provider.getSigner();
+      const contractWithSigner = contractCheat.connect(signer);
+      const tx = await contractWithSigner.saveProgress(
+        roundedTotalScore,
+        concatenatedValue
+      );
+      await tx.wait();
+      console.log("Progress saved successfully");
+    } catch (error) {
+      console.error("Error saving progress:", error);
+      throw error;
+    }
+  } else {
+    console.error("Web3 provider not found (e.g., MetaMask)");
   }
 }
+
 // console.log(stageStartOverLvl, totalScore, calculateCombinedScore);
 export { getTopFivePlayers, getPlayerProgress, saveProgress, cheatPay };

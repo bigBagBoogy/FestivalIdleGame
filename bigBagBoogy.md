@@ -8,13 +8,8 @@ git push -u origin main
 
 # todo:⭐️
 
-Disable double tap = zoom screen -> how to?
-
-fix fund/cheatPay function
-line 84 connectWeb3.JS:
-const ethAmount = document.getElementById("ethAmount").value; //string value here
-connect the cheatpay button to a popup img that has 2 buttons and a close button
-1 for CheatSilver and 1 for CheatGold.
+look in chatGPT: Withdraw Function Error thread --> latest answer regarding
+returning a struct
 
 # let's:
 
@@ -40,10 +35,6 @@ To otherwise call levelUpStage() though, we'll have to add a "checker" that look
 All elementsLvl = 10 to be true
 
 look into creating ECMAScript modules. 🧩
-
-# change ABI and contract in constants.js. Now they are dummys!
-
-Amend the FundMe contract to a cheat contract and handel "pay-to-cheat" logic.
 
 # end of todo..........................................
 
@@ -122,7 +113,7 @@ have fun!
 // private
 // view & pure functions
 
-# bug along the way to learn from:
+# bugs along the way to learn from:
 
 1. connectWeb3.js needs to be typecasted: type="module" in it's html element and
 score.js MUST not! otherwise all functions will break `undefinded`.
@@ -187,8 +178,34 @@ In your JavaScript code, you are using provider.getSigner() to get the signer ob
 
 # to do before testing with Sepolia:
 
-For testing with Anvil I changed the JsonRpcProvider from Alchemy's to Anvil's localhost:
-http://localhost:8545
-This needs to be reset to Alchemy's Sepolia RPC-URL for saveProgress, LoadProgress and top5
-
 7. inpage.js:1 MetaMask - RPC Error: Internal JSON-RPC error.
+
+I suspect this error indicates a revert from the contract logic
+
+8. Withdraw works, only it withdraws 0.00 everytime instead of the contract(balance).
+
+I've checked:
+
+- Metamask account named: Anvil has the "90d" default private key. so I_owner == msg.sender.
+
+what is weird: In stead of reverting when trying to withdraw with a different account
+(from a different address than owner) The transaction does not revert, but withdraws 0.00 also.
+
+The logs (when testing in remix) show 0 because this transaction happens in 2 legs:
+"The reason you are seeing "value: 0 WEI" in the logs is not due to that line of code. It is actually because the transaction receipt's value field represents the amount of Ether sent with the transaction, not the amount transferred in the call function.
+
+Since you are using the call function to transfer the balance, which does not involve sending Ether with the transaction, the value field in the transaction receipt will always show 0 WEI."
+
+When we withdraw we'll be sending to the owner, which seems to be the contract itself and not the deployer of the contract. That's why the balance of the contract does not go down,
+and the balance of the "Anvil default account" doesn't go up.
+
+9. When in REMIX a transaction will fail with: `Gas estimation failed
+Gas estimation errored with the following message (see below). The transaction execution will likely fail. Do you want to force sending?
+Returned error: {"jsonrpc":"2.0","error":"Failed to fetch","id":5555853624322585}`
+   also when there is no internet connection.
+
+# deploying to sepolia:
+
+1.  source.env
+
+2.  forge script script/DeployGameProgressAndTopFive.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY -vvvv

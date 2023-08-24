@@ -1,5 +1,5 @@
 export const contractAddressGameProgressAndTopFive =
-  "0xA8452Ec99ce0C64f20701dB7dD3abDb607c00496";
+  "0x2f4e5EC2C62099415F6D9F0d1D0Ea3326871d6aA"; // sepolia
 export const abiGameProgressAndTopFive = [
   {
     inputs: [

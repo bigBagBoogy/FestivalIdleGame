@@ -1,14 +1,8 @@
 export const contractAddressCheatpay =
-  "0xA8452Ec99ce0C64f20701dB7dD3abDb607c00496";
+  "0x344Ae4D60EB56fA3b74c680F0dD73F877C658090"; //sepolia
 export const abiCheatpay = [
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "priceFeed",
-        type: "address",
-      },
-    ],
+    inputs: [],
     stateMutability: "nonpayable",
     type: "constructor",
   },
@@ -19,7 +13,7 @@ export const abiCheatpay = [
   },
   {
     inputs: [],
-    name: "MINIMUM_USD",
+    name: "MINIMUM_CHEAT",
     outputs: [
       {
         internalType: "uint256",
@@ -77,7 +71,7 @@ export const abiCheatpay = [
   },
   {
     inputs: [],
-    name: "getMINIMUM_USD",
+    name: "getMINIMUM_CHEAT",
     outputs: [
       {
         internalType: "uint256",
@@ -103,20 +97,7 @@ export const abiCheatpay = [
   },
   {
     inputs: [],
-    name: "getPriceFeed",
-    outputs: [
-      {
-        internalType: "contract AggregatorV3Interface",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getVersion",
+    name: "getOwnerBalance",
     outputs: [
       {
         internalType: "uint256",

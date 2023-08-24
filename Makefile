@@ -8,7 +8,7 @@ help:
 	@echo "Usage:"
 	@echo "  make deploy [ARGS=...]\n    example: make deploy ARGS=\"--network sepolia\""
 	@echo ""
-	@echo "  make payForScullies [ARGS=...]\n    example: make deploy ARGS=\"--network sepolia\""
+	@echo "  make CheatPay [ARGS=...]\n    example: make deploy ARGS=\"--network sepolia\""
 
 all: clean remove install update build
 
@@ -42,6 +42,6 @@ ifeq ($(findstring --network sepolia,$(ARGS)),--network sepolia)
 endif
 
 deploy:
-	@forge script script/DeployDSC.s.sol:DeployDSC $(NETWORK_ARGS)
+	@forge script script/DeployGameProgressAndTopFive:DeployGameProgressAndTopFive $(NETWORK_ARGS)
 
 

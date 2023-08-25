@@ -8,8 +8,10 @@ git push -u origin main
 
 # todo:⭐️
 
-look in chatGPT: Withdraw Function Error thread --> latest answer regarding
-returning a struct
+I have this code to calculate the upgrade cost of the elements in my game: `var podiumUpgradeCost = 10;        function calculatePodiumUpgradeCost() {
+  podiumUpgradeCost = podiumUpgradeCost * levelData.Level.podium;
+  return podiumUpgradeCost;   // 
+}` So at lvl1, it's 10*1=10. At lvl2, it's 10*2=20. At lvl3 it's 20*3 At lvl4 it's 60*4=240. At lvl5 it's 240*5=1200 and so on and so forth. This worked fine until now. Now that I succesfully read the saved game data from the smart contract, I load into the game that podiumLvl=5. If however I do this right at the beginning of starting to play the game, podiumUpgradeCost is still 10; and If I call calculatePodiumUpgradeCost(), it will do 10*5 =50 as the cost for leveling from level5 to 6. Do you have a solution? I need a system where the cost of leveling up increases exponentially. I need to do this for all the other elements in the game as well (drinksLvl, foodLvl, etc.)
 
 # let's:
 

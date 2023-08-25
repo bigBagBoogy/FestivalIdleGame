@@ -216,6 +216,9 @@ async function getPlayerProgress() {
       console.log("totalScore:", totalScore);
       console.log("concatenatedValue:", concatenatedValue);
       deconstructConcatenatedValue(concatenatedValue);
+
+      baseScore = totalScore;
+      console.log("Loaded skullies!");
       return { totalScore, concatenatedValue };
     } catch (error) {
       console.error("Error fetching player progress:", error);
@@ -298,7 +301,7 @@ function removeLeadingZeroes(str) {
 
 function deconstructConcatenatedValue(concatenatedValue) {
   let canBeAddedFunctionalityLaterLvl;
-  let podiumLvl;
+
   let drinksLvl;
   let foodLvl;
   let tshirtLvl;
@@ -316,9 +319,22 @@ function deconstructConcatenatedValue(concatenatedValue) {
     concatenatedValue = concatenatedValue.slice(3); // Remove the first 3 characters
   }
 
-  podiumLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(0, 3)), 10);
+  const podiumLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(0, 3)),
+    10
+  );
+  levelData.Level.podium = podiumLvl;
+  updatePodiumLevel();
+  calculatePodiumUpgradeCost();
+  console.log(`podiumUpgradeCost: ${podiumUpgradeCost}`);
   drinksLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(3, 3)), 10);
+  levelData.Level.drinks = drinksLvl;
+  updateDrinksLevel();
+  calculateDrinksUpgradeCost();
   foodLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(6, 3)), 10);
+  levelData.Level.food = foodLvl;
+  updateFoodLevel();
+  calculateFoodUpgradeCost();
   tshirtLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(9, 3)), 10);
   audioLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(12, 3)), 10);
   campingLvl = parseInt(

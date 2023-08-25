@@ -80,7 +80,7 @@ function updatePodiumLevel() {
 
 function calculatePodiumUpgradeCost() {
   podiumUpgradeCost = podiumUpgradeCost * levelData.Level.podium;
-  return podiumUpgradeCost;
+  return podiumUpgradeCost; //
 }
 function upgradePodium() {
   if (totalScore < podiumUpgradeCost) {

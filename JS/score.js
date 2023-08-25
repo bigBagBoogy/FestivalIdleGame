@@ -2,12 +2,18 @@ var totalScore;
 var upgradeLevel = 1;
 // var drinksLevel = 1;
 var podiumUpgradeCost = 10;
-var drinksUpgradeCost = 500;
-var foodUpgradeCost = 800;
+var drinksUpgradeCost = 100;
+var foodUpgradeCost = 700;
 var baseScore = 0;
 var increment = 1;
 var nextLoop;
 var concatenatedValue;
+var podiumBaseCost = 10;
+var podiumGrowthFactor = 1.25;
+var drinksBaseCost = 100;
+var drinksGrowthFactor = 3;
+var foodBaseCost = 700;
+var foodGrowthFactor = 2.5;
 
 const levelData = {
   Level: {
@@ -78,10 +84,15 @@ function updatePodiumLevel() {
   levelElement.innerHTML = `lvl ${podiumLevel}`; // lvlup: ${podiumUpgradeCost}`; this is optional
 }
 
+//    podiumBaseCost = 10; podiumGrowthFactor = 2;
 function calculatePodiumUpgradeCost() {
-  podiumUpgradeCost = podiumUpgradeCost * levelData.Level.podium;
-  return podiumUpgradeCost; //
+  const podiumLvl = levelData.Level.podium;
+  // Calculate the cost using exponential growth formula
+  var podiumUpgradeCost =
+    podiumBaseCost * Math.pow(podiumGrowthFactor, podiumLvl);
+  return podiumUpgradeCost;
 }
+
 function upgradePodium() {
   if (totalScore < podiumUpgradeCost) {
     /// below we turn 1234567 into 1.234m
@@ -111,10 +122,18 @@ function updateDrinksLevel() {
   levelElement.innerHTML = `lvl ${drinksLevel}`; // lvlup: ${drinksUpgradeCost}`; this is optional
 }
 
+// function calculateDrinksUpgradeCost() {
+//   drinksUpgradeCost = drinksUpgradeCost * levelData.Level.drinks;
+//   return drinksUpgradeCost;
+// }
 function calculateDrinksUpgradeCost() {
-  drinksUpgradeCost = drinksUpgradeCost * levelData.Level.drinks;
+  const drinksLvl = levelData.Level.drinks;
+  // Calculate the cost using exponential growth formula
+  var drinksUpgradeCost =
+    drinksBaseCost * Math.pow(drinksGrowthFactor, drinksLvl);
   return drinksUpgradeCost;
 }
+
 function upgradeDrinks() {
   if (totalScore < drinksUpgradeCost) {
     /// below we turn 1234567 into 1.234m
@@ -174,6 +193,12 @@ function updateFoodLevel() {
   const foodLevelElement = document.getElementById("foodLevelText");
   foodLevelElement.innerHTML = `lvl ${foodLevel}`; // lvlup: ${foodUpgradeCost}`; this is optional
 }
+function calculateFoodUpgradeCost() {
+  const foodLvl = levelData.Level.food;
+  // Calculate the cost using exponential growth formula
+  var foodUpgradeCost = foodBaseCost * Math.pow(foodGrowthFactor, foodLvl);
+  return foodUpgradeCost;
+}
 
 function updateFoodImage() {
   var foodLevel = levelData.Level.food;
@@ -195,11 +220,6 @@ function updateFoodImage() {
   foodStall.className = filterColor; // Assign the class to the element
   console.log(`images/food.png#${filterColor}`);
   return;
-}
-
-function calculateFoodUpgradeCost() {
-  foodUpgradeCost = foodUpgradeCost * levelData.Level.food;
-  return foodUpgradeCost;
 }
 
 function upgradeFood() {

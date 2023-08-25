@@ -195,7 +195,7 @@ async function getTopFivePlayers() {
 ////   load      ///
 ////////////////////
 
-async function getPlayerProgress(playerAddress) {
+async function getPlayerProgress() {
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const contractCheat = new ethers.Contract(
@@ -205,10 +205,18 @@ async function getPlayerProgress(playerAddress) {
     );
 
     try {
+      const playerAddress = await provider.getSigner().getAddress();
       console.log("loading player's progress...");
-      const progress = await contractCheat.getPlayerProgress(playerAddress);
-      console.log(progress);
-      return progress;
+      const [totalScoreBigNumber, concatenatedValueBigNumber] =
+        await contractCheat.getPlayerProgress(playerAddress);
+
+      const totalScore = totalScoreBigNumber.toNumber(); // Convert to a regular number
+      const concatenatedValue = concatenatedValueBigNumber.toString(); // Convert to a string
+
+      console.log("totalScore:", totalScore);
+      console.log("concatenatedValue:", concatenatedValue);
+      deconstructConcatenatedValue(concatenatedValue);
+      return { totalScore, concatenatedValue };
     } catch (error) {
       console.error("Error fetching player progress:", error);
       throw error;
@@ -282,6 +290,56 @@ async function saveProgress() {
   } else {
     console.error("Web3 provider not found (e.g., MetaMask)");
   }
+}
+
+function removeLeadingZeroes(str) {
+  return str.replace(/^0+/, "");
+}
+
+function deconstructConcatenatedValue(concatenatedValue) {
+  let canBeAddedFunctionalityLaterLvl;
+  let podiumLvl;
+  let drinksLvl;
+  let foodLvl;
+  let tshirtLvl;
+  let audioLvl;
+  let campingLvl;
+  let stageStartOverLvl;
+  // If concatenatedValue starts with a digit, directly assign it to canBeAddedFunctionalityLaterLvl
+  if (!isNaN(parseInt(concatenatedValue.charAt(0), 10))) {
+    canBeAddedFunctionalityLaterLvl = parseInt(concatenatedValue.charAt(0), 10);
+    concatenatedValue = concatenatedValue.slice(1); // Remove the first character
+  } else {
+    canBeAddedFunctionalityLaterLvl = parseInt(
+      removeLeadingZeroes(concatenatedValue.substr(0, 3))
+    );
+    concatenatedValue = concatenatedValue.slice(3); // Remove the first 3 characters
+  }
+
+  podiumLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(0, 3)), 10);
+  drinksLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(3, 3)), 10);
+  foodLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(6, 3)), 10);
+  tshirtLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(9, 3)), 10);
+  audioLvl = parseInt(removeLeadingZeroes(concatenatedValue.substr(12, 3)), 10);
+  campingLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(15, 3)),
+    10
+  );
+  stageStartOverLvl = parseInt(
+    removeLeadingZeroes(concatenatedValue.substr(18, 3)),
+    10
+  );
+
+  console.log(
+    `canBeAddedFunctionalityLaterLvl: ${canBeAddedFunctionalityLaterLvl}`
+  );
+  console.log(`podiumLvl: ${podiumLvl}`);
+  console.log(`drinksLvl: ${drinksLvl}`);
+  console.log(`foodLvl: ${foodLvl}`);
+  console.log(`tshirtLvl: ${tshirtLvl}`);
+  console.log(`audioLvl: ${audioLvl}`);
+  console.log(`campingLvl: ${campingLvl}`);
+  console.log(`stageStartOverLvl: ${stageStartOverLvl}`);
 }
 
 // console.log(stageStartOverLvl, totalScore, calculateCombinedScore);

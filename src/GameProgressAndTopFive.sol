@@ -88,8 +88,9 @@ contract GameProgressAndTopFive {
         return (topPlayers, topScores);
     }
 
-    function getPlayerProgress(address _player) external view returns (ProgressStruct memory) {
-        return s_playerProgress[_player];
+    function getPlayerProgress(address _player) external view returns (uint256, uint256) {
+        ProgressStruct memory progress = s_playerProgress[_player];
+        return (progress.totalScore, progress.concatenatedValue); // Return individual fields of the struct
     }
 
     function removeLeadingZeroes(string memory inputStr) internal pure returns (string memory) {

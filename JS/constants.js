@@ -1,5 +1,5 @@
 export const contractAddressGameProgressAndTopFive =
-  "0x2f4e5EC2C62099415F6D9F0d1D0Ea3326871d6aA"; // sepolia
+  "0xB0D9A95e06C436594b71F6a795d68F6F82299b22"; // sepolia
 export const abiGameProgressAndTopFive = [
   {
     inputs: [
@@ -12,21 +12,14 @@ export const abiGameProgressAndTopFive = [
     name: "getPlayerProgress",
     outputs: [
       {
-        components: [
-          {
-            internalType: "uint256",
-            name: "totalScore",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "concatenatedValue",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct GameProgressAndTopFive.ProgressStruct",
+        internalType: "uint256",
         name: "",
-        type: "tuple",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",

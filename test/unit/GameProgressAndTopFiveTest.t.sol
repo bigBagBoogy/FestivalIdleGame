@@ -68,11 +68,11 @@ contract GameProgressAndTopFiveTest is StdCheats, Test {
         uint256 concatenatedValue = 1005002001004007007001;
         game.saveProgress(totalScore, concatenatedValue);
 
-        GameProgressAndTopFive.ProgressStruct memory progress = game.getPlayerProgress(address(this));
+        (uint256 returnedTotalScore, uint256 returnedConcatenatedValue) = game.getPlayerProgress(address(this));
         console.log("address: ", address(this));
         console.log("totalScore: ", totalScore);
         console.log("to be sent back to frontend: ", concatenatedValue);
-        assertEq(progress.totalScore, totalScore, "Player's total score is incorrect");
-        assertEq(progress.concatenatedValue, concatenatedValue, "Player's concatenated value is incorrect");
+        assertEq(returnedTotalScore, totalScore, "Player's total score is incorrect");
+        assertEq(returnedConcatenatedValue, concatenatedValue, "Player's concatenated value is incorrect");
     }
 }

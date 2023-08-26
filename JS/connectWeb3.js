@@ -1,4 +1,5 @@
 import { ethers } from "./ethers-5.6.esm.min.js";
+import { BigNumber } from "./ethers-5.6.esm.min.js";
 import { abiCheatpay } from "./constantsCheatpay.js"; // fund, withdraw, balance
 import { contractAddressCheatpay } from "./constantsCheatpay.js";
 
@@ -173,11 +174,30 @@ async function getTopFivePlayers() {
 
     for (let i = 0; i < topPlayers.length; i++) {
       const player = topPlayers[i];
-      const score = topScores[i];
+      const score = BigNumber.from(topScores[i]);
 
-      const listItem = document.createElement("li");
-      listItem.textContent = `${player}: ${score}`;
-      topPlayersList.appendChild(listItem);
+      const scoreString = score.toString();
+      const scoreWithoutLeadingOne = scoreString.slice(1);
+
+      // Skip processing empty strings
+      if (scoreWithoutLeadingOne !== "") {
+        // console.log("scoreWithoutLeadingOne:", scoreWithoutLeadingOne);
+
+        const scoreWithoutLeadingOneBigNumber = BigNumber.from(
+          scoreWithoutLeadingOne
+        );
+
+        console.log(
+          "scoreWithoutLeadingOneBigNumber:",
+          scoreWithoutLeadingOneBigNumber.toString()
+        );
+
+        const listItem = document.createElement("li");
+        listItem.textContent = `${player}: ${scoreWithoutLeadingOneBigNumber}`;
+        topPlayersList.appendChild(listItem);
+      } else {
+        console.log("Empty score found, skipping processing.");
+      }
     }
 
     console.log(topPlayers, topScores);

@@ -8,7 +8,8 @@ html, body, #__next {
 body {
     display: block;
     margin: 8px;
-    font-size: 14px;
+    font-size: 34px;
+    font-weight: bold;
     font-family: 'Poppins', 'DM Sans', sans-serif;
     line-height: 1.5;
     color: #121212;
@@ -16,8 +17,9 @@ body {
 }
 #getTopPlayersButton {
   position: fixed;
-  top: 75px; 
-  right: 215px; 
+  top: 135px; 
+  left: 50%; /* Center the button horizontally */
+  transform: translateX(-50%); /* Adjust for the button's width */
   background-color: #a4da01;
   color: white;
   font-weight: bold;
@@ -32,30 +34,9 @@ body {
 }
 
 /* Custom styles for scoreboard bar */
-.scoreboard-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f5f5f5;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
 
-.score {
-    font-weight: bold;
-    font-size: 18px;
-    margin-right: 10px;
-}
 
-.level {
-    font-size: 16px;
-    margin-right: 10px;
-}
 
-.line-up {
-    font-size: 16px;
-    margin-right: 10px;
-}
 
 .top-scores-link {
     color: #007aff;

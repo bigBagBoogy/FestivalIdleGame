@@ -9,7 +9,7 @@ var increment = 1;
 var nextLoop;
 var concatenatedValue;
 var podiumBaseCost = 10;
-var podiumGrowthFactor = 1.25;
+var podiumGrowthFactor = 2;
 var drinksBaseCost = 100;
 var drinksGrowthFactor = 3;
 var foodBaseCost = 700;
@@ -103,7 +103,7 @@ function upgradePodium() {
   } else {
     totalScore -= podiumUpgradeCost;
     baseScore = totalScore;
-    increment = increment * (15 / 10);
+    increment = increment * (13 / 10);
     levelData.Level.podium++;
     podiumUpgradeCost = calculatePodiumUpgradeCost();
     updateScore(totalScore);

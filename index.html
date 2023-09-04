@@ -18,7 +18,16 @@
       <a href="patches.html" class="patches-link">patches</a>
       <a href="top-scores.html" class="top-scores-link">Top Scores</a>
     </div>
+    <!-- metaMask code for the button -->
+    <img id="connectButton" src="images/metamask.svg" alt="connectButton" />
 
+    <img
+      id="freeCheatButton"
+      src="images/freeCheat.gif"
+      alt="freeCheat"
+      onClick="freeCheat()"
+    />
+    <!-- podium -->
     <img
       id="podium-main"
       src="images/podium3.png"
@@ -29,16 +38,13 @@
     <div id="podiumLevelBox" class="level-box">
       <span id="podiumLevel">lvl 1</span>
     </div>
-
-    <!-- metaMask code for the button -->
-    <img id="connectButton" src="images/metamask.svg" alt="connectButton" />
-
     <img
-      id="freeCheatButton"
-      src="images/freeCheat.gif"
-      alt="freeCheat"
-      onClick="freeCheat()"
+      id="podiumUpgradeArrow"
+      src="images/upgradeArrow.png"
+      alt="podiumUpgradeArrow"
     />
+    <!-- end of podium -->
+
     <!-- drinks -->
     <img
       id="drinksStall"
@@ -52,17 +58,13 @@
     </div>
 
     <img id="upgradeArrow" src="images/upgradeArrow.png" alt="upgradeArrow" />
+    <!-- end of drinks -->
+    <!-- food -->
     <img
       id="foodUpgradeArrow"
       src="images/upgradeArrow.png"
       alt="foodUpgradeArrow"
     />
-    <img
-      id="podiumUpgradeArrow"
-      src="images/upgradeArrow.png"
-      alt="podiumUpgradeArrow"
-    />
-    <!-- end of drinks -->
 
     <img
       id="foodStall"
@@ -74,6 +76,26 @@
     <div id="foodLevelBox" class="level-box">
       <span id="foodLevelText">lvl 1</span>
     </div>
+    <!-- end of food -->
+
+    <!-- tshirt -->
+    <img
+      id="foodUpgradeArrow"
+      src="images/upgradeArrow.png"
+      alt="foodUpgradeArrow"
+    />
+
+    <img
+      id="foodStall"
+      src="images/food.png"
+      class="responsive"
+      alt="food"
+      onClick="upgradeFood()"
+    />
+    <div id="foodLevelBox" class="level-box">
+      <span id="foodLevelText">lvl 1</span>
+    </div>
+    <!-- end of tshirt -->
 
     <!-- Custom Popup Container -->
     <div id="popupContainer" class="popup-container">

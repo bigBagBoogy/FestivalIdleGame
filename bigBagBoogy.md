@@ -209,3 +209,8 @@ Returned error: {"jsonrpc":"2.0","error":"Failed to fetch","id":5555853624322585
 1.  source .env
 
 2.  forge script script/DeployGameProgressAndTopFive.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY -vvvv
+
+# checklist adding an element
+
+1. update x level()
+2. add x LevelText to CSS

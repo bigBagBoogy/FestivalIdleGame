@@ -122,10 +122,6 @@ function updateDrinksLevel() {
   levelElement.innerHTML = `lvl ${drinksLevel}`; // lvlup: ${drinksUpgradeCost}`; this is optional
 }
 
-// function calculateDrinksUpgradeCost() {
-//   drinksUpgradeCost = drinksUpgradeCost * levelData.Level.drinks;
-//   return drinksUpgradeCost;
-// }
 function calculateDrinksUpgradeCost() {
   const drinksLvl = levelData.Level.drinks;
   // Calculate the cost using exponential growth formula
@@ -245,6 +241,74 @@ function upgradeFood() {
     updateFoodLevel(foodUpgradeCost);
   }
 }
+
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+//      tshirt FUNCTIONS       //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+function updateTshirtLevel() {
+  var tshirtLevel = levelData.Level.tshirt;
+  // Get the level element and update its innerHTML with the current level
+  const levelElement = document.getElementById("tshirtLevelText");
+  levelElement.innerHTML = `lvl ${tshirtLevel}`; // lvlup: ${tshirtUpgradeCost}`; this is optional
+}
+
+function calculateDrinksUpgradeCost() {
+  const drinksLvl = levelData.Level.drinks;
+  // Calculate the cost using exponential growth formula
+  var drinksUpgradeCost =
+    drinksBaseCost * Math.pow(drinksGrowthFactor, drinksLvl);
+  return drinksUpgradeCost;
+}
+
+function upgradeDrinks() {
+  if (totalScore < drinksUpgradeCost) {
+    /// below we turn 1234567 into 1.234m
+    const formattedDrinksUpgradeCost =
+      formatNumberAbbreviated(drinksUpgradeCost);
+    ///
+    openPopup(`Not enough Skullies!  need: ${formattedDrinksUpgradeCost}`);
+    console.log(totalScore);
+  } else {
+    console.log("upgraded drinks!");
+    totalScore -= drinksUpgradeCost;
+    baseScore = totalScore;
+    console.log("new totalScore: ", totalScore);
+    increment = increment * (19 / 10);
+    console.log("new increment: ", increment);
+    levelData.Level.drinks++;
+    console.log("drinks level: ", levelData.Level.drinks);
+    drinksUpgradeCost = calculateDrinksUpgradeCost();
+    console.log("upgrade to next level costs: ", drinksUpgradeCost);
+    updateScore(totalScore);
+    updateDrinksImage();
+    updateDrinksLevel(drinksUpgradeCost);
+  }
+}
+function updateDrinksImage() {
+  var drinksLevel = levelData.Level.drinks;
+  console.log("updatedDrinksLevelAndImage", drinksLevel);
+
+  // Determine filter color based on food level
+  let filterColor = "green"; // Default color
+
+  if (drinksLevel > 5 && drinksLevel < 7) {
+    filterColor = "purple";
+  } else if (drinksLevel > 4 && drinksLevel < 6) {
+    filterColor = "purple";
+  } else if (drinksLevel > 3 && drinksLevel < 5) {
+    filterColor = "red";
+  } else if (drinksLevel > 2 && drinksLevel < 4) {
+    filterColor = "yellow";
+  } else if (drinksLevel > 1 && drinksLevel < 3) {
+    filterColor = "blue";
+  }
+  // Update the image class and filter
+  drinksStall.className = filterColor; // Assign the class to the element
+  // console.log(`images/drinks.png#${filterColor}`);
+  return;
+}
+
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 //      HELPER FUNCTIONS       //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//

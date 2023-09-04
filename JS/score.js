@@ -1,19 +1,23 @@
 var totalScore;
 var upgradeLevel = 1;
 // var drinksLevel = 1;
-var podiumUpgradeCost = 10;
-var drinksUpgradeCost = 100;
-var foodUpgradeCost = 700;
 var baseScore = 0;
 var increment = 1;
 var nextLoop;
 var concatenatedValue;
+
+var podiumUpgradeCost = 10;
 var podiumBaseCost = 10;
 var podiumGrowthFactor = 2;
+var drinksUpgradeCost = 100;
 var drinksBaseCost = 100;
 var drinksGrowthFactor = 3;
+var foodUpgradeCost = 700;
 var foodBaseCost = 700;
 var foodGrowthFactor = 2.5;
+var tshirtUpgradeCost = 200;
+var tshirtBaseCost = 200;
+var tshirtGrowthFactor = 2.3;
 
 const levelData = {
   Level: {
@@ -71,6 +75,13 @@ function updateScore(totalScore) {
     podiumUpgradeArrowImg.style.display = "block"; //show
   } else {
     podiumUpgradeArrowImg.style.display = "none"; // Hide the image
+  }
+  const tshirtUpgradeArrowImg = document.getElementById("tshirtUpgradeArrow");
+  if (totalScore >= tshirtUpgradeCost) {
+    // console.log("show arrow!");
+    tshirtUpgradeArrowImg.style.display = "block"; //show
+  } else {
+    tshirtUpgradeArrowImg.style.display = "none"; // Hide the image
   }
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
@@ -253,59 +264,59 @@ function updateTshirtLevel() {
   levelElement.innerHTML = `lvl ${tshirtLevel}`; // lvlup: ${tshirtUpgradeCost}`; this is optional
 }
 
-function calculateDrinksUpgradeCost() {
-  const drinksLvl = levelData.Level.drinks;
+function calculateTshirtUpgradeCost() {
+  const tshirtLvl = levelData.Level.tshirt;
   // Calculate the cost using exponential growth formula
-  var drinksUpgradeCost =
-    drinksBaseCost * Math.pow(drinksGrowthFactor, drinksLvl);
-  return drinksUpgradeCost;
+  var tshirtUpgradeCost =
+    tshirtBaseCost * Math.pow(tshirtGrowthFactor, tshirtLvl);
+  return tshirtUpgradeCost;
 }
 
-function upgradeDrinks() {
-  if (totalScore < drinksUpgradeCost) {
+function upgradeTshirt() {
+  if (totalScore < tshirtUpgradeCost) {
     /// below we turn 1234567 into 1.234m
-    const formattedDrinksUpgradeCost =
-      formatNumberAbbreviated(drinksUpgradeCost);
+    const formattedTshirtUpgradeCost =
+      formatNumberAbbreviated(tshirtUpgradeCost);
     ///
-    openPopup(`Not enough Skullies!  need: ${formattedDrinksUpgradeCost}`);
+    openPopup(`Not enough Skullies!  need: ${formattedTshirtUpgradeCost}`);
     console.log(totalScore);
   } else {
-    console.log("upgraded drinks!");
-    totalScore -= drinksUpgradeCost;
+    console.log("upgraded tshirt!");
+    totalScore -= tshirtUpgradeCost;
     baseScore = totalScore;
     console.log("new totalScore: ", totalScore);
     increment = increment * (19 / 10);
     console.log("new increment: ", increment);
-    levelData.Level.drinks++;
-    console.log("drinks level: ", levelData.Level.drinks);
-    drinksUpgradeCost = calculateDrinksUpgradeCost();
-    console.log("upgrade to next level costs: ", drinksUpgradeCost);
+    levelData.Level.tshirt++;
+    console.log("tshirt level: ", levelData.Level.tshirt);
+    tshirtUpgradeCost = calculateTshirtUpgradeCost();
+    console.log("upgrade to next level costs: ", tshirtUpgradeCost);
     updateScore(totalScore);
-    updateDrinksImage();
-    updateDrinksLevel(drinksUpgradeCost);
+    updateTshirtImage();
+    updateTshirtLevel(tshirtUpgradeCost);
   }
 }
-function updateDrinksImage() {
-  var drinksLevel = levelData.Level.drinks;
-  console.log("updatedDrinksLevelAndImage", drinksLevel);
+function updateTshirtImage() {
+  var tshirtLevel = levelData.Level.tshirt;
+  console.log("updatedTshirtLevelAndImage", tshirtLevel);
 
   // Determine filter color based on food level
   let filterColor = "green"; // Default color
 
-  if (drinksLevel > 5 && drinksLevel < 7) {
+  if (tshirtLevel > 5 && tshirtLevel < 7) {
     filterColor = "purple";
-  } else if (drinksLevel > 4 && drinksLevel < 6) {
+  } else if (tshirtLevel > 4 && tshirtLevel < 6) {
     filterColor = "purple";
-  } else if (drinksLevel > 3 && drinksLevel < 5) {
+  } else if (tshirtLevel > 3 && tshirtLevel < 5) {
     filterColor = "red";
-  } else if (drinksLevel > 2 && drinksLevel < 4) {
+  } else if (tshirtLevel > 2 && tshirtLevel < 4) {
     filterColor = "yellow";
-  } else if (drinksLevel > 1 && drinksLevel < 3) {
+  } else if (tshirtLevel > 1 && tshirtLevel < 3) {
     filterColor = "blue";
   }
   // Update the image class and filter
-  drinksStall.className = filterColor; // Assign the class to the element
-  // console.log(`images/drinks.png#${filterColor}`);
+  tshirtStall.className = filterColor; // Assign the class to the element
+  // console.log(`images/tshirt.png#${filterColor}`);
   return;
 }
 

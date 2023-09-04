@@ -1,3 +1,6 @@
+///      below code is experimental pseudo code ///
+
+
 async function awardPlayer1() {
     if (typeof window.ethereum !== "undefined") {
         const provider = new ethers.providers.Web3Provider(window.ethereum);

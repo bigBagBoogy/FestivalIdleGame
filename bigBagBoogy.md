@@ -213,4 +213,17 @@ Returned error: {"jsonrpc":"2.0","error":"Failed to fetch","id":5555853624322585
 # checklist adding an element
 
 1. update x level()
-2. add x LevelText to CSS
+2. add html -> arrow, elementIMG, Element text (lvl)
+3. add x upgradeArrow to CSS -> don't forget moveUpAndDown x !!
+4. add x -Stall to CSS
+5. add x.blue, .yellow, .red, etc.
+6. add x levelBox
+7. calculate x UpgradeCost()
+8. upgrade x()
+9. update x image()
+10. at the top of score.js add:
+11. var xUpgradeCost = <>;
+12. var xBaseCost = <>;
+13. var xGrowthFactor = <>;
+14. add x UpgradeArrowImg in score.js for conditional show/hide arrow
+    = part of updateScore()

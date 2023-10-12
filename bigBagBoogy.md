@@ -3,7 +3,7 @@
 git init
 git branch -M main
 git add .
-git commit -m "test added"
+git commit -m "test"
 git push -u origin main
 
 # todo:⭐️
